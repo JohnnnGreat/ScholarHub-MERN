@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+.golden-font {
+  font-family: "Golden", sans-serif;
+}
+
+p,
+a,
+button {
+  font-family: "Product", sans-serif;
+}
+
+/* h1 {
+  font-family: "Golden", sans-serif;
+} */
+
+@font-face {
+  font-family: "Golden";
+  src: url("../../public/fonts/golden.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Product";
+  src: url("../../public/fonts/ProductRegular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(53, 53, 53);
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(146, 146, 146);
+  transition: 300ms ease;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(214, 214, 214);
+  border-radius: 20px !important;
+}
+
+/* // /* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+/* */
+*::-webkit-scrollbar-track {
+  background-color: rgb(53, 53, 53);
+  height: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--tertiary);
+}
