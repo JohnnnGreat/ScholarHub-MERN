@@ -39,10 +39,12 @@ export const shakeAnimation = {
   shake: {
     x: [0, -5, 5, -5, 5, 0],
     transition: {
-      repeat: Infinity,
-      repeatType: "loop",
-      duration: 0.5,
-      repeatDelay: 2.5,
+      x: {
+        repeat: Infinity,
+        repeatType: "loop",
+        duration: 0.5,
+        repeatDelay: 2.5,
+      },
     },
   },
 };
