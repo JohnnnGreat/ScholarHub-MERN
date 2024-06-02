@@ -54,7 +54,7 @@ const Login = () => {
       </form> */}
       <Form
         name="normal_login"
-        className="login-form bg-red-500"
+        className="login-form  w-full"
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
@@ -63,7 +63,7 @@ const Login = () => {
           rules={[{ required: true, message: "Please input your Username!" }]}
         >
           <Input
-            className="w-[80%] border border-[#ffffff59] bg-transparent"
+            className="w-[80%] mx-auto py-4 px-5 rounded-full placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
             placeholder="Username"
           />
         </Form.Item>

@@ -22,7 +22,8 @@
 
 p,
 a,
-button {
+button,
+input {
   font-family: "Product", sans-serif;
 }
 
@@ -76,4 +77,8 @@ button {
   display: grid;
   grid-template-columns: 30% 70%;
   height: 100%;
+}
+
+input {
+  background: transparent !important;
 }
