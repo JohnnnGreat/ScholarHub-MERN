@@ -2,7 +2,7 @@ import React from "react";
 
 const Authentication = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex h-screen items-center justify-center bg-[#232932]">
+    <div className="flex h-screen overflow-hidden items-center justify-center bg-[#232932]">
       <div className="grid-auth">
         {/* Logo and Side Text */}
         <div className="hidden md:flex flex-col items-center justify-center w-1/3 h-full bg-white p-10">

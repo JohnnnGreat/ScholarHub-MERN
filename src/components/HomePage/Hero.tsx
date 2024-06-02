@@ -39,7 +39,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         variants={navVariants}
-        className="px-[1rem] position absolute top-[1rem] flex justify-between items-center h-[70px] mx-auto border border-[#76ABAE] bg-[#ffffff0c] backdrop-blur-lg backdrop-opacity-50 rounded-full w-[90%] md:w-[80%] max-w-[1109px]"
+        className="px-[1rem] z-40 fixed top-[1rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] bg-[#ffffff0c] backdrop-blur-2xl backdrop-opacity-50 rounded-full w-[90%] md:w-[80%] max-w-[1109px]"
       >
         <div className="text-[24px] golden-font ml-[1rem]">Scholar Hub</div>
         <div className="hidden md:flex gap-x-[1rem] items-center">
@@ -99,7 +99,7 @@ export default function Hero() {
         </div>
       )}
       <div className="text-center mt-24 mb-16">
-        <h1 className="golden-font text-[35px] md:text-6xl lg:[50px] font-bold mb-4">
+        <h1 className="golden-font text-[35px] md:text-6xl lg:[45px] mb-4">
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h1>

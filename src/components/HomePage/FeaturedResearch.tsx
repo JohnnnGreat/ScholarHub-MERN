@@ -84,7 +84,7 @@ export default function FeaturedResearch() {
           className="text-center"
           ref={ref}
         >
-          <h2 className="text-3xl  text-white sm:text-[48px] golden-font">Featured Research</h2>
+          <h2 className="text-3xl  text-white sm:text-[45px] golden-font">Featured Research</h2>
           <p className="mt-4 text-[20px] font-light leading-6 text-gray-400">
             Explore the latest, most influential, and thought-provoking research papers,
             publications, and datasets curated by our editorial team.
@@ -108,7 +108,7 @@ export default function FeaturedResearch() {
               animate="visible"
               variants={containerVariants}
               key={item}
-              className="bg-[#ffffff0c] backdrop-blur-lg backdrop-opacity-50 rounded-lg p-6 border border-[#76abae57] text-white"
+              className="bg-[#ffffff0c] backdrop-blur-lg backdrop-opacity-50 rounded-[20px] p-6 border border-[#76abae57] text-white"
             >
               <h3 className="text-2xl font-semibold golden-font">
                 Innovations in Renewable Energy Storage

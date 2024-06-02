@@ -54,15 +54,18 @@ const Login = () => {
       </form> */}
       <Form
         name="normal_login"
-        className="login-form"
+        className="login-form bg-red-500"
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="Email"
           rules={[{ required: true, message: "Please input your Username!" }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input
+            className="w-[80%] border border-[#ffffff59] bg-transparent"
+            placeholder="Username"
+          />
         </Form.Item>
         <Form.Item
           name="password"
