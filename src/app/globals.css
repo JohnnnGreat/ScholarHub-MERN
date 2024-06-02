@@ -23,8 +23,9 @@
 p,
 a,
 button,
-input {
-  font-family: "Product", sans-serif;
+input,
+input::placeholder {
+  font-family: "Product", sans-serif !important;
 }
 
 /* h1 {
