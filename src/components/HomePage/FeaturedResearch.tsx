@@ -85,7 +85,7 @@ export default function FeaturedResearch() {
           ref={ref}
         >
           <h2 className="text-3xl  text-white sm:text-[45px] golden-font">Featured Research</h2>
-          <p className="mt-4 text-[20px] font-light leading-6 text-gray-400">
+          <p className="mt-3 font-light leading-6 text-gray-400">
             Explore the latest, most influential, and thought-provoking research papers,
             publications, and datasets curated by our editorial team.
           </p>

@@ -2,11 +2,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { navVariants, shakeAnimation, zoomAnimation } from "@/utils/framermotion";
+import Link from "next/link";
 
 export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="py-[1rem] md:px-0 bg-[#222831] h-screen text-white flex items-center justify-center">
+    <div className="py-[1rem] px-[.6rem] md:px-0 bg-[#222831] h-screen text-white flex items-center justify-center">
       <svg
         width="600"
         height="681"
@@ -39,7 +40,7 @@ export default function Hero() {
         initial="hidden"
         animate="visible"
         variants={navVariants}
-        className="px-[1rem] z-40 fixed top-[1rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] bg-[#ffffff0c] backdrop-blur-2xl backdrop-opacity-50 rounded-full w-[90%] md:w-[80%] max-w-[1109px]"
+        className="px-[1rem] z-40 fixed top-[1rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] bg-[#ffffff0c] backdrop-blur-2xl backdrop-opacity-50 rounded-full w-[400px] md:w-[80%] md:max-w-[1109px]"
       >
         <div className="text-[24px] golden-font ml-[1rem]">Scholar Hub</div>
         <div className="hidden md:flex gap-x-[1rem] items-center">
@@ -56,9 +57,12 @@ export default function Hero() {
             Contact
           </a>
         </div>
-        <button className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700">
+        <Link
+          href="/auth"
+          className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+        >
           Sign Up
-        </button>
+        </Link>
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-gray-400 focus:outline-none">
             <svg
@@ -80,7 +84,7 @@ export default function Hero() {
       </motion.div>
 
       {isOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4">
+        <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4">
           <a href="#" className="block px-2 py-1 hover:text-gray-400">
             Discover
           </a>
@@ -103,19 +107,19 @@ export default function Hero() {
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h1>
-        <p className=" mx-auto text-[16px] md:text-[18px] mb-10 w-[70%]">
+        <p className=" mx-auto font-light text-[16px] md:text-[18px] mb-10 w-full md:w-[70%] text-[#ffffffbd]">
           Unlock the power of a vibrant global community of researchers, scholars, and innovators.
           ScholarHub is your gateway to a world of groundbreaking discoveries, collaboration, and
           knowledge-sharing.
         </p>
-        <div className="flex space-x-4 gap-[.7rem] justify-center flex-wrap mt-[4rem]">
+        <div className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-[.7rem] justify-center flex-wrap mt-[.2rem] md:mt-[4rem] md:w-[800px]">
           <div className="bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full flex items-center">
             <motion.span animate="shake" variants={shakeAnimation} className="mr-2">
               🔍
             </motion.span>{" "}
             Discover
           </div>
-          <div className="bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full flex items-center">
+          <div className="hidden md:inline-block bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full items-center">
             <motion.span animate="zoom" variants={zoomAnimation} className="mr-2">
               📢
             </motion.span>{" "}

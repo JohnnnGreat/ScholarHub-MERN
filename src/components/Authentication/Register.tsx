@@ -2,12 +2,15 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
 import { useCreateNewUser } from "@/utils/queries";
+import { message } from "antd";
 
 const Register = () => {
-  const { mutateAsync: registerUser, isPending, isError } = useCreateNewUser();
+  const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
   const onFinish = async (values: any) => {
     const response = await registerUser(values);
-    console.log(response);
+
+    if (response?.code) message.error(response.code);
+    if (response?.name) message.error(response.name);
   };
   return (
     <>
@@ -24,7 +27,7 @@ const Register = () => {
         onFinish={onFinish}
       >
         <Form.Item
-          name="Email"
+          name="email"
           rules={[{ required: true, message: "Please input your Email Address!" }]}
         >
           <Input
@@ -47,16 +50,21 @@ const Register = () => {
           <Button
             type="primary"
             htmlType="submit"
-            className=" block py-6 rounded-full px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
+            disabled={isCreatingNewUser && true}
+            className="disabled:bg-[#8dcccf] block py-6 rounded-full px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
           >
-            Log in
+            {!isCreatingNewUser ? (
+              "Register"
+            ) : (
+              <span className="loading loading-dots loading-md"></span>
+            )}
           </Button>
           <p className="text-center mt-[1rem] text-[#ffffffb6]">Or</p>
         </Form.Item>
         <button className="px-[2rem] text-[#76ABAE] border hover:bg-transparent py-2 rounded-full w-fit mx-auto border-[#ffffff4b] bg-transparent h-auto flex gap-3 items-center justify-center">
           <svg
-            width="34"
-            height="34"
+            width="30"
+            height="30"
             viewBox="0 0 34 34"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
