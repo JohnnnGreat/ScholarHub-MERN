@@ -8,12 +8,15 @@ import ResearchType from "../Onboarding/ResearchType";
 const Register = () => {
   const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
   const [openResearchType, setOpenResearchType] = useState(false);
-  const onFinish = async (values: any) => {
-    setOpenResearchType(true);
-    // const response = await registerUser(values);
 
-    // if (response?.code) message.error(response.code);
-    // if (response?.name) message.error(response.name);
+  const onFinish = async (values: any) => {
+    const response = await registerUser(values);
+
+    if (response?.code) message.error(response.code);
+    if (response?.name) message.error(response.name);
+
+    console.log(response);
+    setOpenResearchType(true);
   };
   return (
     <>
@@ -21,7 +24,7 @@ const Register = () => {
       {!openResearchType && (
         <div>
           <h2 className="text-3xl text-white mb-3 golden-font  text-center">
-          Join ScholarHub Today
+            Join ScholarHub Today
           </h2>
           <p className="mb-8 text-center text-[#ffffff8e]">
             To provide you with a personalized experience and tailor our features to your needs,
