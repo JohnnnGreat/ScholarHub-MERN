@@ -27,7 +27,7 @@ const Privacy = ({ id }: { id: string }) => {
     }
 
     await message.success("Privacy Updated Successfully");
-    return router.push(`addresource/displayimage?resourceId=${id}`);
+    return router.push(`displayimage?resourceId=${id}`);
   };
   return (
     <div>

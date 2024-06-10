@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const DisplayImage = () => {
-  return (
-    <div>DisplayImage</div>
-  )
-}
+const DisplayImageComponent = ({ id }: { id: string }) => {
+  return <div>DisplayImage</div>;
+};
 
-export default DisplayImage
+export default DisplayImageComponent;
