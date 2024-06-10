@@ -1,15 +1,28 @@
 "use client";
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
-import { useCreateNewUser } from "@/utils/queries";
+import { useUpdateResearcherType } from "@/utils/queries";
 import { message } from "antd";
 import { researcherType } from "../constant";
+import { useRouter } from "next/navigation";
 
 const ResearchType = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const {
+    mutateAsync: updateResearchType,
+    isPending: isUpdatingUser,
+    isError,
+  } = useUpdateResearcherType();
+  const router = useRouter();
 
-  const handleSelectedOption = () => {
-    console.log(selectedOption);
+  const handleSelectedOption = async () => {
+    // const response = await updateResearchType(selectedOption);
+    // console.log(response);
+
+    // if (isError) {
+    //   console.log("An error had occured");
+    // }
+
+    router.push("/auth/institution");
   };
 
   return (
@@ -59,7 +72,9 @@ const ResearchType = () => {
                 setSelectedOption(item?.title);
               }}
               key={item.id}
-              className="hover:border-[#76abae] transition-all border border-[#ffffff3b] rounded-[20px] cursor-pointer p-[1rem]"
+              className={` ${
+                item?.title === selectedOption && "border-[#76abae]"
+              } hover:border-[#76abae] transition-all border border-[#ffffff3b] rounded-[20px] cursor-pointer p-[1rem]`}
             >
               <h1 className="text-[20px]  text-white my-1 golden-font">{item?.title}</h1>
               <p className="text-[14px] text-[#76abaeb7]">{item?.description}</p>
@@ -67,11 +82,11 @@ const ResearchType = () => {
           ))}
         </div>
         <button
+          disabled={isUpdatingUser}
           onClick={handleSelectedOption}
           className="disabled:bg-[#8dcccf] block py-4 rounded-[20px] px-5 w-full bg-[#76ABAE] flex gap-[.8rem] justify-center items-center text-[16px] mt-[.7rem] text-[#232932]"
         >
-          Continue
-          <span className="loading loading-dots loading-sm"></span>
+          {!isUpdatingUser ? "Next" : <span className="loading loading-dots loading-md"></span>}
         </button>
       </div>
     </>

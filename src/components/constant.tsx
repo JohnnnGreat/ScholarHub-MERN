@@ -11,7 +11,7 @@ export const researcherType = [
   },
   {
     id: 2,
-    title: "Academic Researcher",
+    title: "Academic Researchr",
     description: "(University faculty, postdocs, or PhD students engaged in scholarly research)",
     features: [
       "Access academic journals, papers, and collaboration opportunities.",
@@ -21,7 +21,7 @@ export const researcherType = [
   },
   {
     id: 3,
-    title: "Academic Researcher",
+    title: "Academic Resarcher",
     description: "(University faculty, postdocs, or PhD students engaged in scholarly research)",
     features: [
       "Access academic journals, papers, and collaboration opportunities.",
@@ -31,7 +31,7 @@ export const researcherType = [
   },
   {
     id: 4,
-    title: "Academic Researcher",
+    title: "Academi Researcher",
     description: "(University faculty, postdocs, or PhD students engaged in scholarly research)",
     features: [
       "Access academic journals, papers, and collaboration opportunities.",

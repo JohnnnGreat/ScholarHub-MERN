@@ -24,7 +24,9 @@ p,
 a,
 button,
 input,
-input::placeholder {
+label,
+input::placeholder,
+.ant-select-selection-placeholder {
   font-family: "Product", sans-serif !important;
 }
 
@@ -78,8 +80,77 @@ input::placeholder {
   display: grid;
   grid-template-columns: 30% 70%;
   height: 100%;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 567px) {
+  .grid-auth {
+    grid-template-columns: 1fr;
+  }
 }
 
 input {
   background: transparent !important;
+}
+
+.ant-form-item {
+  margin-bottom: 15px !important;
+}
+
+.b-blur {
+  background: #ffffff0c;
+  backdrop-filter: blur(5px);
+}
+
+/* .ant-input,
+.ant-picker,
+.ant-select-selector {
+  @apply bg-gray-700 text-white;
+}
+
+.ant-input:focus,
+.ant-input-focused,
+.ant-picker-focused,
+.ant-input-affix-wrapper-focused,
+.ant-select-focused,
+.ant-select-selector-focused {
+  @apply border-teal-500 shadow-none;
+} */
+
+.ant-btn-primary {
+  @apply bg-teal-500 border-none;
+}
+
+.ant-btn-primary:hover,
+.ant-btn-primary:focus {
+  @apply bg-teal-600;
+}
+
+.ant-select-arrow {
+  @apply text-white;
+}
+
+.ant-select-selector {
+  background: transparent !important;
+  padding: 1.25rem 0.75rem !important;
+  border-radius: 10px !important;
+  border: 1px solid #ffffff59 !important;
+}
+
+.ant-select-selection-placeholder {
+  color: #ffffffa1 !important;
+}
+
+.ant-select-selection-item {
+  color: #76abae;
+}
+
+label {
+  color: #ffffff6e !important;
+}
+
+#add-paper_datePublished::placeholder {
+  color: #ffffffa1 !important;
 }
