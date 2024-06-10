@@ -1,9 +1,13 @@
-import React from 'react'
+import { headers } from "next/headers";
+import React from "react";
 
 const DisplayImage = () => {
-  return (
-    <div>DisplayImage</div>
-  )
-}
+  const header = headers();
 
-export default DisplayImage
+  const headerUrl = header?.get("x-url") || "not found";
+  const urlObject = new URL(headerUrl);
+  const postId = urlObject?.searchParams?.get("resourceId") || "";
+  return <DisplayImage id={postId} />;
+};
+
+export default DisplayImage;

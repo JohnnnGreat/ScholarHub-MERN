@@ -19,6 +19,7 @@ const Privacy = ({ id }: { id: string }) => {
   };
 
   const updatePrivacy = async () => {
+    if (!selectedOption) return message.error("You haven't selected any option");
     const response = await updatePrivacyFn({ privacy: selectedOption, resourceId: id });
     const { data, error } = response;
     if (error) {
@@ -26,7 +27,7 @@ const Privacy = ({ id }: { id: string }) => {
     }
 
     await message.success("Privacy Updated Successfully");
-    return router.push(`addresource/displayImage?resourceId=${id}`);
+    return router.push(`addresource/displayimage?resourceId=${id}`);
   };
   return (
     <div>
@@ -71,7 +72,7 @@ const Privacy = ({ id }: { id: string }) => {
           type="primary"
           htmlType="submit"
           onClick={updatePrivacy}
-          // disabled={isCreatingNewUser && true}
+          disabled={isCreatingNewUser}
           className="disabled:bg-[#8dcccf] hover:bg-[#5e898b] block py-6 rounded-[10px] px-5 w-full mt-[1.3rem] bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
         >
           {!isCreatingNewUser ? (
