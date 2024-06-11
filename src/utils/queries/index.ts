@@ -14,7 +14,7 @@ export const useCreateNewUser = () => {
 
 export const useUpdateResearcherType = () => {
   return useMutation({
-    mutationFn: (typeOfResearcher: string) => updateResearcherType(typeOfResearcher),
+    mutationFn: (payload: { selectedOption: string; id: string }) => updateResearcherType(payload),
   });
 };
 

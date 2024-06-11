@@ -8,13 +8,23 @@ import { AuthContext } from "@/context/AuthContext";
 
 const Register = () => {
   const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
-  const [openResearchType, setOpenResearchType] = useState(false);
   const router = useRouter();
+  const [api, contextHolder] = notification.useNotification();
+
+  type NotificationType = "success" | "info" | "warning" | "error";
+  const openNotificationWithIcon = (type: NotificationType, message: string) => {
+    api[type]({
+      message: message,
+    });
+  };
   const onFinish = async (values: any) => {
     const response = await registerUser(values);
-
-    if (response?.code) message.error(response.code);
-    if (response?.name) message.error(response.name);
+    console.log(response);
+    if (response?.code) {
+      openNotificationWithIcon("error", response.code);
+      return;
+    }
+    // if (response?.name) message.error(response.name);
 
     if (response?.status === 201) {
       notification.success({
@@ -22,10 +32,11 @@ const Register = () => {
       });
     }
 
-    // router.push("/auth/researchtype");
+    router.push(`/auth/researchtype?userId=${response.data[0].id}`);
   };
   return (
     <>
+      {contextHolder}
       <div className="relative top-0">
         <h2 className="text-3xl text-white mb-3 golden-font  text-center">Join ScholarHub Today</h2>
         <p className="mb-4 text-center text-[#ffffff8e] text-[14px]">
@@ -71,7 +82,7 @@ const Register = () => {
             />
           </Form.Item>
           <Form.Item>
-            <button
+            <Button
               htmlType="submit"
               disabled={isCreatingNewUser && true}
               className="disabled:bg-[#649294] py-3 rounded-full px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
@@ -81,7 +92,7 @@ const Register = () => {
               ) : (
                 <span className="loading loading-dots loading-md"></span>
               )}
-            </button>
+            </Button>
             <p className="text-center mt-[.8rem] text-[14px] text-[#ffffffb6]">Or</p>
           </Form.Item>
           <button className="px-[2rem] text-[#76ABAE] border hover:bg-transparent py-2 rounded-full w-fit mx-auto border-[#ffffff4b] bg-transparent h-auto flex gap-3 items-center justify-center">

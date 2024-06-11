@@ -23,7 +23,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       return NextResponse.json("User Already Existsy");
     }
 
-    const response = await supabase.from("User").insert([body]);
+    const response = await supabase.from("User").insert([body]).select();
 
     return NextResponse.json(response);
   } catch (error) {

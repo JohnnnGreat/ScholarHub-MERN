@@ -17,7 +17,7 @@ const AddResourceField = () => {
 
   const onFinish = async (values: any) => {
     const response = await addResourceToDb(values);
-    console.log(response);
+
     const { data, error } = response;
 
     if (error) {

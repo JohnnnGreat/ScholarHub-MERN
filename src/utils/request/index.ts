@@ -26,11 +26,17 @@ export const createNewUser = async (user: any) => {
   }
 };
 
-export const updateResearcherType = async (researcherType: string) => {
+export const updateResearcherType = async ({
+  selectedOption,
+  id,
+}: {
+  selectedOption: string;
+  id: string;
+}) => {
   try {
-    const response = await fetch("api/onboarding/researcher", {
+    const response = await fetch("/api/onboarding/researcher", {
       method: "POST",
-      body: JSON.stringify(researcherType),
+      body: JSON.stringify({ selectedOption, id }),
     });
 
     return await response.json();

@@ -1,11 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { useUpdateResearcherType } from "@/utils/queries";
-import { message } from "antd";
+import { message, notification } from "antd";
 import { researcherType } from "../constant";
 import { useRouter } from "next/navigation";
 
-const ResearchType = () => {
+const ResearchType = ({ id }: { id: string }) => {
   const [selectedOption, setSelectedOption] = useState("");
   const {
     mutateAsync: updateResearchType,
@@ -15,14 +15,16 @@ const ResearchType = () => {
   const router = useRouter();
 
   const handleSelectedOption = async () => {
-    // const response = await updateResearchType(selectedOption);
-    // console.log(response);
+    const { data, error } = await updateResearchType({ selectedOption, id });
 
-    // if (isError) {
-    //   console.log("An error had occured");
-    // }
+    if (isError) {
+      console.log("An error had occured");
+    }
+    await notification.success({
+      message: "Files submitted successfully.",
+    });
 
-    router.push("/auth/institution");
+    return router.push("/auth/institution");
   };
 
   return (
