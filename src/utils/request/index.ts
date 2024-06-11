@@ -135,8 +135,13 @@ const uploadFile = async (Files: {
 };
 
 export const getResourceData = async (id: string) => {
+  const environment = process.env.NODE_ENV;
   try {
-    const response = await fetch(`http://localhost:3000/api/resource/${id}`);
+    const response = await fetch(
+      `http://${
+        environment === "development" ? "localhost:3000" : "scholar-six.vercel.app"
+      }/api/resource/${id}`
+    );
     return await response.json();
   } catch (error) {
     return error;
