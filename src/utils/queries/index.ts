@@ -5,6 +5,7 @@ import {
   createNewUser,
   updatePrivacy,
   updateResearcherType,
+  updateFile,
 } from "../request";
 
 export const useCreateNewUser = () => {
@@ -27,5 +28,11 @@ export const useUpdatePrivacy = (): any => {
   return useMutation({
     mutationFn: (payload: { privacy: string; resourceId: string } | any): Promise<any> =>
       updatePrivacy(payload),
+  });
+};
+
+export const useUpdateFile = (): any => {
+  return useMutation({
+    mutationFn: (filePayload) => updateFile(filePayload),
   });
 };

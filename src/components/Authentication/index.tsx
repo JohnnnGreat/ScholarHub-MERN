@@ -18,7 +18,7 @@ const Authentication = ({ children }: { children: React.ReactNode }) => {
         </div>
 
         {/* Login Form */}
-        <div className=" flex overflow-y-auto relative top-0 flex-col items-start justify-start w-full md:w-2/3 border border-[#ffffff3b] p-10 rounded-[3rem] mt-[3rem] mb-[-2rem]">
+        <div className=" flex overflow-y-auto relative top-0 flex-col items-start justify-start w-full md:w-2/3 border border-[#ffffff3b] p-10 rounded-[3rem] mt-[6rem] mb-[-2rem]">
           {children}
         </div>
       </div>

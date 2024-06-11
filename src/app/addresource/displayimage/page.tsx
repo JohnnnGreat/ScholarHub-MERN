@@ -1,6 +1,11 @@
 import DisplayImageComponent from "@/components/Add/DisplayImage";
+import { Metadata } from "next";
 import { headers } from "next/headers";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Display Image & File Attachment",
+};
 
 const DisplayImage = () => {
   const header = headers();

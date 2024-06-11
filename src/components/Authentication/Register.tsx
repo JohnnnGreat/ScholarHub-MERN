@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useState } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useCreateNewUser } from "@/utils/queries";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
@@ -11,17 +11,18 @@ const Register = () => {
   const [openResearchType, setOpenResearchType] = useState(false);
   const router = useRouter();
   const onFinish = async (values: any) => {
-    /*const response = await registerUser(values);
+    const response = await registerUser(values);
 
     if (response?.code) message.error(response.code);
     if (response?.name) message.error(response.name);
 
     if (response?.status === 201) {
-      message.success("Account Created Successfully !!!😊");
-      return setOpenResearchType(true);
-    }*/
+      notification.success({
+        message: "Account Created Successfully !!!😊",
+      });
+    }
 
-    router.push("/auth/researchtype");
+    // router.push("/auth/researchtype");
   };
   return (
     <>
@@ -39,6 +40,16 @@ const Register = () => {
           initialValues={{ remember: true }}
           onFinish={onFinish}
         >
+          <Form.Item
+            name="fullname"
+            rules={[{ required: true, message: "Please input your Name!" }]}
+          >
+            <Input
+              type="text"
+              className="mb-0 w-[100%] mx-[auto !important] text-[#76ABAE] py-3 px-5 rounded-full placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
+              placeholder="Full Name"
+            />
+          </Form.Item>
           <Form.Item
             name="email"
             rules={[{ required: true, message: "Please input your Email Address!" }]}
@@ -60,18 +71,17 @@ const Register = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button
-              type="primary"
+            <button
               htmlType="submit"
               disabled={isCreatingNewUser && true}
-              className="disabled:bg-[#8dcccf] block py-5 rounded-full px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
+              className="disabled:bg-[#649294] py-3 rounded-full px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
             >
               {!isCreatingNewUser ? (
                 "Register"
               ) : (
                 <span className="loading loading-dots loading-md"></span>
               )}
-            </Button>
+            </button>
             <p className="text-center mt-[.8rem] text-[14px] text-[#ffffffb6]">Or</p>
           </Form.Item>
           <button className="px-[2rem] text-[#76ABAE] border hover:bg-transparent py-2 rounded-full w-fit mx-auto border-[#ffffff4b] bg-transparent h-auto flex gap-3 items-center justify-center">

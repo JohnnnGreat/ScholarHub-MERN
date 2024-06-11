@@ -8,6 +8,12 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -153,4 +159,22 @@ label {
 
 #add-paper_datePublished::placeholder {
   color: #ffffffa1 !important;
+}
+
+.ant-upload {
+  width: 100% !important;
+}
+
+.ant-upload-list-item-name {
+  color: rgba(255, 255, 255, 0.521);
+}
+
+.anticon {
+  svg {
+    color: #76abae !important;
+  }
+}
+
+.ant-divider {
+  background-color: rgba(255, 255, 255, 0.37) !important;
 }

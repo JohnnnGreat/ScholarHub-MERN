@@ -3,16 +3,30 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { navVariants } from "@/utils/framermotion";
 import Link from "next/link";
+import { createClient } from "@/utils/supabase/client";
+import { useRouter } from "next/navigation";
 
-const Header = () => {
+const Header = ({ user }: { user: any }) => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(user);
+  const [signInOut, setIsSigningOut] = useState(false);
+
+  const handleLogout = async () => {
+    setIsSigningOut(true);
+    const supabase = createClient();
+
+    await supabase.auth.signOut();
+    router.push("/auth");
+    setIsSigningOut(false);
+  };
   return (
     <div className="w-full flex justify-center">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={navVariants}
-        className="px-[1rem] z-40 fixed top-[1rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] b-blur rounded-full w-[400px] md:w-[80%] md:max-w-[1109px]"
+        className="px-[1rem] z-40 fixed top-[.7rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] b-blur rounded-full w-[400px] md:w-[80%] md:max-w-[1109px]"
       >
         <div className="text-[24px] golden-font ml-[1rem]">Scholar Hub</div>
         <div className="hidden md:flex gap-x-[1rem] items-center">
@@ -29,12 +43,22 @@ const Header = () => {
             Contact
           </a>
         </div>
-        <Link
-          href="/auth"
-          className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
-        >
-          Sign Up
-        </Link>
+        {isAuthenticated ? (
+          <button
+            onClick={handleLogout}
+            className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+          >
+            {!signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
+          </button>
+        ) : (
+          <Link
+            href="/auth"
+            className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+          >
+            Sign Up
+          </Link>
+        )}
+
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-gray-400 focus:outline-none">
             <svg
@@ -56,7 +80,7 @@ const Header = () => {
       </motion.div>
 
       {isOpen && (
-        <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4">
+        <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4 w-full">
           <a href="#" className="block px-2 py-1 hover:text-gray-400">
             Discover
           </a>

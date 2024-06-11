@@ -70,3 +70,69 @@ export const updatePrivacy = async ({
     return error;
   }
 };
+
+export const updateFile = async (filePayload: any) => {
+  const supabase = createClient();
+  const { resourceId } = filePayload;
+  try {
+    const { resourceFile, thumbnail } = filePayload;
+    const { thumbnailUrl, resourceFileUrl } = await uploadFile({ resourceFile, thumbnail });
+
+    const response = await supabase
+      .from("Resource")
+      .update({ thumbnail: thumbnailUrl, fileUrl: resourceFileUrl })
+      .eq("id", resourceId);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const uploadFile = async (Files: {
+  thumbnail: File;
+  resourceFile: File;
+}): Promise<{ thumbnailUrl: string; resourceFileUrl: string } | any> => {
+  const supabase = createClient();
+  const { resourceFile, thumbnail } = Files;
+  const thumbnailPath = `thumbnails/${Date.now()}_${thumbnail.name}`;
+  const resourceFilePath = `resources/${Date.now()}_${resourceFile.name}`;
+  console.log(resourceFilePath);
+  try {
+    const { data: thumbnailData, error: thumbnailError } = await supabase.storage
+      .from("Thumbnail")
+      .upload(thumbnailPath, thumbnail);
+
+    if (thumbnailError) {
+      throw thumbnailError;
+    }
+
+    const { data: resourceFileData, error: resourceFileError } = await supabase.storage
+      .from("Files")
+      .upload(resourceFilePath, resourceFile);
+
+    if (resourceFileError) {
+      throw resourceFileError;
+    }
+
+    const thumbnailUrl = supabase.storage.from("Thumbnail").getPublicUrl(thumbnailPath)
+      .data.publicUrl;
+
+    const resourceFileUrl = supabase.storage.from("Files").getPublicUrl(resourceFilePath)
+      .data.publicUrl;
+
+    return { thumbnailUrl, resourceFileUrl };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getResourceData = async (id: string) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/resource/${id}`);
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
+};
