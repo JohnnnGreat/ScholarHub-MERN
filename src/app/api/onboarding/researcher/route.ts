@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (req: NextRequest, res: NextResponse) => {
   const supabase = createClient();
   const body = await req.json();
-  console.log(body);
+
   try {
     const { data: userData, error: findUserError } = await supabase
       .from("User")

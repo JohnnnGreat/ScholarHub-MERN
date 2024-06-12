@@ -85,7 +85,7 @@ const Register = () => {
             <Button
               htmlType="submit"
               disabled={isCreatingNewUser && true}
-              className="disabled:bg-[#649294] py-3 rounded-full px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
+              className="disabled:bg-[#649294] py-5 rounded-full px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
             >
               {!isCreatingNewUser ? (
                 "Register"

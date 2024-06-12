@@ -40,3 +40,13 @@ export const researcherType = [
     ],
   },
 ];
+
+export const researchers = [
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+  { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
+];

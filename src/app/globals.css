@@ -32,7 +32,8 @@ button,
 input,
 label,
 input::placeholder,
-.ant-select-selection-placeholder {
+.ant-select-selection-placeholder,
+.ant-tabs-tab-btn {
   font-family: "Product", sans-serif !important;
 }
 
@@ -177,4 +178,24 @@ label {
 
 .ant-divider {
   background-color: rgba(255, 255, 255, 0.37) !important;
+}
+
+.ant-tabs {
+  background: transparent !important;
+}
+
+.ant-tabs-tab-active {
+  background: #222831 !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+  border: none !important;
+}
+
+.ant-tabs-nav {
+  margin-bottom: 0 !important;
+}
+
+.ant-tabs-nav {
+  background: white !important;
+  padding: 0.6rem 1rem;
 }

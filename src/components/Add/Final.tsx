@@ -48,7 +48,7 @@ const FinalComponent = ({ data }: { data: any }) => {
       </div>
 
       <Link
-        href="/dashboard"
+        href="/profile"
         type="primary"
         className="disabled:bg-[#8dcccf] text-white hover:bg-[#5e898b] block py-4 rounded-[10px] px-5 w-full mt-[1.3rem] bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
       >

@@ -48,7 +48,13 @@ export const updateResearcherType = async ({
 export const addResourceToDb = async (resource: Resource): Promise<any> => {
   const supabase = createClient();
   try {
-    const response = await supabase.from("Resource").insert([resource]).select();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const response = await supabase
+      .from("Resource")
+      .insert([{ ...resource, uploadBy: user?.email }])
+      .select();
 
     return response;
   } catch (error) {
@@ -104,7 +110,7 @@ const uploadFile = async (Files: {
   const { resourceFile, thumbnail } = Files;
   const thumbnailPath = `thumbnails/${Date.now()}_${thumbnail.name}`;
   const resourceFilePath = `resources/${Date.now()}_${resourceFile.name}`;
-  console.log(resourceFilePath);
+
   try {
     const { data: thumbnailData, error: thumbnailError } = await supabase.storage
       .from("Thumbnail")

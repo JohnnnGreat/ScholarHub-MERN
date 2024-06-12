@@ -80,7 +80,7 @@ const Header = ({ user }: { user: any }) => {
       </motion.div>
 
       {isOpen && (
-        <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4 w-full">
+        <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4 w-[100%important]">
           <a href="#" className="block px-2 py-1 hover:text-gray-400">
             Discover
           </a>
