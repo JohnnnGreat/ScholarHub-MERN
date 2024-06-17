@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { navVariants, shakeAnimation, zoomAnimation } from "@/utils/framermotion";
 import Link from "next/link";
-import { AuthContext } from "@/context/AuthContext";
+
 
 export default function Hero() {
   return (
