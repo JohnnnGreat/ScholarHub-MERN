@@ -140,7 +140,7 @@ const uploadFile = async (Files: {
   }
 };
 
-export const getResourceData = async (id: string) => {
+export const getResourceData = async (id: string | undefined) => {
   const environment = process.env.NODE_ENV;
   try {
     const response = await fetch(
@@ -153,3 +153,34 @@ export const getResourceData = async (id: string) => {
     return error;
   }
 };
+
+export const getUserInfo = async (email: string) => {
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase.from("User").select("*").eq("email", email).single();
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getRelatedUsers = async (researchType: string, email: string) => {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("User")
+      .select("*")
+      .eq("researchType", researchType);
+
+    const relatedResearchers = data?.filter((item: any, index) => {
+      return item.email !== email;
+    });
+
+    return relatedResearchers;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteResource = async (resourceId: string) => {};

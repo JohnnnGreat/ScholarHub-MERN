@@ -2,24 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
 }
 
 .golden-font {
@@ -35,6 +21,10 @@ input::placeholder,
 .ant-select-selection-placeholder,
 .ant-tabs-tab-btn {
   font-family: "Product", sans-serif !important;
+}
+
+body {
+  background: #222831;
 }
 
 /* h1 {

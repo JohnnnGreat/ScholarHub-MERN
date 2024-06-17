@@ -19,6 +19,7 @@ export const INITIAL_STATE = {
 };
 
 export type IUser = {
+  researchType: string;
   fullname: string;
   email: string;
   imageUrl: string;

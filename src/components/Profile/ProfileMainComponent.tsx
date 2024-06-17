@@ -1,188 +1,137 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Layout, Menu, Avatar, Button, Input, Tag, Tooltip, Tabs } from "antd";
-import {
-  UserOutlined,
-  MailOutlined,
-  EditOutlined,
-  BookOutlined,
-  SettingOutlined,
-  HistoryOutlined,
-} from "@ant-design/icons";
+// import * as Tabs from "@radix-ui/react-tabs";
 import { createClient } from "@/utils/supabase/client";
+
+import ProfileSection from "./ProfileSection";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import { Tabs, Tab } from "@nextui-org/tabs";
+import { useGetRelatedResearchers } from "@/utils/queries";
 import Link from "next/link";
+import { Input, Textarea } from "@nextui-org/input";
+import { useFormik } from "formik";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import MyResource from "./MyResource";
+import { INote, IResource } from "@/types";
+import { IUser } from "@/context/AuthContext";
 
-const { Header, Content, Sider } = Layout;
-const { TextArea } = Input;
+const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
+  const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
+  const researchRe = data as IUser[];
 
-const ProfileMainComponent = ({ userEmail }: any) => {
-  const supabase = createClient();
-  const [userData, setUserData] = useState<any>(null);
-  const [relatedUsers, setRelatedUsers] = useState<any>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+  const noteSchema = z.object({
+    title: z.string().min(3, "Title must be at least 3 characters"),
+    text: z.string().min(3, "Text must be at least 3 characters"),
+  });
 
-      const { data, error } = await supabase
-        .from("User")
-        .select("*")
-        .eq("email", userEmail)
-        .single();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<INote>({
+    resolver: zodResolver(noteSchema),
+  });
 
-      setUserData(data);
-    };
-
-    fetchData();
-
-    const channels = supabase
-      .channel("custom-filter-channel")
-      .on("postgres_changes", { event: "*", schema: "public", table: "User" }, async (payload) => {
-        console.log(payload);
-        fetchData();
-      })
-      .subscribe();
-
-    return () => {
-      channels.unsubscribe();
-    };
-  }, [supabase]);
-
-  useEffect(() => {
-    const fetchRelated = async () => {
-      console.log(userData?.researchType);
-      const { data, error } = await supabase
-        .from("User")
-        .select("*")
-        .eq("researchType", userData?.researchType);
-
-      const relatedResearchers = data?.filter((item: any, index) => {
-        return item.email !== userData?.email;
-      });
-      setRelatedUsers(relatedResearchers);
-    };
-
-    fetchRelated();
-
-    const channels = supabase
-      .channel("custom-filter-channel")
-      .on("postgres_changes", { event: "*", schema: "public", table: "User" }, async (payload) => {
-        console.log(payload);
-        fetchRelated();
-      })
-      .subscribe();
-
-    return () => {
-      channels.unsubscribe();
-    };
-  }, [userData]);
+  const onSubmit = (data: INote) => {
+    console.log(data);
+  };
 
   return (
     <div className="mt-[6rem] max-w-[1100px] mx-auto">
-      <Content className="p-4">
+      <div className="p-4">
         <div className="bg-[#1E242C] text-white p-6 rounded-lg">
-          <div className="flex items-center justify-between">
-            <Tabs defaultActiveKey="1" type="card">
-              <Tabs.TabPane tab="My Resource" key="1">
-                <MyResource email={userEmail} />
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Profile" key="2">
-                <div className="flex items-center my-[2rem]  flex-wrap md:flex-nowrap justify-center">
-                  <Avatar size={200} icon={<UserOutlined />} className="bg-orange-500 mr-4" />
-                  <div>
-                    <h2 className="text-[40px] golden-font text-white flex items-center text-center w-full md:text-left">
-                      {userData?.fullname}
-                      <Tooltip title="Edit Profile">
-                        <Button type="text" icon={<EditOutlined />} className="ml-2 text-white" />
-                      </Tooltip>
-                    </h2>
-                    <p className="text-[#ffffff88] text-[16px] flex items-center mt-[.7rem] max-w-[500px]">
-                      <BookOutlined className="mr-2" />
-                      {userData?.bio}
-                    </p>
-                    <p className="flex items-center text-[#ffffff88] text-[16px] mt-[.7rem]">
-                      <MailOutlined className="mr-2" />
-                      {userData?.email}
-                    </p>
-                    <p className="flex items-center text-[#ffffff88] text-[16px] mt-[.7rem] ">
-                      <SettingOutlined className="mr-2" />
-                      {userData?.researchType}
-                    </p>
-                    <div className="flex space-x-2 mt-2">
-                      <div className="py-2 px-6 rounded-full border border-[#76abaea1] text-[#ffffff88]">
-                        Science
-                      </div>
-                      <div className="py-2 px-6 rounded-full border border-[#76abaea1]">
-                        Science
-                      </div>
-                      <div className="py-2 px-6 rounded-full border border-[#76abaea1]">
-                        Science
-                      </div>
-                    </div>
+          <div className="flex w-full flex-col">
+            <Tabs variant="solid" aria-label="Options">
+              <Tab key="photos" title="My Resource">
+                <MyResource email={userInfo?.email} />
+              </Tab>
+              <Tab key="profile" title="Profile">
+                <div className="flex items-center my-[2rem] gap-x-[2rem] flex-wrap md:flex-nowrap justify-center">
+                  <div className="bg-orange-500 mr-4 rounded-full w-[200px] h-[200px] flex items-center justify-center">
+                    <span className="text-6xl text-white">U</span>
                   </div>
+                  <ProfileSection userData={userInfo} />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2 bg-gray-900 p-6 rounded-lg">
+                  <div className="lg:col-span-2 p-6 rounded-lg">
                     <h3 className="text-white text-xl mb-4 golden-font">
                       Researchers with similar Interest
                     </h3>
-                    <div>
-                      {relatedUsers.map((researcher: any, index: number) => (
-                        <div
-                          key={index}
-                          className="flex items-center mb-4 bg-[#222831] p-4 rounded-[10px]"
-                        >
-                          <Avatar
-                            size="large"
-                            icon={<UserOutlined />}
-                            className="bg-gray-500 mr-4"
-                          />
+                    {researchRe?.map((item: IUser) => (
+                      <div className="flex items-center gap-[1rem] border-b border-[#ffffff3a] py-[.9rem]">
+                        <div className="w-[40px] h-[40px] rounded-full bg-[#ffffff6b] "></div>
+                        <div className="flex justify-between w-full items-center">
                           <div>
-                            <h4 className="text-white">{researcher.fullname}</h4>
-                            <p className="text-gray-400">
-                              {!researcher.publications && 0} Publications,{" "}
-                              {!researcher.followers && 0} followers
-                            </p>
-                            <Link href={`/profile?id=${researcher?.id}`} className="text-blue-500">
-                              View Profile
-                            </Link>
+                            <h1 className="text-[#EEEEEE]">{item?.fullname}</h1>
+                            <div className="text-[#eeeeee81]">10 publications . 100 followers</div>
                           </div>
+                          <Link className="text-[#76abae91]" href="/">
+                            View Profile
+                          </Link>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                   <div className="bg-gray-900 p-6 rounded-lg">
-                    <h3 className="text-white text-xl ">Make Outline</h3>
-                    <p className="text-[#ffffff88] text-[13px]">
+                    <h3 className="text-white text-xl">Make Outline</h3>
+                    <p className="text-[#ffffff88] text-[13px] golden-font">
                       Make An Outline of your Next Research
                     </p>
-                    <Input
-                      placeholder="Title"
-                      className="mb-4 mt-3 py-[.7rem] placeholder:text-[#ffffffaf] border-[#ffffff5b]"
-                    />
-                    <TextArea
-                      placeholder="Outline"
-                      rows={4}
-                      className="mb-4 bg-transparent placeholder:text-white border-[#ffffff5b] focus:bg-transparent"
-                    />
-                    <Button type="primary" className="bg-[#76ABAE!important] " block>
-                      Done Outlining?
-                    </Button>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Input
+                        type="text"
+                        className="mt-[1rem]"
+                        variant="bordered"
+                        label="Email"
+                        {...register("title")}
+                      />
+                      <p
+                        className={`text-red-500 text-[14px] ${
+                          errors?.title?.message ? "" : "hidden"
+                        }`}
+                      >
+                        {errors?.title?.message}
+                      </p>
+                      <Textarea
+                        label="Description"
+                        variant="bordered"
+                        placeholder="Enter your description"
+                        disableAnimation
+                        disableAutosize
+                        classNames={{
+                          base: "max-w-xs mt-[1rem]",
+                          input: "resize-y min-h-[40px]",
+                        }}
+                        {...register("text")}
+                      />
+                      <p
+                        className={`text-red-500 text-[14px] ${
+                          errors?.text?.message ? "" : "hidden"
+                        }`}
+                      >
+                        {errors?.text?.message}
+                      </p>
+                      <button
+                        type="submit"
+                        className="bg-[#76ABAE] w-full py-2 text-white rounded mt-[1rem]"
+                      >
+                        Done Outlining?
+                      </button>
+                    </form>
                   </div>
                 </div>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Activity" key="3">
-                {/* Content for Activity */}
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Analytics" key="4">
-                {/* Content for Analytics */}
-              </Tabs.TabPane>
+              </Tab>
+              <Tab key="activity" title="Activity">
+                <div>Tab 2</div>
+              </Tab>
+              <Tab key="analytics" title="Analytics">
+                <div>Tab 2</div>
+              </Tab>
             </Tabs>
           </div>
         </div>
-      </Content>
+      </div>
     </div>
   );
 };

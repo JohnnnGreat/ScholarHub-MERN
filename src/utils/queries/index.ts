@@ -1,3 +1,4 @@
+import { researcherType } from "./../../components/constant";
 import { useQuery, useMutation, useQueryClient, useInfiniteQuery } from "@tanstack/react-query";
 import {
   Resource,
@@ -6,6 +7,7 @@ import {
   updatePrivacy,
   updateResearcherType,
   updateFile,
+  getRelatedUsers,
 } from "../request";
 
 export const useCreateNewUser = () => {
@@ -34,5 +36,12 @@ export const useUpdatePrivacy = (): any => {
 export const useUpdateFile = (): any => {
   return useMutation({
     mutationFn: (filePayload) => updateFile(filePayload),
+  });
+};
+
+export const useGetRelatedResearchers = (researcherType: string, email: string) => {
+  return useQuery({
+    queryKey: ["GET_RELATED_RESEARCHER"],
+    queryFn: () => getRelatedUsers(researcherType, email),
   });
 };

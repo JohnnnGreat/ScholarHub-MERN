@@ -6,6 +6,8 @@ import AuthProvider from "@/context/AuthContext";
 import Header from "@/components/Header";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { NextUIProvider } from "@nextui-org/system";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,12 +25,16 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <TanStack>
-        <AuthProvider>
-          <body className={inter.className}>
-            <Header user={user ? true : false} />
-            {children}
-          </body>
-        </AuthProvider>
+        <AntdRegistry>
+          <AuthProvider>
+            <body className="dark text-foreground h-max ">
+              <NextUIProvider>
+                <Header user={user ? true : false} />
+                {children}
+              </NextUIProvider>
+            </body>
+          </AuthProvider>
+        </AntdRegistry>
       </TanStack>
     </html>
   );
