@@ -13,8 +13,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import MyResource from "./MyResource";
-import { INote, IResource } from "@/types";
-import { IUser } from "@/context/AuthContext";
+import { INote, IResource, IUser } from "@/types";
 
 const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
   const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);

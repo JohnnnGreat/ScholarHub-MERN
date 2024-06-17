@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import TanStack from "@/components/queryClient";
-import AuthProvider from "@/context/AuthContext";
+
 import Header from "@/components/Header";
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
@@ -26,14 +26,12 @@ export default async function RootLayout({
     <html lang="en">
       <TanStack>
         <AntdRegistry>
-          <AuthProvider>
-            <body className="dark text-foreground h-max ">
-              <NextUIProvider>
-                <Header user={user ? true : false} />
-                {children}
-              </NextUIProvider>
-            </body>
-          </AuthProvider>
+          <body className="dark text-foreground h-max ">
+            <NextUIProvider>
+              <Header user={user ? true : false} />
+              {children}
+            </NextUIProvider>
+          </body>
         </AntdRegistry>
       </TanStack>
     </html>
