@@ -5,6 +5,7 @@ import ResourceCard from "./ResourceCard";
 import { Pagination, divider } from "@nextui-org/react";
 import { IResource } from "@/types";
 import { message } from "antd";
+import Link from "next/link";
 
 const MyResource = ({ email }: { email?: string }) => {
   const supabase = createClient();
@@ -62,6 +63,9 @@ const MyResource = ({ email }: { email?: string }) => {
   }, [subscribeToChanges]);
   return (
     <div>
+      <Link href="addresource" className="bg-white text-black py-[.8rem] px-[1rem]">
+        Add a New Resource
+      </Link>
       {loading ? (
         <span className="loading loading-spinner loading-sm"></span>
       ) : (

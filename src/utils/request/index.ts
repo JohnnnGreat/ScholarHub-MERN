@@ -154,7 +154,7 @@ export const getResourceData = async (id: string | undefined) => {
   }
 };
 
-export const getUserInfo = async (email: string) => {
+export const getUserInfo = async (email: any) => {
   const supabase = createClient();
   try {
     const { data, error } = await supabase.from("User").select("*").eq("email", email).single();
