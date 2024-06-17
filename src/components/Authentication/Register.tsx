@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useCreateNewUser } from "@/utils/queries";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
-import { AuthContext } from "@/context/AuthContext";
+
 
 const Register = () => {
   const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
