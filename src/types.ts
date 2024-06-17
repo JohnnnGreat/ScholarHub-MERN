@@ -14,7 +14,6 @@ export interface IResource {
   thumbnail: string;
   fileUrl: string;
   id: string;
-  
 }
 
 export interface INote {
@@ -27,6 +26,6 @@ export interface IUser {
   email: string;
   researchType: string;
   bio: string;
-  followers: number;
-  publications: number;
+  followers?: number;
+  publications?: number | string;
 }

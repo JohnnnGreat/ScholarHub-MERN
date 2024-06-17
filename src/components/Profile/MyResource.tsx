@@ -43,6 +43,23 @@ const MyResource = ({ email }: { email?: string }) => {
     setCurrentPage(page);
   };
 
+  const subscribeToChanges = () => {
+    const channels = supabase
+      .channel("custom-all-channel")
+      .on("postgres_changes", { event: "*", schema: "public", table: "Resource" }, (payload) => {
+        fetchData(currentPage);
+      })
+      .subscribe();
+
+    return channels;
+  };
+  useEffect(() => {
+    subscribeToChanges();
+
+    return () => {
+      subscribeToChanges().unsubscribe();
+    };
+  }, [subscribeToChanges]);
   return (
     <div>
       {loading ? (

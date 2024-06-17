@@ -183,4 +183,17 @@ export const getRelatedUsers = async (researchType: string, email: string) => {
   }
 };
 
-export const deleteResource = async (resourceId: string) => {};
+export const deleteResource = async (resourceId: string) => {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase.from("Resource").delete().eq("id", resourceId);
+
+    if (error) {
+      throw new Error();
+    }
+
+    return { data, error };
+  } catch (error) {
+    throw new Error();
+  }
+};

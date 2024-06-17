@@ -8,6 +8,7 @@ import {
   updateResearcherType,
   updateFile,
   getRelatedUsers,
+  deleteResource,
 } from "../request";
 
 export const useCreateNewUser = () => {
@@ -41,7 +42,19 @@ export const useUpdateFile = (): any => {
 
 export const useGetRelatedResearchers = (researcherType: string, email: string) => {
   return useQuery({
-    queryKey: ["GET_RELATED_RESEARCHER"],
+    queryKey: ["GET_RELATED_RESEARCHES"],
     queryFn: () => getRelatedUsers(researcherType, email),
+  });
+};
+
+export const useDeleteResource = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (resourceId: string) => deleteResource(resourceId),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["GET_RELATED_RESEARCHES"],
+      });
+    },
   });
 };

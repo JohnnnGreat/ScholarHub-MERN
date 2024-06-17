@@ -4,10 +4,12 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
+import { useDeleteResource } from "@/utils/queries";
 
 const ResourceCard = ({ resource }: { resource: IResource }) => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { mutateAsync: deleteResource, isPending } = useDeleteResource();
 
   const handleShare = (platform: string, id: string) => {
     const urlF = new URL(window.location.href);
@@ -33,8 +35,8 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
 
     window.open(shareUrl, "_blank");
   };
-  const handleDelete = () => {
-    // Implement your delete logic here
+  const handleDelete = (resourceId: string) => {
+    deleteResource(resourceId);
     console.log(`Deleting resource with id: ${resource.id}`);
     setShowDeleteModal(false); // Close the modal after deletion
   };
@@ -126,7 +128,13 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
             </p>
           </ModalBody>
           <ModalFooter>
-            <Button color="danger" variant="light" onClick={handleDelete}>
+            <Button
+              color="danger"
+              variant="light"
+              onClick={() => {
+                handleDelete(resource.id);
+              }}
+            >
               Delete
             </Button>
             <Button onClick={() => setShowDeleteModal(false)}>Cancel</Button>
