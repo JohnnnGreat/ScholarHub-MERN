@@ -6,6 +6,7 @@ import { researcherType } from "../constant";
 import { useRouter } from "next/navigation";
 
 const ResearchType = ({ id }: { id: string }) => {
+  console.log(id);
   const [selectedOption, setSelectedOption] = useState("");
   const {
     mutateAsync: updateResearchType,
@@ -24,7 +25,7 @@ const ResearchType = ({ id }: { id: string }) => {
       message: "Files submitted successfully.",
     });
     console.log(data, error);
-    return router.push("/auth/institution");
+    // return router.push("/auth/institution");
   };
 
   return (

@@ -15,12 +15,8 @@ const ResearcherType = async () => {
   const headerUrl = header?.get("x-url") || "not found";
   const urlObject = new URL(headerUrl);
 
-  const userId = urlObject?.searchParams?.get("code") || "";
-  console.log(userId);
-  // if (!postId) {
-  //   <div>You are not permitted to view this page</div>;
-  //   return redirect("/auth");
-  // }
+  const userId = urlObject?.searchParams?.get("userId") || "";
+
   const supabase = createClient();
 
   const { data } = await supabase.auth.getUser();

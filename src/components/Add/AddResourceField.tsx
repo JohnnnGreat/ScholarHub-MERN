@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import NextCom from "./Nextco";
 import { Button } from "@nextui-org/button";
+import { popularSubjectAreas } from "../constant";
 
 const { Option } = Select;
 
@@ -70,10 +71,11 @@ const AddResourceField = () => {
                 name="subjectArea"
                 rules={[{ required: true, message: "Please input the subject area!" }]}
               >
-                <Input
-                  placeholder="Enter Subject Area"
-                  className="mb-0 w-[100%] mx-[auto !important] text-[#76ABAE] py-3 px-5 rounded-[10px] placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
-                />
+                <Select placeholder="Subjeact Area">
+                  {popularSubjectAreas.map((item, index) => (
+                    <Option value={item}>{item}</Option>
+                  ))}
+                </Select>
               </Form.Item>
             </div>
             <Form.Item label="Co Authors One" name="coAuthors">
