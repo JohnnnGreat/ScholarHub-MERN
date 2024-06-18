@@ -2,7 +2,7 @@ export interface IResource {
   title: string;
   description: string;
   datePublished: string;
-  subjectAreas: string;
+  subjectArea: string;
   coAuthors: string;
   pageNo: string | number;
   edition: number;

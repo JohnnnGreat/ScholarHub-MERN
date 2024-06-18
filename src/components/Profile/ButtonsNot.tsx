@@ -2,6 +2,7 @@
 import { IUser } from "@/types";
 import { useHandleUpdate } from "@/utils/queries";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -21,9 +22,12 @@ const ButtonsNot = ({ userD }: { userD: IUser }) => {
   return (
     <div>
       <button className="btn btn-sm font-light">Deny</button>
-      <button className="btn btn-sm btn-primary font-light" onClick={handleUpdate}>
+      <Link
+        href={`/researchtype?userId=${userD?.id}`}
+        className="btn btn-sm btn-primary font-light"
+      >
         Click to Set
-      </button>
+      </Link>
     </div>
   );
 };

@@ -63,7 +63,7 @@ const MyResource = ({ email }: { email?: string }) => {
   }, [subscribeToChanges]);
   return (
     <div>
-      <div className="flex justify-end  mt-[.8rem]">
+      <div className="flex justify-end  my-[.8rem]">
         <Link
           href="addresource"
           className="bg-[#76ABAE] rounded-md text-black py-[.8rem] px-[1rem]"

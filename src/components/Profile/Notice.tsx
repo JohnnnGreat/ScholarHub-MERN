@@ -4,6 +4,7 @@ import ButtonsNot from "./ButtonsNot";
 import { IUser } from "@/types";
 import { getUserInfo } from "@/utils/request";
 import { createClient } from "@/utils/supabase/client";
+import Link from "next/link";
 
 const Notice = ({ user }: { user: IUser | undefined }) => {
   const supabase = createClient();
@@ -74,9 +75,12 @@ const Notice = ({ user }: { user: IUser | undefined }) => {
           <span className="flex-1">Hi {user?.fullname} Your info isnt set yet!</span>
           <div>
             <button className="btn btn-sm font-light">Deny</button>
-            <button className="btn btn-sm btn-primary font-light" onClick={handleUpdate}>
+            <Link
+              href={`/auth/researchtype?userId=${userSub?.id}`}
+              className="btn btn-sm btn-primary font-light"
+            >
               Click to Set
-            </button>
+            </Link>
           </div>
         </div>
       )}

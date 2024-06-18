@@ -51,7 +51,17 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
       <div className="flex flex-col flex-1">
         <h2 className="text-xl mb-2 text-[#76ABAE] golden-font">{resource.title}</h2>
         <p className="mb-4 text-[#ffffff93]">{resource.description}</p>
-        <div className="flex flex-wrap gap-4 mb-4">
+        <div className="flex gap-3">
+          <div>
+            <h1 className="text-[#fff7]">Resource Type</h1>
+            <p className="text-[#fff] font-bold">{resource?.resourceType}</p>
+          </div>
+          <div>
+            <h1 className="text-[#fff7]">Subject Area</h1>
+            <p className="text-[#fff] font-bold">{resource?.subjectArea}</p>
+          </div>
+        </div>
+        <div className="flex flex-wrap gap-4 mb-4 mt-[1rem]">
           <Link href={`/resources/${resource.id}`} className="text-[#66979A] hover:underline">
             View Paper
           </Link>
