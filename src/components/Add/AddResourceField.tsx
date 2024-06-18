@@ -140,8 +140,7 @@ const AddResourceField = () => {
             </Form.Item>
             <Form.Item>
               <Button
-                htmlType="submit"
-                // disabled={isCreatingNewUser && true}
+                disabled={isCreatingNewUser && true}
                 className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
               >
                 {!isCreatingNewUser ? (
