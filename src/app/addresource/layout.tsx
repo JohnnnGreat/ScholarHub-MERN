@@ -13,9 +13,9 @@ const layout = async ({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) {
-    return redirect("/auth");
-  }
+  // if (!user) {
+  //   return redirect("/auth");
+  // }
   return <div>{children}</div>;
 };
 

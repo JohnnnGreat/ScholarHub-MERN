@@ -154,7 +154,7 @@ export const getResourceData = async (id: string | undefined) => {
   }
 };
 
-export const getUserInfo = async (email: any) => {
+export const getUserInfo = async (email: string | undefined) => {
   const supabase = createClient();
   try {
     const { data, error } = await supabase.from("User").select("*").eq("email", email).single();
@@ -195,5 +195,27 @@ export const deleteResource = async (resourceId: string) => {
     return { data, error };
   } catch (error) {
     throw new Error();
+  }
+};
+
+export const signInUser = async (user: any) => {
+  const supabase = createClient();
+  try {
+    const response = await supabase.auth.signInWithPassword(user);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const handleUpdate = async (id: string) => {
+  const supabase = createClient();
+  try {
+    const response = await supabase.from("User").update({ onboardingSet: true }).eq("id", id);
+
+    return response;
+    // return router.push(`/auth/researchtype?userId=${id}`);
+  } catch (error) {
+    console.log(error);
   }
 };

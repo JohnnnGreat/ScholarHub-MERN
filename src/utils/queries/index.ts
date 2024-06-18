@@ -9,10 +9,16 @@ import {
   updateFile,
   getRelatedUsers,
   deleteResource,
+  signInUser,
+  handleUpdate,
 } from "../request";
 
 export const useCreateNewUser = () => {
   return useMutation({ mutationFn: (user) => createNewUser(user) });
+};
+
+export const useSignInUser = () => {
+  return useMutation({ mutationFn: (user) => signInUser(user) });
 };
 
 export const useUpdateResearcherType = () => {
@@ -24,6 +30,12 @@ export const useUpdateResearcherType = () => {
 export const useAddNewResource = () => {
   return useMutation({
     mutationFn: (resource: Resource) => addResourceToDb(resource),
+  });
+};
+
+export const useHandleUpdate = () => {
+  return useMutation({
+    mutationFn: (id: string) => handleUpdate(id),
   });
 };
 
@@ -40,7 +52,7 @@ export const useUpdateFile = (): any => {
   });
 };
 
-export const useGetRelatedResearchers = (researcherType: string, email: string) => {
+export const useGetRelatedResearchers = (researcherType: string | any, email: string) => {
   return useQuery({
     queryKey: ["GET_RELATED_RESEARCHES"],
     queryFn: () => getRelatedUsers(researcherType, email),

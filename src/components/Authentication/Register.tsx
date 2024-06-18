@@ -5,7 +5,6 @@ import { useCreateNewUser } from "@/utils/queries";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 
-
 const Register = () => {
   const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
   const router = useRouter();
@@ -18,21 +17,33 @@ const Register = () => {
     });
   };
   const onFinish = async (values: any) => {
-    const response = await registerUser(values);
-    console.log(response);
-    if (response?.code) {
-      openNotificationWithIcon("error", response.code);
-      return;
-    }
-    // if (response?.name) message.error(response.name);
+    try {
+      const response = await registerUser(values);
 
-    if (response?.status === 201) {
-      notification.success({
-        message: "Account Created Successfully !!!😊",
+      if (response?.errMessage) return message.error(response.errMessage);
+
+      // if (response?.code) {
+      //   openNotificationWithIcon("error", response.code);
+      //   return;
+      // }
+      // // if (response?.name) message.error(response.name);
+
+      // if (response?.status === 201) {
+      //   notification.success({
+      //     message: "Account Created Successfully !!!😊",
+      //   });
+      // }
+
+      // if (dataError) {
+      //   console.log(dataError);
+      // }
+      return notification.success({
+        message: "A Confirmation Message have been sent to your Email",
       });
+      // router.push(`/auth/researchtype?userId=${response.data[0].id}`);
+    } catch (err) {
+      console.log(err);
     }
-
-    router.push(`/auth/researchtype?userId=${response.data[0].id}`);
   };
   return (
     <>
@@ -82,8 +93,8 @@ const Register = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Button
-              htmlType="submit"
+            <button
+              // htmlType="submit"
               disabled={isCreatingNewUser && true}
               className="disabled:bg-[#649294] py-5 rounded-full px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
             >
@@ -92,7 +103,7 @@ const Register = () => {
               ) : (
                 <span className="loading loading-dots loading-md"></span>
               )}
-            </Button>
+            </button>
             <p className="text-center mt-[.8rem] text-[14px] text-[#ffffffb6]">Or</p>
           </Form.Item>
           <button className="px-[2rem] text-[#76ABAE] border hover:bg-transparent py-2 rounded-full w-fit mx-auto border-[#ffffff4b] bg-transparent h-auto flex gap-3 items-center justify-center">

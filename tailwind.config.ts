@@ -8,7 +8,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@nextui-org/theme/dist/components/(button|input|modal|pagination|tabs|ripple|spinner).js"
+    "./node_modules/@nextui-org/theme/dist/components/(button|input|modal|pagination|tabs|ripple|spinner).js",
   ],
   prefix: "",
   theme: {
@@ -76,7 +76,7 @@ const config = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui(), require("daisyui")],
 } satisfies Config;
 
 export default config;

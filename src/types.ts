@@ -22,10 +22,12 @@ export interface INote {
 }
 
 export interface IUser {
+  id: string;
   fullname: string;
   email: string;
-  researchType: string;
+  researchType: string | undefined;
   bio: string;
   followers?: number;
   publications?: number | string;
+  onboardingSet?: boolean;
 }

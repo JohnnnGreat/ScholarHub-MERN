@@ -63,9 +63,15 @@ const MyResource = ({ email }: { email?: string }) => {
   }, [subscribeToChanges]);
   return (
     <div>
-      <Link href="addresource" className="bg-white text-black py-[.8rem] px-[1rem]">
-        Add a New Resource
-      </Link>
+      <div className="flex justify-end  mt-[.8rem]">
+        <Link
+          href="addresource"
+          className="bg-[#76ABAE] rounded-md text-black py-[.8rem] px-[1rem]"
+        >
+          Add a New Resource
+        </Link>
+      </div>
+
       {loading ? (
         <span className="loading loading-spinner loading-sm"></span>
       ) : (

@@ -25,14 +25,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <TanStack>
-        <AntdRegistry>
-          <body className="dark text-foreground h-max ">
-            <NextUIProvider>
-              <Header user={user ? true : false} />
-              {children}
-            </NextUIProvider>
-          </body>
-        </AntdRegistry>
+        <body className="dark text-foreground h-max ">
+          <NextUIProvider>
+            <Header user={user ? true : false} />
+            {children}
+          </NextUIProvider>
+        </body>
       </TanStack>
     </html>
   );

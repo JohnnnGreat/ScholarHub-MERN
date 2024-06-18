@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
-import { Form, Input, Button, DatePicker, Select, message } from "antd";
+import { Form, Input, DatePicker, Select, message } from "antd";
 import { useAddNewResource } from "@/utils/queries";
 import { useRouter } from "next/navigation";
+
+import NextCom from "./Nextco";
+import { Button } from "@nextui-org/button";
 
 const { Option } = Select;
 
@@ -137,7 +140,6 @@ const AddResourceField = () => {
             </Form.Item>
             <Form.Item>
               <Button
-                type="primary"
                 htmlType="submit"
                 // disabled={isCreatingNewUser && true}
                 className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
@@ -152,6 +154,7 @@ const AddResourceField = () => {
           </Form>
         </div>
       </div>
+      {/* <NextCom /> */}
     </div>
   );
 };
