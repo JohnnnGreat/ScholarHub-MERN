@@ -23,7 +23,7 @@ const ResearchType = ({ id }: { id: string }) => {
     await notification.success({
       message: "Files submitted successfully.",
     });
-
+    console.log(data, error);
     return router.push("/auth/institution");
   };
 

@@ -198,7 +198,7 @@ export const deleteResource = async (resourceId: string) => {
   }
 };
 
-export const signInUser = async (user: any) => {
+export const signInUser = async (user: any): Promise<any> => {
   const supabase = createClient();
   try {
     const response = await supabase.auth.signInWithPassword(user);

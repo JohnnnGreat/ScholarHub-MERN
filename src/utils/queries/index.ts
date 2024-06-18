@@ -18,7 +18,7 @@ export const useCreateNewUser = () => {
 };
 
 export const useSignInUser = () => {
-  return useMutation({ mutationFn: (user) => signInUser(user) });
+  return useMutation({ mutationFn: (user: any) => signInUser(user) });
 };
 
 export const useUpdateResearcherType = () => {

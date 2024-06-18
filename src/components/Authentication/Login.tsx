@@ -27,8 +27,9 @@ export const Login = () => {
     resolver: zodResolver(noteSchema),
   });
 
-  const onSubmit = async (data: ILogin) => {
-    const { data: resData, error } = await loginUser(data);
+  const onSubmit = async (dataV: ILogin) => {
+    const { data, error } = await loginUser(dataV);
+
     if (error) {
       console.log(error.message);
     }
