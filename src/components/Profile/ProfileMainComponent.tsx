@@ -17,6 +17,7 @@ import { INote, IResource, IUser } from "@/types";
 import Notice from "./Notice";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@/utils/request";
+import { welcomeEmail } from "@/utils/request";
 
 const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
   const [pageLoading, setPageLoading] = useState(false);
@@ -41,6 +42,11 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
     console.log(data);
   };
 
+  const handleSendEmail = async () => {
+    const sendWelcomeEmail = await welcomeEmail(userInfo?.id);
+    console.log(sendWelcomeEmail);
+  };
+
   return (
     <>
       {pageLoading ? (
@@ -51,6 +57,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
         <div id="page-p" className="mt-[6rem] max-w-[1100px] mx-auto">
           <div className="p-4">
             <div className="bg-[#1E242C] text-white p-6 rounded-lg">
+              <Button onClick={handleSendEmail}>Send Email Notification</Button>
               <Notice user={userInfo && userInfo} />
               <div className="flex flex-col">
                 <Tabs variant="solid" aria-label="Options">
@@ -79,10 +86,10 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                               <div>
                                 <h1 className="text-[#EEEEEE]">{item?.fullname}</h1>
                                 <div className="text-[#eeeeee81]">
-                                  10 publications . 100 followers
+                                  {item?.noPublications} publications . 100 followers
                                 </div>
                               </div>
-                              <Link className="text-[#76abae91]" href="/">
+                              <Link className="text-[#76abae91]" href={`/user/${item?.id}`}>
                                 View Profile
                               </Link>
                             </div>

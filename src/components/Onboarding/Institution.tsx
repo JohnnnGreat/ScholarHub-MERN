@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input, Textarea } from "@nextui-org/input";
 import { useUpdateInstitution } from "@/utils/queries";
+import { welcomeEmail } from "@/utils/request";
 import { Button } from "@nextui-org/button";
 import { useRouter } from "next/navigation";
 
@@ -63,6 +64,7 @@ const Institution = ({ id }: { id: string }) => {
       return;
     }
 
+    const sendWelcomeEmail = await welcomeEmail(id);
     return router.push("/profile");
   }
 

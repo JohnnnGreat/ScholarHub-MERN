@@ -2,8 +2,44 @@
 import { containerVariants, interceptConfigs, itemVariants } from "@/utils/framermotion";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { createClient } from "@/utils/supabase/client";
+import { useState, useEffect } from "react";
+import { IResource } from "@/types";
+import { Divider } from "antd";
+import Link from "next/link";
+import { ArrowRightOutlined } from "@ant-design/icons";
+
 export default function FeaturedResearch() {
   const [ref, inView] = useInView({ ...interceptConfigs, threshold: 0.4 });
+  const supabase = createClient();
+  const [res, setRes] = useState<IResource[] | null>([]);
+  const handleTwoViewCounts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("Resource")
+        .select("*")
+        .order("views", { ascending: false })
+        .limit(2);
+      console.log(data);
+      setRes(data);
+      if (error) {
+        console.error("Error fetching top resources:", error);
+        return [];
+      }
+
+      return data;
+    } catch (err) {
+      return err;
+    }
+  };
+  const getShortDescription = (description: string, maxLength = 400) => {
+    if (description?.length <= maxLength) return description;
+    return `${description?.substring(0, maxLength)}...`;
+  };
+  useEffect(() => {
+    handleTwoViewCounts();
+  }, []);
+
   return (
     <section className="py-16 bg-[#222831] relative">
       <div className="absolute w-full h-full flex items-center justify-center">
@@ -76,8 +112,8 @@ export default function FeaturedResearch() {
         />
       </svg>
 
-      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+      <div className="max-w-[1100px] gap-[1rem] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2">
+        {/* <motion.div
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
           variants={containerVariants}
@@ -95,9 +131,9 @@ export default function FeaturedResearch() {
           >
             View All Papers
           </a>
-        </motion.div>
+        </motion.div> */}
 
-        <motion.div
+        {/* <motion.div
           animate="visible"
           variants={itemVariants}
           className="mt-12 grid gap-8 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1"
@@ -129,7 +165,38 @@ export default function FeaturedResearch() {
               </a>
             </motion.nav>
           ))}
-        </motion.div>
+        </motion.div> */}
+
+        {res?.map((item) => (
+          <motion.div animate="visible" variants={itemVariants} key={item?.id}>
+            <motion.nav
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+              className="bg-[#ffffff0c]  backdrop-blur-lg backdrop-opacity-50 rounded-[20px] p-6 border border-[#76abae57] text-white"
+            >
+              <h3 className="text-3xl text-grid font-semibold golden-font">
+                {getShortDescription(item?.title, 50)}
+              </h3>
+              <p className="mt-1 text-[#76ABAE]">
+                Dr. Sarah Johnson · University of California, Berkeley
+              </p>
+              <Divider />
+              <p>
+                {item?.views} Views | {item?.published ? "Published" : "Un-Published"} |{" "}
+                {item?.subjectArea}
+              </p>
+              <p className="mt-2 text-gray-400">{getShortDescription(item?.description, 100)}</p>
+              <Link
+                href={`/resource/${item?.id}`}
+                className="mt-6 golden-font flex gap-[1rem] items-center justify-center bg-[#eeeeee] w-full text-black px-6 py-4 text-center rounded-[10px] text-[18px] hover:bg-[#e7e7e7]"
+              >
+                View Paper
+                <ArrowRightOutlined />
+              </Link>
+            </motion.nav>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

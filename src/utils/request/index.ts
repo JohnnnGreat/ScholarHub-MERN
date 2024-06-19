@@ -273,3 +273,42 @@ export const updateViews = async (id: string, views: number) => {
     return error;
   }
 };
+
+export const welcomeEmail = async (id: string) => {
+  console.log(id);
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase.from("User").select("*").eq("id", id);
+    console.log(data);
+    if (error) {
+      throw Error("Failed to get User");
+      return;
+    }
+
+    // return router.push(`/auth/researchtype?userId=${id}`);
+  } catch (error) {
+    return error;
+  }
+};
+
+// const handleSendWelcomeEmail = (id) => {};
+
+export const handleTwoViewCounts = async () => {
+  const supabase = createClient();
+  try {
+    const { data, error } = await supabase
+      .from("Resource")
+      .select("*")
+      .order("views", { ascending: false })
+      .limit(2);
+
+    if (error) {
+      console.error("Error fetching top resources:", error);
+      return [];
+    }
+
+    return data;
+  } catch (err) {
+    return err;
+  }
+};

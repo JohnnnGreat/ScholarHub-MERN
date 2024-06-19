@@ -15,6 +15,7 @@ export interface IResource {
   fileUrl: string;
   id: string;
   parentOrganization: string;
+  views: string;
 }
 
 export interface INote {
@@ -33,5 +34,6 @@ export interface IUser {
   onboardingSet?: boolean;
   institutionName: string;
   faculty: string;
+  noPublications: number;
   subjectArea: string;
 }

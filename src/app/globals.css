@@ -19,7 +19,8 @@ input,
 label,
 input::placeholder,
 .ant-select-selection-placeholder,
-.ant-tabs-tab-btn {
+.ant-tabs-tab-btn,
+span {
   font-family: "Product", sans-serif !important;
 }
 
@@ -196,4 +197,11 @@ label {
 
 .ant-select-selection-search-input {
   display: inline-block;
+}
+
+.text-grid {
+  background-image: linear-gradient(to right, #eafeff, #76abae);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

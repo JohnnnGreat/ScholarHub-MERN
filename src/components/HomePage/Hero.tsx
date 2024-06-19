@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { navVariants, shakeAnimation, zoomAnimation } from "@/utils/framermotion";
 import Link from "next/link";
 
-
 export default function Hero() {
   return (
     <div className="py-[1rem] px-[.6rem] md:px-0 bg-[#222831] h-screen text-white flex items-center justify-center">
@@ -37,7 +36,7 @@ export default function Hero() {
       </svg>
 
       <div className="text-center mt-24 mb-16">
-        <h1 className="golden-font text-[35px] md:text-6xl lg:[45px] mb-4">
+        <h1 className="golden-font text-grid text-[35px] md:text-6xl lg:[45px] mb-4">
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h1>
