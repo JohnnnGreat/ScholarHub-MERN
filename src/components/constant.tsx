@@ -11,36 +11,36 @@ export const researcherType = [
   },
   {
     id: 2,
-    title: "Academic Researchr",
-    description: "(University faculty, postdocs, or PhD students engaged in scholarly research)",
+    title: "Industry Researcher",
+    description: "(Professionals conducting research within corporate or industrial settings)",
     features: [
-      "Access academic journals, papers, and collaboration opportunities.",
-      "Track citations and impact metrics.",
-      "Connect with peers and experts in your field.",
+      "Access to market research reports and industry publications.",
+      "Collaboration with industry experts and stakeholders.",
+      "Opportunities for innovation and product development.",
     ],
   },
   {
     id: 3,
-    title: "Academic Resarcher",
-    description: "(University faculty, postdocs, or PhD students engaged in scholarly research)",
+    title: "Independent Researcher",
+    description:
+      "(Freelancers or self-funded researchers working outside traditional institutions)",
     features: [
-      "Access academic journals, papers, and collaboration opportunities.",
-      "Track citations and impact metrics.",
-      "Connect with peers and experts in your field.",
+      "Access to a variety of research databases and resources.",
+      "Opportunities to publish work in open-access journals.",
+      "Network with other independent researchers.",
     ],
   },
   {
     id: 4,
-    title: "Academi Researcher",
-    description: "(University faculty, postdocs, or PhD students engaged in scholarly research)",
+    title: "Student Researcher",
+    description: "(Undergraduate or master's students engaged in research projects)",
     features: [
-      "Access academic journals, papers, and collaboration opportunities.",
-      "Track citations and impact metrics.",
-      "Connect with peers and experts in your field.",
+      "Access to educational resources and research tools.",
+      "Guidance on research methodologies and best practices.",
+      "Opportunities to present research at student conferences.",
     ],
   },
 ];
-
 export const researchers = [
   { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },
   { name: "Dr. Sarah Johnson", publications: 10, followers: 100 },

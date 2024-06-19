@@ -33,6 +33,8 @@ export const Login = () => {
     if (error) {
       console.log(error.message);
     }
+
+    console.log(data);
     router.push("/profile");
   };
   return (

@@ -1,17 +1,18 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import { Upload, Button, message, notification } from "antd";
+import { Upload, message, notification, Button as AntButton } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Divider } from "antd";
 import { useUpdateFile } from "@/utils/queries";
 import { useRouter } from "next/navigation";
+import { Button as NextButton } from "@nextui-org/button";
 
 const DisplayImageComponent = ({ id }: { id: string }) => {
   const [thumbnail, setThumbnail] = useState<any>(null);
   const [resourceFile, setResourceFile] = useState<any>(null);
   const router = useRouter();
-  const { mutateAsync: uploadFile, isPending: isCreatingNewUser, isError } = useUpdateFile();
+  const { mutateAsync: uploadFile, isPending: isUploadingResource, isError } = useUpdateFile();
 
   const handleThumbnailChange = (info: any) => {
     if (info.file.status === "done") {
@@ -71,12 +72,12 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
 
         <div className="mb-6">
           <Upload onChange={handleThumbnailChange}>
-            <Button
+            <AntButton
               icon={<UploadOutlined />}
               className="w-full bg-[#ffffff18] text-[#ffffff96] py-[2rem!important] flex items-center justify-center border-[#eeeeee54!important] hover:bg-[#ffffff18!important] hover:border-[#76ABAE]"
             >
               Upload Thumbnail
-            </Button>
+            </AntButton>
           </Upload>
           <p className="mt-2 text-sm text-gray-400 text-center">
             If thumbnail not set, resource display will have a default thumbnail. However, attaching
@@ -87,12 +88,12 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
         <Divider />
         <div className="mb-6">
           <Upload onChange={handleResourceFileChange}>
-            <Button
+            <AntButton
               icon={<UploadOutlined />}
               className="w-full bg-[#ffffff18] text-[#ffffff96] py-[2rem!important] flex items-center justify-center border-[#eeeeee54!important] hover:bg-[#ffffff18!important] hover:border-[#76ABAE]"
             >
               Attach Resource File
-            </Button>
+            </AntButton>
           </Upload>
           <p className="mt-2 text-sm text-gray-400 text-center">
             If no file is attached, your resource will be uploaded but will be saved as drafts. This
@@ -101,19 +102,15 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
         </div>
 
         <div className="flex justify-center">
-          <Button
-            type="primary"
-            htmlType="submit"
+          <NextButton
+            type="submit"
+            isLoading={isUploadingResource}
             onClick={handleSubmit}
             // disabled={isCreatingNewUser && true}
             className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"
           >
-            {!isCreatingNewUser ? (
-              "Continue"
-            ) : (
-              <span className="loading loading-bars loading-sm"></span>
-            )}
-          </Button>
+            Next
+          </NextButton>
         </div>
       </div>
     </div>

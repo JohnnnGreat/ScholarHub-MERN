@@ -13,8 +13,8 @@ const FinalComponent = ({ data }: { data: any }) => {
       </h1>
       <p className="text-[#ffffff6c] mb-6">A preview of your resource</p>
 
-      <div className="mt-8 flex bg-[#2E3642]  rounded-[10px] flex-col md:flex-row items-center  p-6 shadow-lg">
-        <div className="w-48 h-64">
+      <div className="mt-8 flex bg-[#2E3642]  rounded-[10px] flex-col md:flex-row  p-6 shadow-lg">
+        <div className="w-48 s">
           <SkeletalmageLoading url={data?.thumbnail} />
         </div>
         <div className="md:ml-6 mt-6 md:mt-0">
@@ -26,15 +26,14 @@ const FinalComponent = ({ data }: { data: any }) => {
           </p>
           <p className="text-gray-300 mt-4">{data?.notes}</p>
 
-          <p className="text-gray-400 mt-4">Public · 200 Pages</p>
           <div className="flex gap-[.7rem]">
             <p className="text-gray-400 mt-4">
               <LockOutlined className="mr-2" />
-              Public
+              {data?.privacy}
             </p>
             <p className="text-gray-400 mt-4">
               <FileTextOutlined className="mr-2" />
-              200 Pages
+              {data?.pageNo} Pages
             </p>
           </div>
         </div>

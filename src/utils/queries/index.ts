@@ -11,6 +11,7 @@ import {
   deleteResource,
   signInUser,
   handleUpdate,
+  updateInstitution,
 } from "../request";
 
 export const useCreateNewUser = () => {
@@ -24,6 +25,15 @@ export const useSignInUser = () => {
 export const useUpdateResearcherType = () => {
   return useMutation({
     mutationFn: (payload: { selectedOption: string; id: string }) => updateResearcherType(payload),
+  });
+};
+
+export const useUpdateInstitution = () => {
+  return useMutation({
+    mutationFn: (payload: {
+      selectedOption: { institutionName: string; faculty: string; subjectArea: string };
+      id: string;
+    }) => updateInstitution(payload),
   });
 };
 

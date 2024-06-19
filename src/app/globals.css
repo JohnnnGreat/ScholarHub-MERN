@@ -193,3 +193,7 @@ label {
 .react-aria- {
   background: red !important;
 }
+
+.ant-select-selection-search-input {
+  display: inline-block;
+}

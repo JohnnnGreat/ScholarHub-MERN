@@ -44,6 +44,33 @@ export const updateResearcherType = async ({
     return error;
   }
 };
+// {
+//   selectedOption: {
+//     institutionName: string;
+//     faculty: string;
+//     subjectArea: string;
+//   }
+//   id: string;
+// }
+export const updateInstitution = async ({
+  selectedOption,
+  id,
+}: {
+  selectedOption: { institutionName: string; faculty: string; subjectArea: string };
+  id: string;
+}) => {
+  console.log(selectedOption, id);
+  try {
+    const response = await fetch("/api/onboarding/institution", {
+      method: "POST",
+      body: JSON.stringify({ selectedOption, id }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
+};
 
 export const addResourceToDb = async (resource: Resource): Promise<any> => {
   const supabase = createClient();

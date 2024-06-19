@@ -4,9 +4,9 @@ import { useUpdateResearcherType } from "@/utils/queries";
 import { message, notification } from "antd";
 import { researcherType } from "../constant";
 import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/button";
 
 const ResearchType = ({ id }: { id: string }) => {
-  console.log(id);
   const [selectedOption, setSelectedOption] = useState("");
   const {
     mutateAsync: updateResearchType,
@@ -22,10 +22,10 @@ const ResearchType = ({ id }: { id: string }) => {
       console.log("An error had occured");
     }
     await notification.success({
-      message: "Files submitted successfully.",
+      message: "Updated",
     });
     console.log(data, error);
-    // return router.push("/auth/institution");
+    return router.push("/auth/institution");
   };
 
   return (
@@ -75,22 +75,25 @@ const ResearchType = ({ id }: { id: string }) => {
                 setSelectedOption(item?.title);
               }}
               key={item.id}
-              className={` ${
-                item?.title === selectedOption && "border-[#76abae]"
-              } hover:border-[#76abae] transition-all border border-[#ffffff3b] rounded-[20px] cursor-pointer p-[1rem]`}
+              className={`cursor-pointer p-6 transition-all border rounded-[10px] bg-[#ffffff18] ${
+                selectedOption === item?.title ? "border-[#76ABAE]" : "border-[#eeeeee54]"
+              }`}
+              // className={` ${
+              //   item?.title === selectedOption && "border-[#76abae]"
+              // } hover:border-[#76abae] transition-all border border-[#ffffff3b] rounded-[20px] cursor-pointer p-[1rem]`}
             >
               <h1 className="text-[20px]  text-white my-1 golden-font">{item?.title}</h1>
               <p className="text-[14px] text-[#76abaeb7]">{item?.description}</p>
             </div>
           ))}
         </div>
-        <button
-          disabled={isUpdatingUser}
+        <Button
+          isLoading={isUpdatingUser}
           onClick={handleSelectedOption}
-          className="disabled:bg-[#8dcccf] block py-4 rounded-[20px] px-5 w-full bg-[#76ABAE] flex gap-[.8rem] justify-center items-center text-[16px] mt-[.7rem] text-[#232932]"
+          className="disabled:bg-[#8dcccf] mt-[.8rem] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
         >
-          {!isUpdatingUser ? "Next" : <span className="loading loading-dots loading-md"></span>}
-        </button>
+          Next
+        </Button>
       </div>
     </>
   );

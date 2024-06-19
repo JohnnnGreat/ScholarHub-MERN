@@ -9,6 +9,8 @@ import { useDeleteResource } from "@/utils/queries";
 const ResourceCard = ({ resource }: { resource: IResource }) => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   const { mutateAsync: deleteResource, isPending } = useDeleteResource();
 
   const handleShare = (platform: string, id: string) => {
@@ -41,6 +43,15 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
     setShowDeleteModal(false); // Close the modal after deletion
   };
 
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
+
+  const getShortDescription = (description: string, maxLength = 400) => {
+    if (description.length <= maxLength) return description;
+    return `${description.substring(0, maxLength)}...`;
+  };
+
   return (
     <div className="bg-[#76abae17] p-6 mb-6 rounded-[18px] text-gray-300 flex flex-col lg:flex-row gap-4">
       <img
@@ -50,8 +61,18 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
       />
       <div className="flex flex-col flex-1">
         <h2 className="text-xl mb-2 text-[#76ABAE] golden-font">{resource.title}</h2>
-        <p className="mb-4 text-[#ffffff93]">{resource.description}</p>
-        <div className="flex gap-3">
+        <p className="mb-4 text-[#ffffff93]">
+          {showFullDescription ? resource.description : getShortDescription(resource.description)}
+          {resource.description.length > 100 && (
+            <span
+              className="text-[#66979A] cursor-pointer hover:underline"
+              onClick={toggleDescription}
+            >
+              {showFullDescription ? " Read Less" : " Read More"}
+            </span>
+          )}
+        </p>
+        <div className="flex gap-3 flex-wrap">
           <div>
             <h1 className="text-[#fff7]">Resource Type</h1>
             <p className="text-[#fff] font-bold">{resource?.resourceType}</p>
@@ -59,6 +80,10 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
           <div>
             <h1 className="text-[#fff7]">Subject Area</h1>
             <p className="text-[#fff] font-bold">{resource?.subjectArea}</p>
+          </div>
+          <div>
+            <h1 className="text-[#fff7]">Privacy</h1>
+            <p className="text-[#fff] font-bold">{resource?.privacy}</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-4 mb-4 mt-[1rem]">

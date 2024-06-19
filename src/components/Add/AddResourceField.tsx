@@ -27,8 +27,8 @@ const AddResourceField = () => {
     if (error) {
       message.error(error);
     }
-    await message.success("Saved Successfully");
-    return router.push(`addresource/resourceprivacy?resourceId=${data[0].id}`);
+    await message.success("Resource Added Successfully");
+    router.push(`addresource/resourceprivacy?resourceId=${data[0].id}`);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -142,14 +142,11 @@ const AddResourceField = () => {
             </Form.Item>
             <Form.Item>
               <Button
-                disabled={isCreatingNewUser && true}
+                type="submit"
+                isLoading={isCreatingNewUser}
                 className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
               >
-                {!isCreatingNewUser ? (
-                  "Continue"
-                ) : (
-                  <span className="loading loading-dots loading-md"></span>
-                )}
+                Continue
               </Button>
             </Form.Item>
           </Form>
