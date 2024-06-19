@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useUpdateResearcherType } from "@/utils/queries";
 import { message } from "antd";
 import { popularSubjectAreas, researcherType } from "../constant";
-import { Button, Checkbox, Form, Input as AntInput, Select } from "antd";
+import { Checkbox, Form, Input as AntInput, Select } from "antd";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Input, Textarea } from "@nextui-org/input";
 import { useUpdateInstitution } from "@/utils/queries";
+import { Button } from "@nextui-org/button";
+import { useRouter } from "next/navigation";
+
 const { Option } = Select;
 
 const inputNextUi = [
@@ -26,7 +29,7 @@ const inputNextUi = [
 ];
 
 const Institution = ({ id }: { id: string }) => {
-  console.log(id);
+  const router = useRouter();
   const {
     mutateAsync: updateInstitution,
     isPending: isUpdatingUser,
@@ -55,7 +58,12 @@ const Institution = ({ id }: { id: string }) => {
 
   async function onSubmit(dataInstitution: IInstitution) {
     const { data: res, error } = await updateInstitution({ selectedOption: dataInstitution, id });
-    console.log(res);
+    if (error) {
+      console.log("An Error Occured");
+      return;
+    }
+
+    return router.push("/profile");
   }
 
   function onerror(e: any) {
@@ -149,9 +157,13 @@ const Institution = ({ id }: { id: string }) => {
             {errors?.subjectArea?.message}
           </p>
 
-          <button type="submit" className="bg-[#76ABAE] w-full py-2 text-white rounded mt-[1rem]">
+          <Button
+            isLoading={isUpdatingUser}
+            type="submit"
+            className="bg-[#76ABAE] w-full py-2 text-white rounded mt-[1rem]"
+          >
             Login
-          </button>
+          </Button>
         </form>
       </div>
     </>

@@ -48,22 +48,22 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
   };
 
   const getShortDescription = (description: string, maxLength = 400) => {
-    if (description.length <= maxLength) return description;
-    return `${description.substring(0, maxLength)}...`;
+    if (description?.length <= maxLength) return description;
+    return `${description?.substring(0, maxLength)}...`;
   };
 
   return (
     <div className="bg-[#76abae17] p-6 mb-6 rounded-[18px] text-gray-300 flex flex-col lg:flex-row gap-4">
       <img
         className="rounded-[16px] w-full md:w-[200px!important] lg:w-auto"
-        src={resource.thumbnail || "/fallbacki.jpg"}
-        alt={resource.title}
+        src={resource?.thumbnail || "/fallbacki.jpg"}
+        alt={resource?.title}
       />
       <div className="flex flex-col flex-1">
-        <h2 className="text-xl mb-2 text-[#76ABAE] golden-font">{resource.title}</h2>
+        <h2 className="text-xl mb-2 text-[#76ABAE] golden-font">{resource?.title}</h2>
         <p className="mb-4 text-[#ffffff93]">
-          {showFullDescription ? resource.description : getShortDescription(resource.description)}
-          {resource.description.length > 100 && (
+          {showFullDescription ? resource?.description : getShortDescription(resource?.description)}
+          {resource?.description?.length > 100 && (
             <span
               className="text-[#66979A] cursor-pointer hover:underline"
               onClick={toggleDescription}
@@ -87,7 +87,7 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
           </div>
         </div>
         <div className="flex flex-wrap gap-4 mb-4 mt-[1rem]">
-          <Link href={`/resources/${resource.id}`} className="text-[#66979A] hover:underline">
+          <Link href={`/resource/${resource.id}`} className="text-[#66979A] hover:underline">
             View Paper
           </Link>
           <button className="text-[#66979A] hover:underline">View Analytics</button>
@@ -149,7 +149,7 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
         backdrop="blur"
         classNames={{
           body: "py-6",
-          base: "border-[#292f46] bg-[#19172c] dark:bg-[#19172c] text-[#a8b0d3]",
+          base: "border-[#292f46] bg-[#76ABAE] dark:bg-[#19172c] text-[#a8b0d3]",
           header: "border-b-[1px] border-[#292f46]",
           footer: "border-t-[1px] border-[#292f46]",
           closeButton: "hover:bg-white/5 active:bg-white/10",

@@ -243,6 +243,33 @@ export const handleUpdate = async (id: string) => {
     return response;
     // return router.push(`/auth/researchtype?userId=${id}`);
   } catch (error) {
-    console.log(error);
+    return error;
+  }
+};
+
+export const handleSendNotificationRequestMail = async (information: any) => {
+  try {
+    const response = await fetch("/api/notify", {
+      method: "POST",
+      body: JSON.stringify(information),
+    });
+    return await response.json();
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateViews = async (id: string, views: number) => {
+  const supabase = createClient();
+  try {
+    const response = await supabase
+      .from("Resource")
+      .update({ views: views + 1 })
+      .eq("id", id);
+
+    return response;
+    // return router.push(`/auth/researchtype?userId=${id}`);
+  } catch (error) {
+    return error;
   }
 };

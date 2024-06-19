@@ -25,7 +25,7 @@ const ResearchType = ({ id }: { id: string }) => {
       message: "Updated",
     });
     console.log(data, error);
-    return router.push("/auth/institution");
+    router.push(`/auth/institution?userId=${id}`);
   };
 
   return (

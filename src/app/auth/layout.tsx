@@ -10,9 +10,9 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // if (user) {
-  //   return redirect("/");
-  // }
+  if (user) {
+    return redirect("/profile");
+  }
   return <Authentication>{children}</Authentication>;
 };
 

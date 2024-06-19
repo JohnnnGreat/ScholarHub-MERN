@@ -5,6 +5,7 @@ import * as z from "zod";
 import { Input, Textarea } from "@nextui-org/input";
 import { useSignInUser } from "@/utils/queries";
 import { useRouter } from "next/navigation";
+import { message } from "antd";
 
 export const Login = () => {
   const { mutateAsync: loginUser, isPending: isCreatingNewUser, isError } = useSignInUser();
@@ -31,10 +32,9 @@ export const Login = () => {
     const { data, error } = await loginUser(dataV);
 
     if (error) {
-      console.log(error.message);
+      message.error(error.message);
+      return;
     }
-
-    console.log(data);
     router.push("/profile");
   };
   return (
