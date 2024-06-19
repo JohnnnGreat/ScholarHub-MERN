@@ -83,3 +83,5 @@ export const notifyHtml = ({
     </html>
   `;
 };
+
+// export const notifyAllRelatedresource = (resourceArr: IResource[]) => {};
