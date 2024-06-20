@@ -16,16 +16,48 @@ import MyResource from "./MyResource";
 import { INote, IResource, IUser } from "@/types";
 import Notice from "./Notice";
 import { useEffect, useState } from "react";
-import { getUserInfo } from "@/utils/request";
+import { getRelatedUsers, getUserInfo } from "@/utils/request";
 import { welcomeEmail } from "@/utils/request";
 import { Avatar } from "antd";
 
 const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
+  const supabase = createClient();
   const [pageLoading, setPageLoading] = useState(false);
 
   const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
   const researchRe = data as IUser[];
-  console.log(researchRe);
+  const [users, setUsers] = useState(researchRe);
+  const fetchUserInfo = async (researchType: string | undefined, emailArg: string | undefined) => {
+    const userInfoResponse = await getRelatedUsers(researchType, emailArg);
+    return userInfoResponse;
+  };
+  useEffect(() => {
+    fetchUserInfo(userInfo?.researchType, userInfo?.email).then((res) => {
+      console.log(res);
+    });
+  }, [users]);
+
+  const subscribeToChanges = () => {
+    const channels = supabase
+      .channel("custom-all-channel")
+      .on("postgres_changes", { event: "*", schema: "public", table: "User" }, (payload) => {
+        console.log("updated", payload);
+
+        setUsers(researchRe);
+      })
+      .subscribe();
+
+    return channels;
+  };
+
+  useEffect(() => {
+    subscribeToChanges();
+
+    return () => {
+      supabase.removeChannel(subscribeToChanges());
+    };
+  }, [supabase]);
+
   const noteSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters"),
     text: z.string().min(3, "Text must be at least 3 characters"),
@@ -48,41 +80,48 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
     console.log(sendWelcomeEmail);
   };
 
-  const handleFollow = async (email: string, followeId: string, followee: [string]) => {
-    const supabase = createClient();
-
-    const { followers } = userInfo;
-
-    if (!followers?.indexOf(email)) {
-      const updatedFollowers: (string | undefined)[] = [...(followers || []), email];
-
-      const updatedUser = {
-        ...userInfo,
-        followers: updatedFollowers,
-      };
+  type followersType = string | string[];
+  const [userMainFollowers, setUserMainFollowers] = useState(() => {
+    try {
+      return userInfo?.followers
+        ? JSON.parse(userInfo?.followers ? userInfo?.followers : "[]")
+        : [];
+    } catch (e) {
+      console.error("Failed to parse followers", e);
+      return [];
+    }
+  });
+  console.log(userMainFollowers);
+  const handleFollow = async (email: string, followeeId: string, followeeFollowers: string) => {
+    if (!userMainFollowers.includes(email)) {
+      const updatedFollowers = [...userMainFollowers, email];
+      setUserMainFollowers(updatedFollowers);
 
       const { data: updateMainUser, error: mainError } = await supabase
         .from("User")
-        .update({ followers: updatedFollowers })
-        .eq("id", updatedUser?.id);
-      const { data, error } = await supabase
-        .from("User")
-        .update({ followers: [...followee, userInfo?.email] })
-        .eq("id", followeId);
-    } else {
-      console.log("Email already follows the user");
-    }
+        .update({ followers: JSON.stringify(updatedFollowers) })
+        .eq("id", userInfo.id);
 
-    if (!followee?.includes(userInfo?.email)) {
-      const { data, error } = await supabase
-        .from("User")
-        .update({ followers: [...followee, userInfo?.email] })
-        .eq("id", followeId);
+      if (mainError) {
+        console.error(mainError);
+      }
+
+      const followeeFollowersArray = followeeFollowers ? JSON.parse(followeeFollowers) : [];
+      if (!followeeFollowersArray.includes(userInfo.email)) {
+        const updatedFolloweeFollowers = [...followeeFollowersArray, userInfo.email];
+        const { data, error } = await supabase
+          .from("User")
+          .update({ followers: JSON.stringify(updatedFolloweeFollowers) })
+          .eq("id", followeeId);
+
+        if (error) {
+          console.error(error);
+        }
+      }
     } else {
       console.log("Email already follows the user");
     }
   };
-
   return (
     <>
       {pageLoading ? (
@@ -128,15 +167,16 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                               <div>
                                 <h1 className="text-[#EEEEEE]">{item?.fullname}</h1>
                                 <div className="text-[#eeeeee81]">
-                                  {item?.noPublications | 0} publications .{" "}
-                                  {item?.followers?.split(",")?.length} followers
+                                  {item?.noPublications | 0} publications{" "}
+                                  {item?.followers ? JSON.parse(item?.followers).length : 0}{" "}
+                                  followers
                                 </div>
                               </div>
                               <div className="flex flex-col items-end">
                                 <Link className="text-[#76abae91]" href={`/user/${item?.id}`}>
                                   View Profile
                                 </Link>
-                                {!item?.followers?.indexOf(userInfo?.email) && (
+                                {!userMainFollowers?.includes(item?.email) ? (
                                   <button
                                     onClick={() =>
                                       handleFollow(item?.email, item?.id, item?.followers)
@@ -144,7 +184,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                                   >
                                     Follow
                                   </button>
-                                )}
+                                ) : null}
                               </div>
                             </div>
                           </div>
