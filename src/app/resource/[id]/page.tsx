@@ -51,7 +51,7 @@ const SingleResource = async () => {
 
   // Update Reads
   const response = await updateViews(data?.id, data?.views);
-  console.log(response);
+
   return (
     <>
       <SingleResourceComponent resInfo={data} userInfo={userI?.data} />;

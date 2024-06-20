@@ -18,13 +18,14 @@ import Notice from "./Notice";
 import { useEffect, useState } from "react";
 import { getUserInfo } from "@/utils/request";
 import { welcomeEmail } from "@/utils/request";
+import { Avatar } from "antd";
 
 const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
   const [pageLoading, setPageLoading] = useState(false);
-  console.log(userInfo);
+
   const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
   const researchRe = data as IUser[];
-
+  console.log(researchRe);
   const noteSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters"),
     text: z.string().min(3, "Text must be at least 3 characters"),
@@ -45,6 +46,41 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
   const handleSendEmail = async () => {
     const sendWelcomeEmail = await welcomeEmail(userInfo?.id);
     console.log(sendWelcomeEmail);
+  };
+
+  const handleFollow = async (email: string, followeId: string, followee: [string]) => {
+    const supabase = createClient();
+
+    const { followers } = userInfo;
+
+    if (!followers?.indexOf(email)) {
+      const updatedFollowers: (string | undefined)[] = [...(followers || []), email];
+
+      const updatedUser = {
+        ...userInfo,
+        followers: updatedFollowers,
+      };
+
+      const { data: updateMainUser, error: mainError } = await supabase
+        .from("User")
+        .update({ followers: updatedFollowers })
+        .eq("id", updatedUser?.id);
+      const { data, error } = await supabase
+        .from("User")
+        .update({ followers: [...followee, userInfo?.email] })
+        .eq("id", followeId);
+    } else {
+      console.log("Email already follows the user");
+    }
+
+    if (!followee?.includes(userInfo?.email)) {
+      const { data, error } = await supabase
+        .from("User")
+        .update({ followers: [...followee, userInfo?.email] })
+        .eq("id", followeId);
+    } else {
+      console.log("Email already follows the user");
+    }
   };
 
   return (
@@ -71,8 +107,9 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                       </div>
                       <ProfileSection userData={userInfo} />
                     </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                      <div className="lg:col-span-2 p-6 rounded-lg bg-[#2a2f38]">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                      {/* Researchers with Similar Interest */}
+                      <div className="col-span-1 md:col-span-2 lg:col-span-2 p-6 rounded-lg bg-[#2a2f38]">
                         <h3 className="text-white text-xl mb-4 golden-font">
                           Researchers with similar Interest
                         </h3>
@@ -81,22 +118,41 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                             key={item.id}
                             className="flex items-center gap-[1rem] border-b border-[#ffffff3a] py-[.9rem]"
                           >
-                            <div className="w-[40px] h-[40px] rounded-full bg-[#ffffff6b]"></div>
-                            <div className="flex justify-between w-full items-center">
+                            <Avatar
+                              style={{ backgroundColor: "#76ABAE", verticalAlign: "middle" }}
+                              size={50}
+                            >
+                              {item?.fullname?.slice(0, 2)}
+                            </Avatar>
+                            <div className="flex flex-wrap justify-between w-full items-center">
                               <div>
                                 <h1 className="text-[#EEEEEE]">{item?.fullname}</h1>
                                 <div className="text-[#eeeeee81]">
-                                  {item?.noPublications} publications . 100 followers
+                                  {item?.noPublications | 0} publications .{" "}
+                                  {item?.followers?.split(",")?.length} followers
                                 </div>
                               </div>
-                              <Link className="text-[#76abae91]" href={`/user/${item?.id}`}>
-                                View Profile
-                              </Link>
+                              <div className="flex flex-col items-end">
+                                <Link className="text-[#76abae91]" href={`/user/${item?.id}`}>
+                                  View Profile
+                                </Link>
+                                {!item?.followers?.indexOf(userInfo?.email) && (
+                                  <button
+                                    onClick={() =>
+                                      handleFollow(item?.email, item?.id, item?.followers)
+                                    }
+                                  >
+                                    Follow
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           </div>
                         ))}
                       </div>
-                      <div className="bg-gray-900 p-6 rounded-lg">
+
+                      {/* Make Outline */}
+                      <div className="col-span-1 bg-gray-900 p-6 rounded-lg">
                         <h3 className="text-white text-xl">Make Outline</h3>
                         <p className="text-[#ffffff88] text-[13px] golden-font">
                           Make An Outline of your Next Research

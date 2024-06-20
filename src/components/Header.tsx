@@ -5,6 +5,7 @@ import { navVariants } from "@/utils/framermotion";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/button";
 
 const Header = ({ user }: { user: any }) => {
   const router = useRouter();
@@ -30,26 +31,26 @@ const Header = ({ user }: { user: any }) => {
       >
         <div className="text-[24px] golden-font ml-[1rem]">Scholar Hub</div>
         <div className="hidden md:flex gap-x-[1rem] items-center">
-          <a href="#" className="hover:text-gray-400">
+          <Link href="#" className="hover:text-gray-400">
             Discover
-          </a>
-          <a href="#" className="hover:text-gray-400">
+          </Link>
+          <Link href="#" className="hover:text-gray-400">
             My Products
-          </a>
-          <a href="#" className="hover:text-gray-400">
+          </Link>
+          <Link href="#" className="hover:text-gray-400">
             About
-          </a>
-          <a href="#" className="hover:text-gray-400">
+          </Link>
+          <Link href="#" className="hover:text-gray-400">
             Contact
-          </a>
+          </Link>
         </div>
         {isAuthenticated ? (
-          <button
+          <Button
             onClick={handleLogout}
             className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
           >
             {!signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
-          </button>
+          </Button>
         ) : (
           <Link
             href="/auth"
@@ -81,21 +82,26 @@ const Header = ({ user }: { user: any }) => {
 
       {isOpen && (
         <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4 w-[100%important]">
-          <a href="#" className="block px-2 py-1 hover:text-gray-400">
+          <Link href="#" className="block px-2 py-1 hover:text-gray-400">
             Discover
-          </a>
-          <a href="#" className="block px-2 py-1 hover:text-gray-400">
+          </Link>
+          <Link href="#" className="block px-2 py-1 hover:text-gray-400">
             My Products
-          </a>
-          <a href="#" className="block px-2 py-1 hover:text-gray-400">
+          </Link>
+          <Link href="#" className="block px-2 py-1 hover:text-gray-400">
             About
-          </a>
-          <a href="#" className="block px-2 py-1 hover:text-gray-400">
+          </Link>
+          <Link href="#" className="block px-2 py-1 hover:text-gray-400">
             Contact
-          </a>
-          <button className="w-full mt-2 bg-[#76ABAE] text-black px-4 py-2 rounded-full hover:bg-teal-700">
-            Sign Up
-          </button>
+          </Link>
+          {isAuthenticated && (
+            <button
+              onClick={handleLogout}
+              className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+            >
+              {signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
+            </button>
+          )}
         </div>
       )}
     </div>

@@ -29,7 +29,7 @@ export interface IUser {
   email: string;
   researchType: string | undefined;
   bio: string;
-  followers?: number;
+  followers?: any;
   publications?: number | string;
   onboardingSet?: boolean;
   institutionName: string;
