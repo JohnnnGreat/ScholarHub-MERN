@@ -192,7 +192,7 @@ export const getUserInfo = async (email: string | undefined) => {
   }
 };
 
-export const getRelatedUsers = async (researchType: string, email: string) => {
+export const getRelatedUsers = async (researchType: any, email: string) => {
   try {
     const supabase = createClient();
     const { data, error } = await supabase

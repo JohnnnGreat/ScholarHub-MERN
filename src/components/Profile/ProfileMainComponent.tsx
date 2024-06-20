@@ -27,7 +27,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
   const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
   const researchRe = data as IUser[];
   const [users, setUsers] = useState(researchRe);
-  const fetchUserInfo = async (researchType: string | undefined, emailArg: string | undefined) => {
+  const fetchUserInfo = async (researchType: string | undefined, emailArg: string) => {
     const userInfoResponse = await getRelatedUsers(researchType, emailArg);
     return userInfoResponse;
   };
