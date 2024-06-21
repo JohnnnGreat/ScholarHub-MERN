@@ -3,6 +3,7 @@ const nextConfig = {
   images: {
     domains: ["xdbwjrcyweidbassiwfi.supabase.co"],
   },
+  swcMinify: false,
 };
 
 export default nextConfig;
