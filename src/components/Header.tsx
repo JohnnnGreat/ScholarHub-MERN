@@ -25,14 +25,11 @@ const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
   };
 
   const handleClick = (key: any) => {
-    switch (key) {
-      case key === "profile":
-        router.push("/profile");
-        break;
-      case key === "logout":
-        handleLogout();
-      default:
-        break;
+    if (key === "profile") {
+      console.log(key);
+      router.push("/profile");
+    } else if (key === "logout") {
+      handleLogout();
     }
   };
 
