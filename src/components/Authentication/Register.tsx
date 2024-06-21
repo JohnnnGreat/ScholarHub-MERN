@@ -4,6 +4,7 @@ import { Button, Checkbox, Form, Input, notification } from "antd";
 import { useCreateNewUser } from "@/utils/queries";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Register = () => {
   const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
@@ -136,9 +137,9 @@ const Register = () => {
         </Form>
         <div className="mt-1 text-gray-400 text-[14px] text-center">
           Have an account?{" "}
-          <a href="#" className="text-[#76ABAE] hover:underline">
+          <Link href="/auth/login" className="text-[#76ABAE] hover:underline">
             Sign in
-          </a>
+          </Link>
         </div>
       </div>
     </>

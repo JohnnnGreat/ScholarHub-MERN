@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextUIProvider } from "@nextui-org/system";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
@@ -27,7 +28,7 @@ export default async function RootLayout({
       <TanStack>
         <body className="dark text-foreground h-max ">
           <NextUIProvider>
-            <Header user={user ? true : false} />
+            <Header user={user ? true : false} userInfo={user} />
             {children}
           </NextUIProvider>
         </body>

@@ -20,7 +20,7 @@ label,
 input::placeholder,
 .ant-select-selection-placeholder,
 .ant-tabs-tab-btn,
-span {
+.head-f span {
   font-family: "Product", sans-serif !important;
 }
 
@@ -87,6 +87,10 @@ body {
   .grid-auth {
     grid-template-columns: 1fr;
   }
+}
+
+.ant-dropdown-menu-title-content {
+  color: #ffffffab;
 }
 
 input {
@@ -204,4 +208,8 @@ label {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.ant-dropdown-menu {
+  background-color: #404b5c !important;
 }

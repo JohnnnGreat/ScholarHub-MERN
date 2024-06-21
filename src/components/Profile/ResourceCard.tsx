@@ -132,7 +132,9 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
               </div>
             </div>
           )}
-          <button className="text-[#66979A] hover:underline">Edit Resource</button>
+          <Link href={`/`} className="text-[#66979A] hover:underline">
+            Edit Resource
+          </Link>
           <button
             className="text-[#66979A] hover:underline"
             onClick={() => setShowDeleteModal(true)}

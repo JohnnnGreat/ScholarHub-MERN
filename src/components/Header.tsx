@@ -5,14 +5,20 @@ import { navVariants } from "@/utils/framermotion";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-import { Button } from "@nextui-org/button";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import { IUser } from "@/types";
+import { Avatar } from "@nextui-org/react";
+import { Dropdown, Space } from "antd";
+import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import type { MenuProps } from "antd";
 
-const Header = ({ user }: { user: any }) => {
+const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(user);
   const [signInOut, setIsSigningOut] = useState(false);
 
+  console.log("user", userInfo);
   const handleLogout = async () => {
     setIsSigningOut(true);
     const supabase = createClient();
@@ -21,15 +27,42 @@ const Header = ({ user }: { user: any }) => {
     router.push("/auth");
     setIsSigningOut(false);
   };
+
+  const items: MenuProps["items"] = [
+    {
+      key: "1",
+      label: (
+        <Link href="/profile" className="text-gray-300">
+          My Profile
+        </Link>
+      ),
+      icon: <UserOutlined />,
+    },
+    {
+      key: "2",
+
+      label: (
+        <Button isLoading={signInOut} onClick={handleLogout} className="w-full">
+          Logout
+        </Button>
+      ),
+    },
+  ];
+
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full flex  justify-center">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={navVariants}
-        className="px-[1rem] z-40 fixed top-[.7rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] b-blur rounded-full w-[400px] md:w-[80%] md:max-w-[1109px]"
+        className="px-[1rem] z-40 gap-[1rem] fixed top-[.7rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] b-blur rounded-full w-[400px] md:w-[80%] md:max-w-[1109px]"
       >
-        <div className="text-[24px] golden-font ml-[1rem]">Scholar Hub</div>
+        <Link
+          href="/"
+          className="flex-grow md:flex-grow-0 text-[24px] head-f golden-font ml-[1rem]"
+        >
+          Scholar Hub
+        </Link>
         <div className="hidden md:flex gap-x-[1rem] items-center">
           <Link href="#" className="hover:text-gray-400">
             Discover
@@ -45,12 +78,25 @@ const Header = ({ user }: { user: any }) => {
           </Link>
         </div>
         {isAuthenticated ? (
-          <Button
-            onClick={handleLogout}
-            className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
-          >
-            {!signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
-          </Button>
+          // <Button
+          //   onClick={handleLogout}
+          //   className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+          // >
+          //   {!signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
+          // </Button>
+          <div>
+            <>
+              <Dropdown menu={{ items }}>
+                <Avatar
+                  className="cursor-pointer"
+                  isBordered
+                  showFallback
+                  name={userInfo?.fullname?.slice(0, 2)}
+                  src="https://images.unsplash.com/broken"
+                />
+              </Dropdown>
+            </>
+          </div>
         ) : (
           <Link
             href="/auth"

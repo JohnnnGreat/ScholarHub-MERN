@@ -65,7 +65,7 @@ const MyResource = ({ email }: { email?: string }) => {
     <div>
       <div className="flex justify-end  my-[.8rem]">
         <Link
-          href="addresource"
+          href="/addresource"
           className="bg-[#76ABAE] rounded-md text-black py-[.8rem] px-[1rem]"
         >
           Add a New Resource
