@@ -8,7 +8,7 @@ export interface IResource {
   edition: number;
   published: boolean;
   resourceType: string;
-  resourceEmbeddedNotes: string;
+  resourceEmbeddedNote: string;
   uploadBy: string | null;
   privacy: string;
   thumbnail: string;

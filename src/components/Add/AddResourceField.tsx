@@ -1,16 +1,26 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, DatePicker, Select, message } from "antd";
-import { useAddNewResource } from "@/utils/queries";
+import { useAddNewResource, useUpdateResource } from "@/utils/queries";
 import { useRouter } from "next/navigation";
 
 import NextCom from "./Nextco";
 import { Button } from "@nextui-org/button";
 import { popularSubjectAreas } from "../constant";
+import { IResource } from "@/types";
+import dayjs from "dayjs";
 
 const { Option } = Select;
 
-const AddResourceField = () => {
+const AddResourceField = ({
+  isEdit,
+  postId,
+  resourceInfo,
+}: {
+  isEdit: any;
+  postId: string;
+  resourceInfo: IResource;
+}) => {
   const router = useRouter();
   const [form] = Form.useForm();
   const {
@@ -19,22 +29,46 @@ const AddResourceField = () => {
     isError,
   } = useAddNewResource();
 
+  const { mutateAsync: updateResourceFn, isPending: isUpdatingResoirce } = useUpdateResource();
+
   const onFinish = async (values: any) => {
     const response = await addResourceToDb(values);
 
-    const { data, error } = response;
+    if (isEdit) {
+      const response = await updateResourceFn({ id: postId, resourcePayload: values });
+      console.log(response);
+    } else {
+      const { data, error } = response;
 
-    if (error) {
-      message.error(error);
+      if (error) {
+        message.error(error);
+      }
+      await message.success("Resource Added Successfully");
+      router.push(`addresource/resourceprivacy?resourceId=${data[0].id}`);
     }
-    await message.success("Resource Added Successfully");
-    router.push(`addresource/resourceprivacy?resourceId=${data[0].id}`);
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    if (isEdit) {
+      form.setFieldsValue({
+        title: resourceInfo?.title,
+        datePublished: dayjs(resourceInfo?.datePublished),
+        subjectArea: resourceInfo?.subjectArea,
+        coAuthors: resourceInfo?.coAuthors,
+        pageNo: resourceInfo?.pageNo,
+        edition: resourceInfo?.edition,
+        parentOrganization: resourceInfo?.parentOrganization,
+        description: resourceInfo?.description,
+        published: resourceInfo?.published,
+        resourceType: resourceInfo?.resourceType,
+        resourceEmbeddedNote: resourceInfo?.resourceEmbeddedNote,
+      });
+    }
+  }, [form, resourceInfo]);
   return (
     <div>
       <div className="min-h-screen  text-white flex justify-center items-center mt-[5.5rem]">

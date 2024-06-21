@@ -1,5 +1,7 @@
 import AddResourceField from "@/components/Add/AddResourceField";
+import { getResourceData } from "@/utils/request";
 import { Metadata } from "next";
+import { headers } from "next/headers";
 import React from "react";
 
 export const metadata: Metadata = {
@@ -13,10 +15,20 @@ export const metadata: Metadata = {
   robots: "index, follow",
 };
 
-const AddPage = () => {
+const AddPage = async () => {
+  const header = headers();
+
+  const headerUrl = header?.get("x-url") || "not found";
+  const urlObject = new URL(headerUrl);
+
+  console.log(urlObject);
+  const postId = urlObject?.searchParams?.get("resourceId") || "";
+  const isEdit = urlObject?.searchParams?.get("isEdit") || false;
+
+  const { data, error } = await getResourceData(postId);
   return (
     <div>
-      <AddResourceField />
+      <AddResourceField isEdit={isEdit} postId={postId} resourceInfo={data} />
     </div>
   );
 };

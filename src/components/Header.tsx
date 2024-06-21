@@ -5,20 +5,16 @@ import { navVariants } from "@/utils/framermotion";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
-import { Button, ButtonGroup } from "@nextui-org/button";
-import { IUser } from "@/types";
-import { Avatar } from "@nextui-org/react";
-import { Dropdown, Space } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
-import type { MenuProps } from "antd";
 
+import { Avatar } from "@nextui-org/react";
+
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
 const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(user);
   const [signInOut, setIsSigningOut] = useState(false);
 
-  console.log("user", userInfo);
   const handleLogout = async () => {
     setIsSigningOut(true);
     const supabase = createClient();
@@ -28,26 +24,17 @@ const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
     setIsSigningOut(false);
   };
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <Link href="/profile" className="text-gray-300">
-          My Profile
-        </Link>
-      ),
-      icon: <UserOutlined />,
-    },
-    {
-      key: "2",
-
-      label: (
-        <Button isLoading={signInOut} onClick={handleLogout} className="w-full">
-          Logout
-        </Button>
-      ),
-    },
-  ];
+  const handleClick = (key: any) => {
+    switch (key) {
+      case key === "profile":
+        router.push("/profile");
+        break;
+      case key === "logout":
+        handleLogout();
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="w-full flex  justify-center">
@@ -78,25 +65,71 @@ const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
           </Link>
         </div>
         {isAuthenticated ? (
-          // <Button
-          //   onClick={handleLogout}
-          //   className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
-          // >
-          //   {!signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
-          // </Button>
-          <div>
-            <>
-              <Dropdown menu={{ items }}>
-                <Avatar
-                  className="cursor-pointer"
-                  isBordered
-                  showFallback
-                  name={userInfo?.fullname?.slice(0, 2)}
-                  src="https://images.unsplash.com/broken"
-                />
-              </Dropdown>
-            </>
-          </div>
+          <Dropdown backdrop="opaque">
+            <DropdownTrigger>
+              <Avatar
+                className="cursor-pointer"
+                isBordered
+                showFallback
+                name={userInfo?.fullname?.slice(0, 2)}
+                src="https://images.unsplash.com/broken"
+                as="button"
+              />
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label="Action event example"
+              onAction={(key) => {
+                handleClick(key);
+              }}
+              variant="faded"
+            >
+              <DropdownItem
+                key="profile"
+                startContent={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+                    />
+                  </svg>
+                }
+              >
+                My Profile
+              </DropdownItem>
+
+              <DropdownItem
+                startContent={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-4"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
+                    />
+                  </svg>
+                }
+                key="logout"
+                className="text-danger"
+                color="danger"
+              >
+                Logout
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         ) : (
           <Link
             href="/auth"

@@ -78,15 +78,15 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
         <div className="flex gap-3 flex-wrap">
           <div>
             <h1 className="text-[#fff7]">Resource Type</h1>
-            <p className="text-[#fff] font-bold">{resource?.resourceType}</p>
+            <p className="text-[#fff] font-semibold">{resource?.resourceType}</p>
           </div>
           <div>
             <h1 className="text-[#fff7]">Subject Area</h1>
-            <p className="text-[#fff] font-bold">{resource?.subjectArea}</p>
+            <p className="text-[#fff] font-semibold">{resource?.subjectArea}</p>
           </div>
           <div>
             <h1 className="text-[#fff7]">Privacy</h1>
-            <p className="text-[#fff] font-bold">{resource?.privacy}</p>
+            <p className="text-[#fff] font-semibold">{resource?.privacy}</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-4 mb-4 mt-[1rem]">
@@ -132,7 +132,10 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
               </div>
             </div>
           )}
-          <Link href={`/`} className="text-[#66979A] hover:underline">
+          <Link
+            href={`/addresource?isEdit=true&resourceId=${resource?.id}`}
+            className="text-[#66979A] hover:underline"
+          >
             Edit Resource
           </Link>
           <button

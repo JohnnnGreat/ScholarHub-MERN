@@ -26,6 +26,7 @@ const MyResource = ({ email }: { email?: string }) => {
       .select("*", { count: "exact" })
       .range(from, to)
       .eq("uploadBy", email);
+
     console.log(error);
     if (error) {
       message.error("Error Fetching Resoure");

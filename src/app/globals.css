@@ -190,6 +190,10 @@ label {
   margin-bottom: 0 !important;
 }
 
+.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: auto !important;
+}
 .ant-tabs-nav {
   background: white !important;
   padding: 0.6rem 1rem;

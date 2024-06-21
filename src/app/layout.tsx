@@ -8,9 +8,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextUIProvider } from "@nextui-org/system";
-
-
-const inter = Inter({ subsets: ["latin"] });
+import PDFWorker from "@/components/pdfWorker";
 
 export default async function RootLayout({
   children,
@@ -27,10 +25,12 @@ export default async function RootLayout({
     <html lang="en">
       <TanStack>
         <body className="dark text-foreground h-max ">
-          <NextUIProvider>
-            <Header user={user ? true : false} userInfo={user} />
-            {children}
-          </NextUIProvider>
+          <PDFWorker>
+            <NextUIProvider>
+              <Header user={user ? true : false} userInfo={user} />
+              {children}
+            </NextUIProvider>
+          </PDFWorker>
         </body>
       </TanStack>
     </html>

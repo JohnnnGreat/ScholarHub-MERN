@@ -12,7 +12,9 @@ import {
   signInUser,
   handleUpdate,
   updateInstitution,
+  updateResourceData,
 } from "../request";
+import { IResource } from "@/types";
 
 export const useCreateNewUser = () => {
   return useMutation({ mutationFn: (user) => createNewUser(user) });
@@ -34,6 +36,13 @@ export const useUpdateInstitution = () => {
       selectedOption: { institutionName: string; faculty: string; subjectArea: string };
       id: string;
     }) => updateInstitution(payload),
+  });
+};
+
+export const useUpdateResource = () => {
+  return useMutation({
+    mutationFn: (payload: { id: string; resourcePayload: IResource }) =>
+      updateResourceData(payload),
   });
 };
 

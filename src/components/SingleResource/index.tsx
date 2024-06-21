@@ -6,9 +6,16 @@ import { Input } from "@nextui-org/input";
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/modal";
 import { Image, Avatar } from "antd";
 import Head from "next/head";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { handleSendNotificationRequestMail } from "@/utils/request";
 import { message as antmessage } from "antd";
+import { Document, Outline, Page } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+
+function highlightPattern(text: string, pattern: any) {
+  return text.replace(pattern, (value: any) => `<mark>${value}</mark>`);
+}
 const SingleResourceComponent = ({
   resInfo,
   userInfo,
@@ -48,6 +55,28 @@ const SingleResourceComponent = ({
     setShowModal(false);
     setIsLoading(false);
   };
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }: { numPages: any }) {
+    setNumPages(numPages);
+  }
+
+  function onItemClick({ pageNumber: itemPageNumber }: { pageNumber: number }) {
+    setPageNumber(itemPageNumber);
+  }
+
+  const [searchText, setSearchText] = useState("");
+
+  const textRenderer = useCallback(
+    (textItem: any) => highlightPattern(textItem.str, searchText),
+    [searchText]
+  );
+
+  function onChange(event: any) {
+    setSearchText(event.target.value);
+  }
+
   return (
     <>
       <Modal
@@ -93,10 +122,10 @@ const SingleResourceComponent = ({
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-wrap gap-2">
             <div className="bg-[#76abae41]  text-sm font-semibold rounded-lg text-[#95dbdfce] py-2 px-3">
-              {resInfo?.privacy?.toUpperCase()}
+              <p>{resInfo?.privacy?.toUpperCase()}</p>
             </div>
             <div className="bg-[#6f6f6f52] text-sm rounded-lg font-semibold text-[#ffffffc0] py-2 px-3">
-              {resInfo?.subjectArea?.toUpperCase()}
+              <p>{resInfo?.subjectArea?.toUpperCase()}</p>
             </div>
           </div>
           <h1 className="text-white text-4xl lg:text-5xl golden-font  mt-2">{resInfo?.title}</h1>
@@ -114,8 +143,8 @@ const SingleResourceComponent = ({
                 <div>
                   <h1 className="text-white">{userInfo?.fullname}</h1>
                   <p className="font-thin text-sm">
-                    {userInfo?.institutionName} | {userInfo?.followers ? userInfo?.followers : 0}{" "}
-                    followers
+                    {userInfo?.institutionName} |{" "}
+                    {userInfo?.followers ? JSON.parse(userInfo?.followers).length : 0} followers
                   </p>
                 </div>
               </div>
@@ -150,8 +179,59 @@ const SingleResourceComponent = ({
               Request for Resource
             </Button>
           )}
-          <div className="w-full mt-4">
-            <iframe className="w-full h-[700px]" src={resInfo?.fileUrl}></iframe>
+          <div className="w-[90%] mx-auto mt-4 flex gap-6 flex-wrap md:flex-nowrap">
+            {resInfo?.privacy === "public" ? (
+              <>
+                {" "}
+                <Document file={resInfo?.fileUrl} onLoadSuccess={onDocumentLoadSuccess}>
+                  <Outline onItemClick={onItemClick} />
+                  {Array.from(new Array(numPages), (el, index) => (
+                    <Page
+                      className="rounded-[20px]"
+                      customTextRenderer={textRenderer}
+                      key={`page_${index + 1}`}
+                      pageNumber={index + 1}
+                    />
+                  ))}
+                </Document>
+                <div>
+                  <h1 className="text-white golden-font text-[23px]">Looking for Something?</h1>
+                  <p>Enter a Keyword Below to make searches</p>
+                  <div>
+                    <label htmlFor="search">Search:</label>
+                    <input
+                      type="search"
+                      id="search"
+                      className="border-[1px] border-[#ffffff59] placeholder:text-[#ffffffa1] text-[#76ABAE!important]"
+                      value={searchText}
+                      onChange={onChange}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div role="alert" className="alert shadow-lg">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="stroke-info shrink-0 w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <div>
+                  <h3 className="font-bold">This resource is available on request</h3>
+                  <div className="text-xs">
+                    Send a Direct Message to the Author to Have Access to this Resource
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

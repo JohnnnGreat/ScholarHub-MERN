@@ -1,3 +1,4 @@
+import { IResource } from "@/types";
 import { createClient } from "../supabase/client";
 
 export interface Resource {
@@ -198,7 +199,8 @@ export const getRelatedUsers = async (researchType: any, email: string) => {
     const { data, error } = await supabase
       .from("User")
       .select("*")
-      .eq("researchType", researchType);
+      .eq("researchType", researchType)
+      .order("created_at", { ascending: false });
 
     const relatedResearchers = data?.filter((item: any, index) => {
       return item.email !== email;
@@ -242,6 +244,21 @@ export const handleUpdate = async (id: string) => {
 
     return response;
     // return router.push(`/auth/researchtype?userId=${id}`);
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateResourceData = async (payload: {
+  id: string | undefined;
+  resourcePayload: IResource;
+}) => {
+  const supabase = createClient();
+
+  const { id, resourcePayload } = payload;
+  try {
+    const response = await supabase.from("Resource").update(resourcePayload).eq("id", id);
+    return response;
   } catch (error) {
     return error;
   }
