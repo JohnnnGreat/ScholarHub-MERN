@@ -1,4 +1,4 @@
-import { IResource } from "@/types";
+import { IResource, IUser } from "@/types";
 import { createClient } from "../supabase/client";
 
 export interface Resource {
@@ -244,6 +244,18 @@ export const handleUpdate = async (id: string) => {
 
     return response;
     // return router.push(`/auth/researchtype?userId=${id}`);
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateUserInfo = async ({ id, updateInfo }: { id: string; updateInfo: IUser }) => {
+  const supabase = createClient();
+  try {
+    console.log(id, updateInfo);
+    const response = await supabase.from("User").update(updateInfo).eq("id", id);
+    return response;
+    // // return router.push(`/auth/researchtype?userId=${id}`);
   } catch (error) {
     return error;
   }

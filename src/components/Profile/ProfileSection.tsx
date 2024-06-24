@@ -1,6 +1,7 @@
 import { IUser } from "@/types";
 import { BookOutlined, EditOutlined, MailOutlined, SettingOutlined } from "@ant-design/icons";
 import { Button, Tooltip } from "antd";
+import Link from "next/link";
 import React from "react";
 
 const ProfileSection = ({ userData }: { userData: IUser }) => {
@@ -9,7 +10,12 @@ const ProfileSection = ({ userData }: { userData: IUser }) => {
       <h2 className="text-[40px] golden-font text-white flex items-center text-center w-full md:text-left">
         {userData?.fullname}
         <Tooltip title="Edit Profile">
-          <Button type="text" icon={<EditOutlined />} className="ml-2 text-white" />
+          <Link
+            href={`/editprofile?userId=${userData?.id}`}
+            className="ml-2 text-[20px] text-white"
+          >
+            <EditOutlined size={10} />
+          </Link>
         </Tooltip>
       </h2>
       <p className="text-[#ffffff88] text-[16px] flex items-center mt-[.7rem] max-w-[500px]">

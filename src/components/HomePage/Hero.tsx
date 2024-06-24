@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <div className="py-[1rem] px-[.6rem] md:px-0 bg-[#222831] h-screen text-white flex items-center justify-center">
+    <div className="py-[1rem] px-[.6rem] md:px-0 bg-[#222831] h-screen text-white flex items-center justify-center overflow-hidden relative">
       <svg
         width="600"
         height="681"

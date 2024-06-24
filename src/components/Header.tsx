@@ -34,12 +34,12 @@ const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
   };
 
   return (
-    <div className="w-full flex  justify-center">
+    <div className="w-full flex  justify-center relative">
       <motion.div
         initial="hidden"
         animate="visible"
         variants={navVariants}
-        className="px-[1rem] z-40 gap-[1rem] fixed top-[.7rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] b-blur rounded-full w-[400px] md:w-[80%] md:max-w-[1109px]"
+        className="px-[1rem] z-40 gap-[1rem] fixed top-[.7rem] flex justify-between items-center h-[70px] mx-auto border border-[#76abaea8] b-blur rounded-full w-[90%] md:w-[80%] md:max-w-[1109px]"
       >
         <Link
           href="/"
@@ -157,7 +157,10 @@ const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
       </motion.div>
 
       {isOpen && (
-        <div className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4 w-[100%important]">
+        <div
+          className="md:hidden px-[1rem] top-16 z-20 gap-[1rem] fixed  mx-auto  bg-[#222831]   w-[90%] md:w-[80%] md:max-w-[1109px] mx-4 p-4"
+          // className="md:hidden fixed top-16 z-20 mt-[1rem] left-0 right-0 bg-[#222831] backdrop-blur-lg backdrop-opacity-50 rounded-lg mx-4 p-4 w-screen">
+        >
           <Link href="#" className="block px-2 py-1 hover:text-gray-400">
             Discover
           </Link>
@@ -170,13 +173,21 @@ const Header = ({ user, userInfo }: { user: boolean; userInfo: any }) => {
           <Link href="#" className="block px-2 py-1 hover:text-gray-400">
             Contact
           </Link>
-          {isAuthenticated && (
-            <button
+          {isAuthenticated ? (
+            <Link
+              href="/profile"
               onClick={handleLogout}
-              className="hidden md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+              className=" md:md:block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
             >
-              {signInOut ? "Logout" : <span className="loading loading-dots loading-md"></span>}
-            </button>
+              My Profile
+            </Link>
+          ) : (
+            <Link
+              className=" block bg-[#76ABAE] text-black px-10 py-3 rounded-full hover:bg-teal-700"
+              href="/auth"
+            >
+              Sign In
+            </Link>
           )}
         </div>
       )}
