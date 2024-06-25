@@ -36,11 +36,11 @@ export default function Hero() {
       </svg>
 
       <div className="text-center mt-24 mb-16">
-        <h3 className="text-3xl md:text-6xl font-semibold golden-font">
+        <h3 className="text-2xl md:text-6xl font-semibold golden-font">
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h3>
-        <p className="mt-3 mx-auto font-light text-[16px] md:text-[18px] mb-4 w-full md:w-[70%] text-[#ffffffbd]">
+        <p className="mt-3 mx-auto font-light text-[15px] md:text-[18px] mb-4 w-full md:w-[70%] text-[#ffffffbd]">
           Unlock the power of a vibrant global community of researchers, scholars, and innovators.
           ScholarHub is your gateway to a world of groundbreaking discoveries, collaboration, and
           knowledge-sharing.
