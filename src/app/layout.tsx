@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextUIProvider } from "@nextui-org/system";
 import PDFWorker from "@/components/pdfWorker";
+import ParticlesBackground from "@/components/Particles";
 
 export default async function RootLayout({
   children,
@@ -27,8 +28,11 @@ export default async function RootLayout({
         <body className="dark text-foreground h-max ">
           <PDFWorker>
             <NextUIProvider>
+              <>
+             
               <Header user={user ? true : false} userInfo={user} />
               {children}
+              </>
             </NextUIProvider>
           </PDFWorker>
         </body>
