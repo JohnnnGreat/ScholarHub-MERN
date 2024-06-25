@@ -325,18 +325,35 @@ export const welcomeEmail = async (id: string) => {
 export const handleTwoViewCounts = async () => {
   const supabase = createClient();
   try {
-    const { data, error } = await supabase
+    const { data: resources, error } = await supabase
       .from("Resource")
       .select("*")
-      .order("views", { ascending: false })
-      .limit(2);
+      .order("views", { ascending: false });
 
     if (error) {
       console.error("Error fetching top resources:", error);
       return [];
     }
 
-    return data;
+    // Fetch user information for each resource
+    const resourcesWithUserInfo = await Promise.all(
+      resources.map(async (resource: any) => {
+        const { data: userData, error: userError } = await supabase
+          .from("User")
+          .select("*")
+          .eq("email", resource.uploadBy)
+          .single();
+
+        if (userError) {
+          console.error("Error fetching user data:", userError);
+          return { ...resource, userInfo: null };
+        }
+
+        return { ...resource, userInfo: userData };
+      })
+    );
+
+    return resourcesWithUserInfo;
   } catch (err) {
     return err;
   }

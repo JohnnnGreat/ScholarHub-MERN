@@ -2,36 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Base Styles */
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
-.golden-font {
-  font-family: "Golden", sans-serif;
-}
-
-p,
-a,
-button,
-input,
-label,
-input::placeholder,
-.ant-select-selection-placeholder,
-.ant-tabs-tab-btn,
-.head-f span, .product-font {
-  font-family: "Product", sans-serif !important;
-}
-
 body {
   background: #222831;
 }
 
-/* h1 {
-  font-family: "Golden", sans-serif;
-} */
-
+/* Typography */
 @font-face {
   font-family: "Golden";
   src: url("../../public/fonts/golden.otf") format("opentype");
@@ -46,14 +28,31 @@ body {
   font-style: normal;
 }
 
-::-webkit-scrollbar-track {
-  background-color: rgb(53, 53, 53);
-  height: 10px;
+.golden-font {
+  font-family: "Golden", sans-serif;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(146, 146, 146);
-  transition: 300ms ease;
+p,
+a,
+button,
+input,
+label,
+input::placeholder,
+.ant-select-selection-placeholder,
+.ant-tabs-tab-btn,
+.head-f span,
+.product-font {
+  font-family: "Product", sans-serif !important;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(53, 53, 53);
+  height: 2px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -61,19 +60,12 @@ body {
   border-radius: 20px !important;
 }
 
-/* // /* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 10px;
-}
-/* */
-*::-webkit-scrollbar-track {
-  background-color: rgb(53, 53, 53);
-  height: 2px;
-}
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--tertiary);
+  background-color: rgb(146, 146, 146);
+  transition: 300ms ease;
 }
 
+/* Layout */
 .grid-auth {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -83,128 +75,77 @@ body {
   padding-right: 1rem;
 }
 
+.grid-feeds {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 30% 45% 25%;
+}
 @media (max-width: 567px) {
-  .grid-auth {
+  .grid-auth,
+  .grid-feeds {
     grid-template-columns: 1fr;
   }
 }
+/* Ant Design Overrides */
+@layer components {
+  .ant-btn-primary {
+    @apply bg-teal-500 border-none;
+  }
 
-.ant-dropdown-menu-title-content {
-  color: #ffffffab;
-}
+  .ant-btn-primary:hover,
+  .ant-btn-primary:focus {
+    @apply bg-teal-600;
+  }
 
-input {
-  background: transparent !important;
-}
+  .ant-select-arrow {
+    @apply text-white;
+  }
 
-.ant-form-item {
-  margin-bottom: 15px !important;
-}
+  .ant-select-selector {
+    background: transparent !important;
+    padding: 1.25rem 0.75rem !important;
+    border-radius: 10px !important;
+    border: 1px solid #ffffff59 !important;
+  }
 
-.b-blur {
-  background: #ffffff0c;
-  backdrop-filter: blur(5px);
-}
+  .ant-select-selection-placeholder {
+    color: #ffffffa1 !important;
+  }
 
-/* .ant-input,
-.ant-picker,
-.ant-select-selector {
-  @apply bg-gray-700 text-white;
-}
+  .ant-select-selection-item {
+    color: #76abae;
+  }
 
-.ant-input:focus,
-.ant-input-focused,
-.ant-picker-focused,
-.ant-input-affix-wrapper-focused,
-.ant-select-focused,
-.ant-select-selector-focused {
-  @apply border-teal-500 shadow-none;
-} */
+  .ant-upload {
+    width: 100% !important;
+  }
 
-.ant-btn-primary {
-  @apply bg-teal-500 border-none;
-}
+  .ant-tabs {
+    background: transparent !important;
+  }
 
-.ant-btn-primary:hover,
-.ant-btn-primary:focus {
-  @apply bg-teal-600;
-}
+  .ant-tabs-tab-active {
+    background: #222831 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    border: none !important;
+  }
 
-.ant-select-arrow {
-  @apply text-white;
-}
+  .ant-tabs-nav {
+    margin-bottom: 0 !important;
+    background: white !important;
+    padding: 0.6rem 1rem;
+  }
 
-.ant-select-selector {
-  background: transparent !important;
-  padding: 1.25rem 0.75rem !important;
-  border-radius: 10px !important;
-  border: 1px solid #ffffff59 !important;
-}
-
-.ant-select-selection-placeholder {
-  color: #ffffffa1 !important;
-}
-
-.ant-select-selection-item {
-  color: #76abae;
-}
-
-label {
-  color: #ffffff6e !important;
-}
-
-#add-paper_datePublished::placeholder {
-  color: #ffffffa1 !important;
-}
-
-.ant-upload {
-  width: 100% !important;
-}
-
-.ant-upload-list-item-name {
-  color: rgba(255, 255, 255, 0.521);
-}
-
-.anticon {
-  svg {
-    color: #76abae !important;
+  .ant-dropdown-menu {
+    background-color: #404b5c !important;
   }
 }
 
-.ant-divider {
-  background-color: rgba(255, 255, 255, 0.37) !important;
-}
-
-.ant-tabs {
-  background: transparent !important;
-}
-
-.ant-tabs-tab-active {
-  background: #222831 !important;
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-  border: none !important;
-}
-
-.ant-tabs-nav {
-  margin-bottom: 0 !important;
-}
-
-.react-pdf__Page__canvas {
-  width: 100% !important;
-  height: auto !important;
-}
-.ant-tabs-nav {
-  background: white !important;
-  padding: 0.6rem 1rem;
-}
-
-.react-aria- {
-  background: red !important;
-}
-
-.ant-select-selection-search-input {
-  display: inline-block;
+/* Custom Classes */
+.b-blur {
+  background: #ffffff0c;
+  backdrop-filter: blur(5px);
 }
 
 .text-grid {
@@ -214,6 +155,20 @@ label {
   -webkit-text-fill-color: transparent;
 }
 
-.ant-dropdown-menu {
-  background-color: #404b5c !important;
+/* Misc */
+input {
+  background: transparent !important;
+}
+
+label {
+  color: #ffffff6e !important;
+}
+
+.ant-divider {
+  background-color: rgba(255, 255, 255, 0.37) !important;
+}
+
+.react-pdf__Page__canvas {
+  width: 100% !important;
+  height: auto !important;
 }
