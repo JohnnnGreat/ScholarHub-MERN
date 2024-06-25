@@ -1,48 +1,59 @@
 "use client";
-// import * as Tabs from "@radix-ui/react-tabs";
-import { createClient } from "@/utils/supabase/client";
 
-import ProfileSection from "./ProfileSection";
-import { Button, ButtonGroup } from "@nextui-org/button";
-import { Tabs, Tab } from "@nextui-org/tabs";
-import { useGetRelatedResearchers } from "@/utils/queries";
-import Link from "next/link";
-import { Input, Textarea } from "@nextui-org/input";
+// Import necessary modules and components
+import { createClient } from "@/utils/supabase/client";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
+import ProfileSection from "./ProfileSection";
+import { Button } from "@nextui-org/button";
+import { Tabs, Tab } from "@nextui-org/tabs";
+import { useGetRelatedResearchers } from "@/utils/queries";
+import Link from "next/link";
+import { Input, Textarea } from "@nextui-org/input";
 import MyResource from "./MyResource";
-import { INote, IResource, IUser } from "@/types";
 import Notice from "./Notice";
-import { useEffect, useState } from "react";
-import { getRelatedUsers, getUserInfo } from "@/utils/request";
-import { welcomeEmail } from "@/utils/request";
-import { Avatar } from "antd";
+import { getRelatedUsers, welcomeEmail } from "@/utils/request";
+import { Avatar } from "@nextui-org/react";
+import { Avatar as AntAvatar, message } from "antd";
+import { INote, IUser } from "@/types";
 
 const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
+  // Initialize Supabase client
   const supabase = createClient();
+
+  // State to manage loading status
   const [pageLoading, setPageLoading] = useState(false);
 
+  // Fetch related researchers data
   const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
   const researchRe = data as IUser[];
+
+  // State to manage list of related users
   const [users, setUsers] = useState(researchRe);
+
+  // Fetch related user information based on research type and email
   const fetchUserInfo = async (researchType: string | undefined, emailArg: string) => {
     const userInfoResponse = await getRelatedUsers(researchType, emailArg);
     return userInfoResponse;
   };
+
+  // Effect to fetch user information when `users` state changes
   useEffect(() => {
     fetchUserInfo(userInfo?.researchType, userInfo?.email).then((res) => {
       console.log(res);
     });
   }, [users]);
 
+  // Function to subscribe to database changes
   const subscribeToChanges = () => {
     const channels = supabase
       .channel("custom-all-channel")
       .on("postgres_changes", { event: "*", schema: "public", table: "User" }, (payload) => {
         console.log("updated", payload);
-
         setUsers(researchRe);
       })
       .subscribe();
@@ -50,19 +61,22 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
     return channels;
   };
 
+  // Effect to subscribe and clean up subscription to database changes
   useEffect(() => {
-    subscribeToChanges();
+    const channels = subscribeToChanges();
 
     return () => {
-      supabase.removeChannel(subscribeToChanges());
+      supabase.removeChannel(channels);
     };
   }, [supabase]);
 
+  // Schema validation for note form using Zod
   const noteSchema = z.object({
     title: z.string().min(3, "Title must be at least 3 characters"),
     text: z.string().min(3, "Text must be at least 3 characters"),
   });
 
+  // Initialize form handling with react-hook-form
   const {
     register,
     handleSubmit,
@@ -71,16 +85,18 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
     resolver: zodResolver(noteSchema),
   });
 
+  // Handle note form submission
   const onSubmit = (data: INote) => {
     console.log(data);
   };
 
+  // Handle sending welcome email
   const handleSendEmail = async () => {
     const sendWelcomeEmail = await welcomeEmail(userInfo?.id);
     console.log(sendWelcomeEmail);
   };
 
-  type followersType = string | string[];
+  // State to manage user followers
   const [userMainFollowers, setUserMainFollowers] = useState(() => {
     try {
       return userInfo?.followers
@@ -91,7 +107,8 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
       return [];
     }
   });
-  console.log(userMainFollowers);
+
+  // Handle follow functionality
   const handleFollow = async (email: string, followeeId: string, followeeFollowers: string) => {
     if (!userMainFollowers.includes(email)) {
       const updatedFollowers = [...userMainFollowers, email];
@@ -115,13 +132,14 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
           .eq("id", followeeId);
 
         if (error) {
-          console.error(error);
+          message.error(error?.message)
         }
       }
     } else {
-      console.log("Email already follows the user");
+      message.error("Email already follows the user");
     }
   };
+
   return (
     <>
       {pageLoading ? (
@@ -129,11 +147,11 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
           Loading
         </div>
       ) : (
-        <div id="page-p" className="mt-[6rem] max-w-[1100px] mx-auto">
-          <div className="p-4">
-            <div className="bg-[#1E242C] text-white p-6 rounded-lg">
+        <div id="page-p" className="overflow-hidden relative mt-[6rem] max-w-[1100px] mx-auto">
+          <div className="md:p-4">
+            <div className="bg-[#1E242C] text-white p-2 md:p-5 rounded-lg">
               <Button onClick={handleSendEmail}>Send Email Notification</Button>
-              <Notice user={userInfo && userInfo} />
+              <Notice user={userInfo} />
               <div className="flex flex-col">
                 <Tabs variant="solid" aria-label="Options">
                   <Tab key="photos" title="My Resource">
@@ -141,14 +159,60 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                   </Tab>
                   <Tab key="profile" title="Profile">
                     <div className="flex flex-col md:flex-row items-center my-[2rem] gap-x-[2rem] justify-center">
-                      <div className="bg-orange-500 rounded-full w-[150px] h-[150px] md:w-[200px] md:h-[200px] flex items-center justify-center">
-                        <span className="text-4xl md:text-6xl text-white">U</span>
-                      </div>
+                      <AntAvatar
+                        style={{ backgroundColor: "#76ABAE", verticalAlign: "middle" }}
+                        src={userInfo?.profileUrl}
+                        size={200}
+                      >
+                        {userInfo?.fullname?.slice(0, 2)}
+                      </AntAvatar>
                       <ProfileSection userData={userInfo} />
+                    </div>
+                    <div className="absolute w-full h-full flex items-center justify-center">
+                      <svg
+                        width="1198"
+                        height="930"
+                        viewBox="0 0 1198 930"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <g filter="url(#filter0_f_5_19)">
+                          <circle
+                            cx="584.5"
+                            cy="411.5"
+                            r="313.5"
+                            fill="#5A93E9"
+                            fillOpacity="0.12"
+                          />
+                        </g>
+                        <defs>
+                          <filter
+                            id="filter0_f_5_19"
+                            x="-29"
+                            y="-202"
+                            width="1227"
+                            height="1227"
+                            filterUnits="userSpaceOnUse"
+                            colorInterpolationFilters="sRGB"
+                          >
+                            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+                            <feBlend
+                              mode="normal"
+                              in="SourceGraphic"
+                              in2="BackgroundImageFix"
+                              result="shape"
+                            />
+                            <feGaussianBlur
+                              stdDeviation="150"
+                              result="effect1_foregroundBlur_5_19"
+                            />
+                          </filter>
+                        </defs>
+                      </svg>
                     </div>
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                       {/* Researchers with Similar Interest */}
-                      <div className="col-span-1 md:col-span-2 lg:col-span-2 p-6 rounded-lg bg-[#2a2f38]">
+                      <div className="col-span-1 md:col-span-2 lg:col-span-2 border p-6 rounded-[10px] border-[#76abae86] b-blur">
                         <h3 className="text-white text-xl mb-4 golden-font">
                           Researchers with similar Interest
                         </h3>
@@ -157,23 +221,32 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                             key={item.id}
                             className="flex items-center gap-[1rem] border-b border-[#ffffff3a] py-[.9rem]"
                           >
-                            <Avatar
-                              style={{ backgroundColor: "#76ABAE", verticalAlign: "middle" }}
-                              size={50}
-                            >
-                              {item?.fullname?.slice(0, 2)}
-                            </Avatar>
-                            <div className="flex flex-wrap justify-between w-full items-center">
+                            <div className="w-[70px]">
+                              <AntAvatar
+                                style={{ backgroundColor: "#76ABAE", verticalAlign: "middle" }}
+                                size={50}
+                                className="w-[100px]"
+                                src={item?.profileUrl}
+                              >
+                                {item?.fullname?.slice(0, 2)}
+                              </AntAvatar>
+                            </div>
+                            <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
                               <div>
-                                <h1 className="text-[#EEEEEE]">{item?.fullname}</h1>
+                                <h1 className="text-[#EEEEEE] product-font">{item?.fullname}</h1>
                                 <div className="text-[#eeeeee81]">
-                                  {item?.noPublications | 0} publications{" "}
-                                  {item?.followers ? JSON.parse(item?.followers).length : 0}{" "}
-                                  followers
+                                  <p>
+                                    {item?.noPublications | 0} publications{" "}
+                                    {item?.followers ? JSON.parse(item?.followers).length : 0}{" "}
+                                    followers
+                                  </p>
                                 </div>
                               </div>
-                              <div className="flex flex-col items-end">
-                                <Link className="text-[#76abae91]" href={`/user/${item?.id}`}>
+                              <div className="flex flex-col md:items-end">
+                                <Link
+                                  className="text-[#76abae91] hover:text-[#76abaefd]"
+                                  href={`/user/${item?.id}`}
+                                >
                                   View Profile
                                 </Link>
                                 {!userMainFollowers?.includes(item?.email) ? (

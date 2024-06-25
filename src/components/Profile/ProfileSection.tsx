@@ -18,7 +18,7 @@ const ProfileSection = ({ userData }: { userData: IUser }) => {
           </Link>
         </Tooltip>
       </h2>
-      <p className="text-[#ffffff88] text-[16px] flex items-center mt-[.7rem] max-w-[500px]">
+      <p className="text-[#ffffff88] text-[16px] flex  mt-[.7rem] max-w-[500px]">
         <BookOutlined className="mr-2" />
         {userData?.bio}
       </p>

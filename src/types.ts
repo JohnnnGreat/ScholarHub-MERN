@@ -35,5 +35,5 @@ export interface IUser {
   institutionName: string;
   faculty: string;
   noPublications: number;
-  subjectArea: string;
+  profileUrl: string;
 }

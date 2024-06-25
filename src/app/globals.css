@@ -20,7 +20,7 @@ label,
 input::placeholder,
 .ant-select-selection-placeholder,
 .ant-tabs-tab-btn,
-.head-f span {
+.head-f span, .product-font {
   font-family: "Product", sans-serif !important;
 }
 

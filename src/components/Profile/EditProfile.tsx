@@ -1,38 +1,21 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  Form,
-  Input,
-  DatePicker,
-  Select,
-  message,
-  Upload,
-  Button as AntButton,
-  notification,
-} from "antd";
-import { useUpdateUserInfo } from "@/utils/queries";
-import { useRouter } from "next/navigation";
-
-import { Button } from "@nextui-org/button";
-
-import { IResource, IUser } from "@/types";
+import { Form, Input, Upload, Button as AntButton, message, notification } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/button";
+import { useUpdateUserInfo } from "@/utils/queries";
 import { createClient } from "@/utils/supabase/client";
+import { IResource, IUser } from "@/types";
 
 const EditProfileComponent = ({ userData }: { userData: IUser }) => {
-  const router = useRouter();
-  const [form] = Form.useForm();
-  const { mutateAsync: updateUserInfo, isPending } = useUpdateUserInfo();
-  const onFinish = async (values: any) => {
-    const response = await updateUserInfo({ id: userData?.id, updateInfo: values });
-    message.success("Profile Updated");
-    router.push("/profile");
-  };
+  // State for storing the profile image URL
+  const [profileImageUrl, setProfileImageUrl] = useState(userData?.profileUrl);
+  const router = useRouter(); // Router for navigation
+  const [form] = Form.useForm(); // Form instance from Ant Design
+  const { mutateAsync: updateUserInfo, isPending } = useUpdateUserInfo(); // Custom hook for updating user info
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
+  // Effect to set initial form values when userData changes
   useEffect(() => {
     form.setFieldsValue({
       fullname: userData?.fullname,
@@ -40,34 +23,37 @@ const EditProfileComponent = ({ userData }: { userData: IUser }) => {
     });
   }, [form, userData]);
 
-  const [profileImageUrl, setProfileImageUrl] = useState("");
-  const handleProfileFileChange = (info: any) => {
-    if (info.file.status === "done") {
-      console.log(info.file.originFileObj);
-      notification.success({
-        message: `${info.file.name} file uploaded successfully`,
+  // Handler for successful form submission
+  const handleFinish = async (values: any) => {
+    try {
+      await updateUserInfo({
+        id: userData?.id,
+        updateInfo: { ...values, profileUrl: profileImageUrl },
       });
-    } else if (info.file.status === "error") {
-      notification.error({
-        message: `${info.file.name} file upload failed.`,
-      });
+      message.success("Profile Updated");
+      router.push("/profile");
+    } catch (error) {
+      message.error("Profile Update Failed");
+      console.error("Update Error:", error);
     }
   };
 
-  const customRequest = async ({ file, onSuccess, onError }: any) => {
-    const fileName = `${Date.now()}_${file.name}`;
-    const supabase = createClient();
-    try {
-      const { data, error } = await supabase.storage
-        .from("Files") // replace with your bucket name
-        .upload(fileName, file);
+  // Handler for failed form submission
+  const handleFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
-      if (error) {
-        throw error;
-      }
+  // Custom request handler for file upload
+  const handleUpload = async ({ file, onSuccess, onError }: any) => {
+    const fileName = `${Date.now()}_${file.name}`; // Generate unique file name
+    const supabase = createClient(); // Initialize Supabase client
+    try {
+      const { data, error } = await supabase.storage.from("Files").upload(fileName, file);
+
+      if (error) throw error;
 
       const resourceFileUrl = supabase.storage.from("Files").getPublicUrl(fileName).data.publicUrl;
-      console.log(resourceFileUrl);
+      setProfileImageUrl(resourceFileUrl); // Update state with new image URL
       onSuccess(data);
       notification.success({
         message: `${file.name} file uploaded successfully`,
@@ -79,64 +65,61 @@ const EditProfileComponent = ({ userData }: { userData: IUser }) => {
       });
     }
   };
+
   return (
-    <div>
-      <div className="min-h-screen  text-white flex justify-center items-center mt-[5.5rem]">
-        <div className="w-full max-w-2xl p-8  rounded">
-          <h1 className="text-3xl  golden-font">Add a Paper</h1>
-          <p className="text-[#ffffff6c] mb-6">Add the basic meta data about the resource</p>
-          <Form
-            form={form}
-            name="add-paper"
-            layout="vertical"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
+    <div className="min-h-screen flex justify-center items-center mt-[5.5rem] text-white">
+      <div className="w-full max-w-2xl p-8 rounded">
+        <h1 className="text-3xl golden-font">Add a Paper</h1>
+        <p className="text-[#ffffff6c] mb-6">Add the basic meta data about the resource</p>
+        <Form
+          form={form}
+          name="add-paper"
+          layout="vertical"
+          onFinish={handleFinish}
+          onFinishFailed={handleFinishFailed}
+        >
+          <Form.Item
+            label="Full Name"
+            name="fullname"
+            rules={[{ required: true, message: "Please input the title!" }]}
           >
-            <Form.Item
-              label="Full Name"
-              name="fullname"
-              rules={[{ required: true, message: "Please input the title!" }]}
+            <Input
+              placeholder="Full Name"
+              className="mb-0 w-full text-[#76ABAE] py-3 px-5 rounded-[10px] placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent border-[#ffffff59]"
+            />
+          </Form.Item>
+
+          <Form.Item label="Bio" name="bio">
+            <Input.TextArea
+              placeholder="Enter Your Bio"
+              rows={4}
+              className="mb-0 w-full text-[#76ABAE] py-3 px-5 rounded-[10px] placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent border-[#ffffff59]"
+            />
+          </Form.Item>
+
+          <Upload multiple={false} customRequest={handleUpload}>
+            <AntButton
+              icon={<UploadOutlined />}
+              className="w-full bg-[#ffffff18] text-[#ffffff96] py-[2rem!important] flex items-center justify-center border-[#eeeeee54!important] hover:bg-[#ffffff18!important] hover:border-[#76ABAE]"
             >
-              <Input
-                placeholder="Full Name"
-                className="mb-0 w-[100%] mx-[auto !important] text-[#76ABAE] py-3 px-5 rounded-[10px] placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
-              />
-            </Form.Item>
+              Attach Resource File
+            </AntButton>
+          </Upload>
 
-            <Form.Item label="Bio" name="bio">
-              <Input.TextArea
-                placeholder="Enter Your Bio"
-                rows={4}
-                className="mb-0 w-[100%] mx-[auto !important] text-[#76ABAE] py-3 px-5 rounded-[10px] placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <Button
-                type="submit"
-                isLoading={isPending}
-                className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px]"
-              >
-                Update
-              </Button>
-            </Form.Item>
-
-            <Upload
-              multiple={false}
-              customRequest={customRequest}
-              onChange={handleProfileFileChange}
+          <Form.Item>
+            <Button
+              type="submit"
+              isLoading={isPending}
+              className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE] flex justify-center items-center text-[16px] mt-[1rem]"
             >
-              <AntButton
-                icon={<UploadOutlined />}
-                className="w-full bg-[#ffffff18] text-[#ffffff96] py-[2rem!important] flex items-center justify-center border-[#eeeeee54!important] hover:bg-[#ffffff18!important] hover:border-[#76ABAE]"
-              >
-                Attach Resource File
-              </AntButton>
-            </Upload>
-          </Form>
-        </div>
+              Update
+            </Button>
+            {profileImageUrl && (
+              <img className="w-[200px] mt-[1rem]" src={profileImageUrl} alt="Profile" />
+            )}
+          </Form.Item>
+        </Form>
       </div>
-      {/* <NextCom /> */}
     </div>
   );
 };
