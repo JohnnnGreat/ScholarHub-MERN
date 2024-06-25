@@ -12,22 +12,39 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 export default function FeaturedResearch() {
   const [ref, inView] = useInView({ ...interceptConfigs, threshold: 0.4 });
   const supabase = createClient();
-  const [res, setRes] = useState<IResource[] | null>([]);
+  const [res, setRes] = useState<IResource[] | any>([]);
   const handleTwoViewCounts = async () => {
     try {
-      const { data, error } = await supabase
+      const { data: resources, error } = await supabase
         .from("Resource")
         .select("*")
         .order("views", { ascending: false })
         .limit(2);
-      console.log(data);
-      setRes(data);
+
       if (error) {
         console.error("Error fetching top resources:", error);
         return [];
       }
 
-      return data;
+      // Fetch user information for each resource
+      const resourcesWithUserInfo = await Promise.all(
+        resources.map(async (resource: any) => {
+          const { data: userData, error: userError } = await supabase
+            .from("User")
+            .select("*")
+            .eq("email", resource.uploadBy)
+            .single();
+
+          if (userError) {
+            console.error("Error fetching user data:", userError);
+            return { ...resource, userInfo: null };
+          }
+
+          return { ...resource, userInfo: userData };
+        })
+      );
+
+      setRes(resourcesWithUserInfo);
     } catch (err) {
       return err;
     }
@@ -38,7 +55,7 @@ export default function FeaturedResearch() {
   };
   useEffect(() => {
     handleTwoViewCounts();
-  }, []);
+  }, [res]);
 
   return (
     <section className="py-16 bg-[#222831] relative">
@@ -113,77 +130,18 @@ export default function FeaturedResearch() {
       </svg>
 
       <div className="max-w-[1100px] gap-[1rem] mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2">
-        {/* <motion.div
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={containerVariants}
-          className="text-center"
-          ref={ref}
-        >
-          <h2 className="text-3xl  text-white sm:text-[45px] golden-font">Featured Research</h2>
-          <p className="mt-3 font-light leading-6 text-gray-400">
-            Explore the latest, most influential, and thought-provoking research papers,
-            publications, and datasets curated by our editorial team.
-          </p>
-          <a
-            href="#"
-            className="mt-4 inline-block text-white golden-font hover:text-teal-700 w-full"
-          >
-            View All Papers
-          </a>
-        </motion.div> */}
-
-        {/* <motion.div
-          animate="visible"
-          variants={itemVariants}
-          className="mt-12 grid gap-8 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1"
-        >
-          {[1, 2].map((item) => (
-            <motion.nav
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
-              key={item}
-              className="bg-[#ffffff0c] backdrop-blur-lg backdrop-opacity-50 rounded-[20px] p-6 border border-[#76abae57] text-white"
-            >
-              <h3 className="text-2xl font-semibold golden-font">
-                Innovations in Renewable Energy Storage
-              </h3>
-              <p className="mt-2 text-[#76ABAE]">
-                Dr. Sarah Johnson · University of California, Berkeley
-              </p>
-              <p className="mt-4 text-gray-400">
-                Groundbreaking advancements in battery technology are paving the way for a
-                sustainable energy future. This study explores novel energy storage solutions that
-                could revolutionize the integration of renewable power sources.
-              </p>
-              <a
-                href="#"
-                className="mt-6 golden-font inline-block bg-[#eeeeee] w-full text-black px-6 py-5 text-center rounded-[10px] text-[20px] hover:bg-[#e7e7e7]"
-              >
-                View Paper
-              </a>
-            </motion.nav>
-          ))}
-        </motion.div> */}
-
-        {res?.map((item) => (
-          <motion.div animate="visible" variants={itemVariants} key={item?.id}>
-            <motion.nav
-              initial="hidden"
-              animate="visible"
-              variants={containerVariants}
-              className="bg-[#ffffff0c]  backdrop-blur-lg backdrop-opacity-50 rounded-[20px] p-6 border border-[#76abae57] text-white"
-            >
+        {res?.map((item: any) => (
+          <div key={item?.id}>
+            <div className="bg-[#ffffff0c]  backdrop-blur-lg backdrop-opacity-50 rounded-[20px] p-6 border border-[#76abae57] text-white">
               <h3 className="text-3xl text-grid font-semibold golden-font">
-                {getShortDescription(item?.title, 50)}
+                {getShortDescription(item?.title, 46)}
               </h3>
               <p className="mt-1 text-[#76ABAE]">
-                Dr. Sarah Johnson · University of California, Berkeley
+                {item?.userInfo?.fullname} · {item?.userInfo?.institutionName}
               </p>
               <Divider />
               <p>
-                {item?.views} Views | {item?.published ? "Published" : "Un-Published"} |{" "}
+                {item?.views} Views | {item?.published ? "Published" : "Un-Published"} |
                 {item?.subjectArea}
               </p>
               <p className="mt-2 text-gray-400">{getShortDescription(item?.description, 100)}</p>
@@ -194,8 +152,8 @@ export default function FeaturedResearch() {
                 View Paper
                 <ArrowRightOutlined />
               </Link>
-            </motion.nav>
-          </motion.div>
+            </div>
+          </div>
         ))}
       </div>
     </section>

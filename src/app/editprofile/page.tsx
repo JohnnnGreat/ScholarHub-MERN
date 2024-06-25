@@ -18,7 +18,7 @@ const EditProfile = async () => {
   } = await supabase.auth.getUser();
 
   const userInfo = await getUserInfo(user?.email);
-  console.log(userInfo);
+  
   return <EditProfileComponent userData={userInfo} />;
 };
 

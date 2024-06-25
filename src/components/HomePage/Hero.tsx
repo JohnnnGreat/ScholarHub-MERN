@@ -36,7 +36,7 @@ export default function Hero() {
       </svg>
 
       <div className="text-center mt-24 mb-16">
-        <h3 className="text-2xl md:text-6xl font-semibold golden-font">
+        <h3 className="text-4xl md:text-6xl font-semibold golden-font">
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h3>

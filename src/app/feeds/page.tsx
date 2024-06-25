@@ -1,9 +1,17 @@
 import FeedComponentIndex from "@/components/Feeds";
-import { handleTwoViewCounts } from "@/utils/request";
+import { getUserInfo, handleTwoViewCounts } from "@/utils/request";
+import { createClient } from "@/utils/supabase/client";
 import React from "react";
 
 const FeedPage = async () => {
   const res = await handleTwoViewCounts();
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const userInfo = await getUserInfo(user?.email);
   return <FeedComponentIndex resInfo={res} />;
 };
 

@@ -29,8 +29,8 @@ const RecentFeedsCard = ({ resourceInfo }: any) => {
     </Menu>
   );
   return (
-    <Link
-      href={`/resource/${resourceInfo.id}`}
+    <div
+      // href={`/resource/${resourceInfo.id}`}
       className="p-[1rem] bg-[#2D3440] inline-block rounded-[10px] mb-[1rem] w-full "
     >
       <div>
@@ -60,13 +60,13 @@ const RecentFeedsCard = ({ resourceInfo }: any) => {
           <div className="flex-1">
             <h1 className="text-[#EEEEEE] product-font">{resourceInfo?.userInfo?.fullname}</h1>
             <p className="text-[#ffffff54]">
-              {JSON.parse(resourceInfo?.userInfo?.followers).length} followers
+              {resourceInfo?.followers ? JSON.parse(resourceInfo?.followers).length : 0} followers
             </p>
           </div>
           <Button>Download</Button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
