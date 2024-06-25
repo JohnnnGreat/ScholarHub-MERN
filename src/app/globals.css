@@ -41,7 +41,9 @@ label,
 input::placeholder,
 .ant-select-selection-placeholder,
 .ant-tabs-tab-btn,
-.head-f span,
+.head-f,
+span,
+div,
 .product-font {
   font-family: "Schibsted Grotesk", sans-serif;
 }

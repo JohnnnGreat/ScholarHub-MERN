@@ -9,7 +9,6 @@ import { redirect } from "next/navigation";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextUIProvider } from "@nextui-org/system";
 import PDFWorker from "@/components/pdfWorker";
-import ParticlesBackground from "@/components/Particles";
 
 export default async function RootLayout({
   children,

@@ -36,7 +36,7 @@ export default function Hero() {
       </svg>
 
       <div className="text-center mt-24 mb-16">
-        <h1 className="text-[50px] font-semibold golden-font">
+        <h1 className="text-[30px] md:text-[50px] font-semibold golden-font">
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h1>
@@ -46,7 +46,7 @@ export default function Hero() {
           knowledge-sharing.
         </p>
         <div className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-[.7rem] justify-center flex-wrap mt-[.2rem] md:mt-[4rem] md:w-[800px]">
-          <div className="bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full flex items-center">
+          <div className="bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full hover:bg-gray-700 flex items-center">
             <motion.span animate="shake" variants={shakeAnimation} className="mr-2">
               🔍
             </motion.span>{" "}
