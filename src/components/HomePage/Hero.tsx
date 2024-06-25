@@ -36,29 +36,29 @@ export default function Hero() {
       </svg>
 
       <div className="text-center mt-24 mb-16">
-        <h1 className="text-[30px] md:text-[50px] font-semibold golden-font">
+        <h3 className="text-3xl md:text-6xl font-semibold golden-font">
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
-        </h1>
+        </h3>
         <p className=" mx-auto font-light text-[16px] md:text-[18px] mb-10 w-full md:w-[70%] text-[#ffffffbd]">
           Unlock the power of a vibrant global community of researchers, scholars, and innovators.
           ScholarHub is your gateway to a world of groundbreaking discoveries, collaboration, and
           knowledge-sharing.
         </p>
         <div className="mx-auto grid grid-cols-2 md:grid-cols-3 gap-[.7rem] justify-center flex-wrap mt-[.2rem] md:mt-[4rem] md:w-[800px]">
-          <div className="bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full hover:bg-gray-700 flex items-center">
+          <div className="bg-gray-800 text-[#ffffff8f] px-12 py-3 border border-[#76abae79] rounded-full hover:bg-gray-700 flex items-center">
             <motion.span animate="shake" variants={shakeAnimation} className="mr-2">
               🔍
             </motion.span>{" "}
             Discover
           </div>
-          <div className="hidden md:inline-block bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full items-center">
+          <div className="text-[#ffffff8f] hidden md:inline-block bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full items-center">
             <motion.span animate="zoom" variants={zoomAnimation} className="mr-2">
               📢
             </motion.span>{" "}
             Showcase
           </div>
-          <div className="bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full hover:bg-gray-700 flex items-center">
+          <div className="text-[#ffffff8f] bg-gray-800 px-12 py-3 border border-[#76abae79] rounded-full hover:bg-gray-700 flex items-center">
             <span className="mr-2">🤝</span> Collaborate
           </div>
         </div>
