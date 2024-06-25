@@ -40,7 +40,7 @@ export default function Hero() {
           Connecting <span className="text-[#76ABAE]">researchers</span>,<br />
           powering <span>discoveries</span>
         </h3>
-        <p className=" mx-auto font-light text-[16px] md:text-[18px] mb-10 w-full md:w-[70%] text-[#ffffffbd]">
+        <p className="mt-3 mx-auto font-light text-[16px] md:text-[18px] mb-4 w-full md:w-[70%] text-[#ffffffbd]">
           Unlock the power of a vibrant global community of researchers, scholars, and innovators.
           ScholarHub is your gateway to a world of groundbreaking discoveries, collaboration, and
           knowledge-sharing.
