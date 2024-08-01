@@ -9,10 +9,9 @@ import { IUser } from "@/types";
 import Link from "next/link";
 
 const FeedComponentIndex = ({ resInfo, userInfo }: any) => {
-  const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
+  const { data, isPending } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
   const researchRe = data as IUser[];
 
-  console.log(researchRe);
   return (
     <div className="mt-[6rem] relative">
       <div className="max-w-[1200px] mx-auto">
@@ -59,47 +58,53 @@ const FeedComponentIndex = ({ resInfo, userInfo }: any) => {
           </div>
 
           {/* Other Related Researchers */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-2 mt-[1rem] p-2 rounded-[10px] ">
-            <h3 className="text-white text-xl mb-4 golden-font">
-              Researchers with similar Interest
-            </h3>
-            {researchRe?.map((item: IUser) => (
-              <div
-                key={item.id}
-                className="flex items-center gap-[1rem] border-b border-[#ffffff57] py-[.9rem] mt-[1rem]"
-              >
-                <div className="w-[70px]">
-                  <AntAvatar
-                    style={{ backgroundColor: "#76ABAE", verticalAlign: "middle" }}
-                    size={50}
-                    className="w-[100px]"
-                    src={item?.profileUrl}
-                  >
-                    {item?.fullname?.slice(0, 2)}
-                  </AntAvatar>
-                </div>
-                <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
-                  <div>
-                    <h1 className="text-[#EEEEEE] product-font text-[14px]">{item?.fullname}</h1>
-                    <div className="text-[#eeeeee81]">
-                      <p className="text-[14px]">
-                        {item?.noPublications | 0} publications{" "}
-                        {item?.followers ? JSON.parse(item?.followers).length : 0} followers
-                      </p>
+          {isPending ? (
+            <div className="mt-[2rem] flex flex-col">
+              Loading Data <span className="loading loading-ring loading-lg"></span>
+            </div>
+          ) : (
+            <div className="col-span-1 md:col-span-2 lg:col-span-2 mt-[1rem] p-2 rounded-[10px] ">
+              <h3 className="text-white text-xl mb-4 golden-font">
+                Researchers with similar Interest
+              </h3>
+              {researchRe?.map((item: IUser) => (
+                <div
+                  key={item.id}
+                  className="flex items-center gap-[1rem] border-b border-[#ffffff57] py-[.9rem] mt-[1rem]"
+                >
+                  <div className="w-[70px]">
+                    <AntAvatar
+                      style={{ backgroundColor: "#76ABAE", verticalAlign: "middle" }}
+                      size={50}
+                      className="w-[100px]"
+                      src={item?.profileUrl}
+                    >
+                      {item?.fullname?.slice(0, 2)}
+                    </AntAvatar>
+                  </div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between w-full">
+                    <div>
+                      <h1 className="text-[#EEEEEE] product-font text-[14px]">{item?.fullname}</h1>
+                      <div className="text-[#eeeeee81]">
+                        <p className="text-[14px]">
+                          {item?.noPublications | 0} publications{" "}
+                          {item?.followers ? JSON.parse(item?.followers).length : 0} followers
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col md:items-end">
+                      <Link
+                        className="text-[#76abae91] hover:text-[#76abaefd]"
+                        href={`/user/${item?.id}`}
+                      >
+                        View Profile
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex flex-col md:items-end">
-                    <Link
-                      className="text-[#76abae91] hover:text-[#76abaefd]"
-                      href={`/user/${item?.id}`}
-                    >
-                      View Profile
-                    </Link>
-                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="w-full border rounded-[15px] border-[#ffffff25] p-[1rem]">
           <h1 className="font-bold my-[1rem] text-[1.5rem] text-white">Recent Articles</h1>

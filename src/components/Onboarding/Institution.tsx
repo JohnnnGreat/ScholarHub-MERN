@@ -164,7 +164,7 @@ const Institution = ({ id }: { id: string }) => {
             type="submit"
             className="bg-[#76ABAE] w-full py-2 text-white rounded mt-[1rem]"
           >
-            Login
+            Continue
           </Button>
         </form>
       </div>
