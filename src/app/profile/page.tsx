@@ -11,7 +11,6 @@ const ProfilePage = async () => {
   } = await supabase.auth.getUser();
 
   const userInfo = await getUserInfo(user?.email);
-  
 
   return <ProfileMainComponent userInfo={userInfo ? userInfo : null} />;
 };

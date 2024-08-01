@@ -17,7 +17,7 @@ export const generateMetadata = async (headers: any): Promise<Metadata> => {
     };
   }
 
-  const { title, description, thumbnail } = data; // Ensure these fields exist in your data
+  const { title, description, thumbnail } = data;
 
   return {
     title,
