@@ -56,6 +56,8 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
     resolver: zodResolver(noteSchema),
   });
 
+
+ 
   // Effect to fetch user information when `users` state changes
   useEffect(() => {
     fetchUserInfo(userInfo?.researchType, userInfo?.email).then((res) => {
@@ -232,7 +234,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                               <div className="flex flex-col md:items-end">
                                 <Link
                                   className="text-[#76abae91] hover:text-[#76abaefd]"
-                                  href={`/user/${item?.id}`}
+                                  href={`/user?userId=${item?.id}`}
                                 >
                                   View Profile
                                 </Link>

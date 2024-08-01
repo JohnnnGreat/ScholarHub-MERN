@@ -358,3 +358,29 @@ export const handleTwoViewCounts = async () => {
     return err;
   }
 };
+
+// Send notification to all users about the existence of a new resource
+export const sendNotification = async (resourceId: string) => {
+  const supabase = createClient();
+  const allUsersEmail: any = [];
+  try {
+    // Get All Users
+    const { data: allUsersInDb, error: errorFetchingUsersFromDb } = await supabase
+      .from("User")
+      .select("*");
+
+    allUsersInDb?.map((users) => {
+      allUsersEmail.push(users?.email);
+    });
+
+    // Send Users Array to the Server
+    const responseSendingNotification = await fetch("/api/sendnotification", {
+      method: "POST",
+      body: JSON.stringify({ emails: allUsersEmail, id: resourceId }),
+    });
+
+    console.log(responseSendingNotification);
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};

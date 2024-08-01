@@ -6,6 +6,7 @@ import { Pagination, divider } from "@nextui-org/react";
 import { IResource } from "@/types";
 import { message } from "antd";
 import Link from "next/link";
+import { sendNotification } from "@/utils/request";
 
 /* =================== MY RESOURCE TAB ==================== */
 const MyResource = ({ email }: { email?: string }) => {
@@ -37,6 +38,12 @@ const MyResource = ({ email }: { email?: string }) => {
     setLoading(false);
   };
 
+  const sendNotificationOfNewResource = async (resource: any) => {
+    // Send notification to all users about new resources added.
+
+    const { id } = resource;
+  };
+
   useEffect(() => {
     fetchData(currentPage);
   }, [currentPage]);
@@ -55,6 +62,8 @@ const MyResource = ({ email }: { email?: string }) => {
 
     return channels;
   };
+
+  console.log("resources Updated", currentPage);
   useEffect(() => {
     subscribeToChanges();
 

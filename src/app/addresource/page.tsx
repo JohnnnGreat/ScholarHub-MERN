@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   keywords:
     "add resource, research hub, contribute, research papers, academic articles, add research",
 
-  viewport: "width=device-width, initial-scale=1.0",
   robots: "index, follow",
 };
 
