@@ -1,31 +1,26 @@
 "use client";
+
+// Import necessary modules and components
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
 import { Input, Textarea } from "@nextui-org/input";
 import { useSignInUser } from "@/utils/queries";
-import { useRouter } from "next/navigation";
 import { message } from "antd";
+import { loginSchema } from "@/utils/schema";
+import { ILogin } from "@/types";
 
+// Login Component
 export const Login = () => {
-  const { mutateAsync: loginUser, isPending: isCreatingNewUser, isError } = useSignInUser();
+  const { mutateAsync: loginUser, isPending: isLoginUser, isError } = useSignInUser();
   const router = useRouter();
 
-  const noteSchema = z.object({
-    email: z.string().min(3, "Title must be at least 3 characters"),
-    password: z.string().min(3, "Text must be at least 3 characters"),
-  });
-
-  interface ILogin {
-    email: string;
-    password: string;
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILogin>({
-    resolver: zodResolver(noteSchema),
+    resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = async (dataV: ILogin) => {
@@ -89,7 +84,6 @@ export const Login = () => {
               "border-[1px] mt-[.8rem] border-[#ffffff59] placeholder:text-[#ffffffa1] text-[#76ABAE!important]",
             ],
           }}
-          // className="w-[100%] mx-[auto !important] text-[#76ABAE] py-3 px-5 rounded-full placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
           variant="bordered"
           label="Password"
           {...register("password")}
@@ -99,7 +93,7 @@ export const Login = () => {
         </p>
 
         <button type="submit" className="bg-[#76ABAE] w-full py-2 text-white rounded mt-[1rem]">
-          Login
+          {!isLoginUser ? "Login" : <span className="loading loading-dots loading-md"></span>}
         </button>
       </form>
       <div className="mt-1 text-gray-400 text-[14px] text-center">

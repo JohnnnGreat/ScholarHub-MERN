@@ -6,14 +6,7 @@ const Authentication = ({ children }: { children: React.ReactNode }) => {
       <div className="grid-auth grid justify-center">
         {/* Logo and Side Text */}
         <div className="hidden md:flex flex-col items-center justify-between w-1/3 h-full bg-white p-10">
-          <div
-            // initial={{ y: -100, opacity: 0 }}
-            // animate={inView ? { y: 0, opacity: 1 } : {}}
-            // transition={{ duration: 0.5 }}
-            className="text-black text-xl golden-font"
-          >
-            Scholar Hub
-          </div>
+          <div className="text-black text-xl golden-font">Scholar Hub</div>
           <button className="border py-5 px-6 rounded-full">Login</button>
         </div>
 

@@ -37,3 +37,17 @@ export interface IUser {
   noPublications: number;
   profileUrl: string;
 }
+
+export interface IRegister {
+  email: string;
+  password: string;
+  fullname: string;
+}
+
+// Set default values for the notifications
+export type NotificationType = "success" | "info" | "warning" | "error";
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

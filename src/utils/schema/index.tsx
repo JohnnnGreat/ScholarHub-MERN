@@ -13,3 +13,19 @@ export const formSchema = z.object({
   resourceType: z.string(),
   resourceEmbeddedNote: z.string(),
 });
+
+export const registerSchema = z.object({
+  email: z.string().min(3, "Title must be at least 3 characters"),
+  password: z.string().min(3, "Text must be at least 3 characters"),
+});
+
+export const loginSchema = z.object({
+  email: z.string().min(3, "Title must be at least 3 characters"),
+  password: z.string().min(3, "Text must be at least 3 characters"),
+});
+
+// Schema validation for note form using Zod
+export const noteSchema = z.object({
+  title: z.string().min(3, "Title must be at least 3 characters"),
+  text: z.string().min(3, "Text must be at least 3 characters"),
+});

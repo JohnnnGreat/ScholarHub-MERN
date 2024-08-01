@@ -6,12 +6,15 @@ import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/button";
 import { useUpdateUserInfo } from "@/utils/queries";
 import { createClient } from "@/utils/supabase/client";
-import { IResource, IUser } from "@/types";
+import { IUser } from "@/types";
 
+const supabase = createClient();
+
+/* ===================EDIT PROFILE COMPONENT==================== */
 const EditProfileComponent = ({ userData }: { userData: IUser }) => {
   // State for storing the profile image URL
   const [profileImageUrl, setProfileImageUrl] = useState(userData?.profileUrl);
-  const router = useRouter(); // Router for navigation
+  const router = useRouter();
   const [form] = Form.useForm(); // Form instance from Ant Design
   const { mutateAsync: updateUserInfo, isPending } = useUpdateUserInfo(); // Custom hook for updating user info
 
@@ -20,6 +23,12 @@ const EditProfileComponent = ({ userData }: { userData: IUser }) => {
     form.setFieldsValue({
       fullname: userData?.fullname,
       bio: userData?.bio,
+    });
+
+    // Clear Fields Value when the component is unmounted
+    return form.setFieldsValue({
+      fullname: "",
+      bio: "",
     });
   }, [form, userData]);
 
@@ -34,7 +43,6 @@ const EditProfileComponent = ({ userData }: { userData: IUser }) => {
       router.push("/profile");
     } catch (error) {
       message.error("Profile Update Failed");
-      console.error("Update Error:", error);
     }
   };
 
@@ -46,10 +54,8 @@ const EditProfileComponent = ({ userData }: { userData: IUser }) => {
   // Custom request handler for file upload
   const handleUpload = async ({ file, onSuccess, onError }: any) => {
     const fileName = `${Date.now()}_${file.name}`; // Generate unique file name
-    const supabase = createClient(); // Initialize Supabase client
     try {
       const { data, error } = await supabase.storage.from("Files").upload(fileName, file);
-
       if (error) throw error;
 
       const resourceFileUrl = supabase.storage.from("Files").getPublicUrl(fileName).data.publicUrl;
@@ -69,8 +75,8 @@ const EditProfileComponent = ({ userData }: { userData: IUser }) => {
   return (
     <div className="min-h-screen flex justify-center items-center mt-[5.5rem] text-white">
       <div className="w-full max-w-2xl p-8 rounded">
-        <h1 className="text-3xl golden-font">Add a Paper</h1>
-        <p className="text-[#ffffff6c] mb-6">Add the basic meta data about the resource</p>
+        <h1 className="text-3xl golden-font">Edit Your Profile</h1>
+        <hr />
         <Form
           form={form}
           name="add-paper"

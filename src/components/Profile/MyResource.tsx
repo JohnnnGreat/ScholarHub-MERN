@@ -7,13 +7,13 @@ import { IResource } from "@/types";
 import { message } from "antd";
 import Link from "next/link";
 
+/* =================== MY RESOURCE TAB ==================== */
 const MyResource = ({ email }: { email?: string }) => {
   const supabase = createClient();
   const [resources, setResources] = useState<IResource[]>([]);
   const [total, setTotal] = useState<number | null>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [loading, setLoading] = useState<boolean>(false);
-
   const PAGE_SIZE = 7;
 
   const fetchData = async (page: number) => {

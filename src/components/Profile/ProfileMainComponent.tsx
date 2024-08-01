@@ -3,11 +3,8 @@
 // Import necessary modules and components
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import { useFormik } from "formik";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-
 import ProfileSection from "./ProfileSection";
 import { Button } from "@nextui-org/button";
 import { Tabs, Tab } from "@nextui-org/tabs";
@@ -17,38 +14,29 @@ import { Input, Textarea } from "@nextui-org/input";
 import MyResource from "./MyResource";
 import Notice from "./Notice";
 import { getRelatedUsers, welcomeEmail } from "@/utils/request";
-import { Avatar } from "@nextui-org/react";
 import { Avatar as AntAvatar, message } from "antd";
 import { INote, IUser } from "@/types";
+import { noteSchema } from "@/utils/schema";
+
+/* =================== PROFILE MAIN COMPONENT: WRAPPER COMPONENT ==================== */
 
 const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
-  // Initialize Supabase client
+  // 1. Initialize Supabase client
+  // 2. State to manage loading status
+  // 3. Fetch related researchers data
+  // 4. State to manage list of related users
+  // 5. Fetch related user information based on research type and email
+  // 6. Function to subscribe to database changes
+  // 7. Initialize form handling with react-hook-form
   const supabase = createClient();
-
-  // State to manage loading status
   const [pageLoading, setPageLoading] = useState(false);
-
-  // Fetch related researchers data
   const { data } = useGetRelatedResearchers(userInfo?.researchType, userInfo?.email);
   const researchRe = data as IUser[];
-
-  // State to manage list of related users
   const [users, setUsers] = useState(researchRe);
-
-  // Fetch related user information based on research type and email
   const fetchUserInfo = async (researchType: string | undefined, emailArg: string) => {
     const userInfoResponse = await getRelatedUsers(researchType, emailArg);
     return userInfoResponse;
   };
-
-  // Effect to fetch user information when `users` state changes
-  useEffect(() => {
-    fetchUserInfo(userInfo?.researchType, userInfo?.email).then((res) => {
-      console.log(res);
-    });
-  }, [users]);
-
-  // Function to subscribe to database changes
   const subscribeToChanges = () => {
     const channels = supabase
       .channel("custom-all-channel")
@@ -60,6 +48,20 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
 
     return channels;
   };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<INote>({
+    resolver: zodResolver(noteSchema),
+  });
+
+  // Effect to fetch user information when `users` state changes
+  useEffect(() => {
+    fetchUserInfo(userInfo?.researchType, userInfo?.email).then((res) => {
+      console.log(res);
+    });
+  }, [users]);
 
   // Effect to subscribe and clean up subscription to database changes
   useEffect(() => {
@@ -69,21 +71,6 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
       supabase.removeChannel(channels);
     };
   }, [supabase]);
-
-  // Schema validation for note form using Zod
-  const noteSchema = z.object({
-    title: z.string().min(3, "Title must be at least 3 characters"),
-    text: z.string().min(3, "Text must be at least 3 characters"),
-  });
-
-  // Initialize form handling with react-hook-form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<INote>({
-    resolver: zodResolver(noteSchema),
-  });
 
   // Handle note form submission
   const onSubmit = (data: INote) => {
@@ -132,7 +119,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
           .eq("id", followeeId);
 
         if (error) {
-          message.error(error?.message)
+          message.error(error?.message);
         }
       }
     } else {
@@ -166,7 +153,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                       >
                         {userInfo?.fullname?.slice(0, 2)}
                       </AntAvatar>
-                      <ProfileSection userData={userInfo} />
+                      <ProfileSection userProfileInformation={userInfo} />
                     </div>
                     <div className="absolute w-full h-full flex items-center justify-center">
                       <svg

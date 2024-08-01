@@ -1,24 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import ButtonsNot from "./ButtonsNot";
+import React, { useEffect, useState, useMemo } from "react";
+
 import { IUser } from "@/types";
 import { getUserInfo } from "@/utils/request";
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 
+/* =================== NOTICE TO USER TO ANSWER ONBOARDING QUESTIONS ==================== */
 const Notice = ({ user }: { user: IUser | undefined }) => {
   const supabase = createClient();
-
   const [userSub, setUserSub] = useState<IUser | null>(null);
   const fetchUserInfo = async (emailArg: string | undefined) => {
     const userInfoResponse = await getUserInfo(emailArg);
     return userInfoResponse;
   };
-  useEffect(() => {
-    fetchUserInfo(user?.email).then((res) => {
-      setUserSub(res);
-    });
-  }, [userSub]);
   const subscribeToChanges = () => {
     const channels = supabase
       .channel("custom-all-channel")
@@ -29,9 +24,14 @@ const Notice = ({ user }: { user: IUser | undefined }) => {
         });
       })
       .subscribe();
-
     return channels;
   };
+
+  useEffect(() => {
+    fetchUserInfo(user?.email).then((res) => {
+      setUserSub(res);
+    });
+  }, [userSub]);
 
   useEffect(() => {
     subscribeToChanges();

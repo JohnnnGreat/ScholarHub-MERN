@@ -6,19 +6,25 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextu
 import { Button } from "@nextui-org/button";
 import { useDeleteResource } from "@/utils/queries";
 import { Image } from "antd";
+import { getShortDescription } from "@/utils/shared";
+
+/* ===================RESOURCE CARD COMPONENT==================== */
 
 const ResourceCard = ({ resource }: { resource: IResource }) => {
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showFullDescription, setShowFullDescription] = useState(false);
-
   const { mutateAsync: deleteResource, isPending } = useDeleteResource();
 
+  /* ====================================================================== */
+  /* ====================================================================== */
+
+  // Handle the functionalities for sharing resource across social media forums.
   const handleShare = (platform: string, id: string) => {
-    const urlF = new URL(window.location.href);
-    console.log(urlF);
-    const url = encodeURIComponent(`${urlF.origin}/resource/${id}`);
-    const text = encodeURIComponent(`Check out this resource: ${resource.title}`);
+    const urlOrigin = new URL(window.location.href);
+
+    const url = encodeURIComponent(`${urlOrigin.origin}/resource/${id}`);
+    const text = encodeURIComponent(`Check out this resource: ${resource?.title}`);
 
     let shareUrl = "";
 
@@ -36,21 +42,20 @@ const ResourceCard = ({ resource }: { resource: IResource }) => {
         return;
     }
 
+    // Open url on another service
     window.open(shareUrl, "_blank");
   };
+
+  // Handle Deleting of Resource
   const handleDelete = (resourceId: string) => {
     deleteResource(resourceId);
-    console.log(`Deleting resource with id: ${resource.id}`);
-    setShowDeleteModal(false); // Close the modal after deletion
+    // Close the modal after deletion
+    setShowDeleteModal(false);
   };
 
+  // Toggling the Read More
   const toggleDescription = () => {
     setShowFullDescription(!showFullDescription);
-  };
-
-  const getShortDescription = (description: string, maxLength = 400) => {
-    if (description?.length <= maxLength) return description;
-    return `${description?.substring(0, maxLength)}...`;
   };
 
   return (

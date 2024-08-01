@@ -4,14 +4,16 @@ import { Button, Tooltip } from "antd";
 import Link from "next/link";
 import React from "react";
 
-const ProfileSection = ({ userData }: { userData: IUser }) => {
+/* =================== PROFILE SECTION COMPONENT ==================== */
+
+const ProfileSection = ({ userProfileInformation }: { userProfileInformation: IUser }) => {
   return (
     <div>
       <h2 className="text-[40px] golden-font text-white flex items-center text-center w-full md:text-left">
-        {userData?.fullname}
+        {userProfileInformation?.fullname}
         <Tooltip title="Edit Profile">
           <Link
-            href={`/editprofile?userId=${userData?.id}`}
+            href={`/editprofile?userId=${userProfileInformation?.id}`}
             className="ml-2 text-[20px] text-white"
           >
             <EditOutlined size={10} />
@@ -20,15 +22,15 @@ const ProfileSection = ({ userData }: { userData: IUser }) => {
       </h2>
       <p className="text-[#ffffff88] text-[16px] flex  mt-[.7rem] max-w-[500px]">
         <BookOutlined className="mr-2" />
-        {userData?.bio}
+        {userProfileInformation?.bio}
       </p>
       <p className="flex items-center text-[#ffffff88] text-[16px] mt-[.7rem]">
         <MailOutlined className="mr-2" />
-        {userData?.email}
+        {userProfileInformation?.email}
       </p>
       <p className="flex items-center text-[#ffffff88] text-[16px] mt-[.7rem] ">
         <SettingOutlined className="mr-2" />
-        {userData?.researchType}
+        {userProfileInformation?.researchType}
       </p>
       <div className="flex space-x-2 mt-2">
         <div className="py-2 px-6 rounded-full border border-[#76abaea1] text-[#ffffff88]">

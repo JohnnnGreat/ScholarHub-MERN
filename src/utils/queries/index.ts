@@ -18,7 +18,7 @@ import {
 import { IResource, IUser } from "@/types";
 
 export const useCreateNewUser = () => {
-  return useMutation({ mutationFn: (user) => createNewUser(user) });
+  return useMutation({ mutationFn: (user: any) => createNewUser(user) });
 };
 
 export const useSignInUser = () => {

@@ -1,50 +1,59 @@
 "use client";
-import React, { useContext, useState } from "react";
-import { Button, Checkbox, Form, Input, notification } from "antd";
+
+// Import necessary modules and components
+import React from "react";
+import { Button, Checkbox, Form, notification } from "antd";
+import { Input } from "@nextui-org/input";
 import { useCreateNewUser } from "@/utils/queries";
 import { message } from "antd";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+import { IRegister, NotificationType } from "@/types";
+import { registerSchema } from "@/utils/schema";
+
+// Register Component
 const Register = () => {
   const { mutateAsync: registerUser, isPending: isCreatingNewUser, isError } = useCreateNewUser();
   const router = useRouter();
   const [api, contextHolder] = notification.useNotification();
-
-  type NotificationType = "success" | "info" | "warning" | "error";
   const openNotificationWithIcon = (type: NotificationType, message: string) => {
     api[type]({
       message: message,
     });
   };
-  const onFinish = async (values: any) => {
-    try {
-      const response = await registerUser(values);
+  // const onFinish = async (values: any) => {
+  //   try {
+  //     const response = await registerUser(values);
 
-      if (response?.errMessage) return message.error(response.errMessage);
+  //     if (response?.errMessage) return message.error(response.errMessage);
 
-      // if (response?.code) {
-      //   openNotificationWithIcon("error", response.code);
-      //   return;
-      // }
-      // // if (response?.name) message.error(response.name);
+  //     return notification.success({
+  //       message: "A Confirmation Message have been sent to your Email",
+  //     });
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-      // if (response?.status === 201) {
-      //   notification.success({
-      //     message: "Account Created Successfully !!!😊",
-      //   });
-      // }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IRegister>({
+    resolver: zodResolver(registerSchema),
+  });
 
-      // if (dataError) {
-      //   console.log(dataError);
-      // }
-      return notification.success({
-        message: "A Confirmation Message have been sent to your Email",
-      });
-      // router.push(`/auth/researchtype?userId=${response.data[0].id}`);
-    } catch (err) {
-      console.log(err);
+  const onSubmit = async (dataV: IRegister) => {
+    const { data, error } = await registerUser(dataV);
+
+    if (error) {
+      message.error(error.message);
+      return;
     }
+    router.push("/profile");
   };
   return (
     <>
@@ -57,7 +66,7 @@ const Register = () => {
           content, connections, and tools that suit your research journey.
         </p>
 
-        <Form
+        {/* <Form
           name="normal_login"
           className="login-form w-full flex flex-col"
           initialValues={{ remember: true }}
@@ -134,13 +143,70 @@ const Register = () => {
             </svg>
             Continue with Google
           </button>
-        </Form>
+        </Form> */}
         <div className="mt-1 text-gray-400 text-[14px] text-center">
           Have an account?{" "}
           <Link href="/auth/login" className="text-[#76ABAE] hover:underline">
             Sign in
           </Link>
         </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            type="text"
+            classNames={{
+              innerWrapper: "bg-transparent",
+              inputWrapper: [
+                "shadow-xl",
+                "bg-default-200/50",
+                "dark:bg-default/60",
+                "backdrop-blur-xl",
+                "backdrop-saturate-200",
+                "hover:bg-default-200/70",
+                "dark:hover:bg-default/70",
+                "group-data-[focus=true]:bg-default-200/50",
+                "dark:group-data-[focus=true]:bg-default/60",
+                "!cursor-text",
+                "border-[1px] border-[#ffffff59] placeholder:text-[#ffffffa1] text-[#76ABAE!important]",
+              ],
+            }}
+            variant="bordered"
+            label="Email"
+            {...register("email")}
+          />
+          <p className={`text-red-500 text-[14px] ${errors?.email?.message ? "" : "hidden"}`}>
+            {errors?.email?.message}
+          </p>
+          <Input
+            type="password"
+            classNames={{
+              innerWrapper: "bg-transparent",
+              inputWrapper: [
+                "shadow-xl",
+                "bg-default-200/50",
+                "dark:bg-default/60",
+
+                "backdrop-saturate-200",
+                "hover:bg-default-200/70",
+                "dark:hover:bg-default/70",
+                "group-data-[focus=true]:bg-default-200/50",
+                "dark:group-data-[focus=true]:bg-default/60",
+                "!cursor-text",
+                "border-[1px] mt-[.8rem] border-[#ffffff59] placeholder:text-[#ffffffa1] text-[#76ABAE!important]",
+              ],
+            }}
+            // className="w-[100%] mx-[auto !important] text-[#76ABAE] py-3 px-5 rounded-full placeholder:text-[#ffffffa1] border bg-transparent hover:bg-transparent focus:bg-transparent invalid:bg-transparent border-[#ffffff59] "
+            variant="bordered"
+            label="Password"
+            {...register("password")}
+          />
+          <p className={`text-red-500 text-[14px] ${errors?.password?.message ? "" : "hidden"}`}>
+            {errors?.password?.message}
+          </p>
+
+          <button type="submit" className="bg-[#76ABAE] w-full py-2 text-white rounded mt-[1rem]">
+            Login
+          </button>
+        </form>
       </div>
     </>
   );
