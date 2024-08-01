@@ -24,11 +24,11 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       },
     });
     const sendNotification = await Promise.all(
-      demoEmail.map(async (email: string) => {
+      emails.map(async (email: string) => {
         const responseHtml = notifyHtml(resourceInfo);
 
         const mailOptions = {
-          from: "johnossai20@gmail.com",
+          from: `New Resource <johnossai20@gmail.com>`,
           to: email,
           subject: `You are missing a resource ${email}`,
           html: responseHtml,
@@ -37,8 +37,6 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
         await transporter.sendMail(mailOptions);
       })
     );
-
-    console.log("Send Notification", sendNotification);
 
     return NextResponse.json({ success: true });
   } catch (error) {

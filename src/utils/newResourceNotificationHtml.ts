@@ -9,6 +9,9 @@ export const notifyHtml = (resourceInfo: any) => {
     resourceType,
     uploadBy,
     fileUrl,
+    thumbnail,
+    views,
+    pageNo,
   } = resourceInfo;
 
   return `
@@ -71,16 +74,35 @@ export const notifyHtml = (resourceInfo: any) => {
                 margin: 5px 0;
                 font-size: 14px;
             }
+            .thumbnail {
+                width: 100%;
+                max-width: 600px;
+                height: auto;
+                margin: 20px 0;
+            }
+
+            .ext {
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            }
+
+            .ext h1 {
+            font-weight:600;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <div class="header">
-                <h1>New Resource Notification</h1>
+                <h2>We found a new resource</h2>
             </div>
             <div class="content">
                 <h1>${title}</h1>
-               
+                ${
+                  thumbnail
+                    ? `<img src="${thumbnail}" alt="${title} thumbnail" class="thumbnail" />`
+                    : ""
+                }
                 <p><strong>Published Date:</strong> ${new Date(
                   datePublished
                 ).toLocaleDateString()}</p>
@@ -89,11 +111,23 @@ export const notifyHtml = (resourceInfo: any) => {
                 ${description ? `<p><strong>Description:</strong> ${description}</p>` : ""}
                 <p><strong>Type:</strong> ${resourceType}</p>
                 <p><strong>Uploaded By:</strong> ${uploadBy}</p>
+                <div className='ext'>
                 ${
-                  fileUrl
-                    ? `<a href="https://scholar-six.vercel.app/resource/${id}" class="button">View Resource</a>`
-                    : ""
+                  views &&
+                  `<div>
+                    <h1>Views</h1>
+                    <p>${views}</p>
+                  </div>`
                 }
+                  ${
+                    pageNo &&
+                    `<div>
+                    <h1>Page No</h1>
+                    <p>${pageNo}</p>
+                  </div>`
+                  }
+                  
+                </div>
 
                 <a href="https://scholar-six.vercel.app/resource/${id}" class="button">View Resource</a>
             </div>

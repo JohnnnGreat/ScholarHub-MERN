@@ -60,36 +60,9 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
         message: `${file.name} file upload failed.`,
       });
     }
-    // if (info.file.status === "done") {
-    //   setResourceFile(info.file.originFileObj);
-    //   notification.success({
-    //     message: `${info.file.name} file uploaded successfully`,
-    //   });
-    // } else if (info.file.status === "error") {
-    //   notification.error({
-    //     message: `${info.file.name} file upload failed.`,
-    //   });
-    // }
   };
 
   const handleSubmit = async () => {
-    // console.log(thumbnail, resourceFile);
-    // if (!thumbnail || !resourceFile) {
-    //   notification.warning({
-    //     message: "Please upload both files.",
-    //   });
-    //   return;
-    // }
-
-    // const { data, error } = await uploadFile({ thumbnail, resourceFile, resourceId: id });
-    // if (error) {
-    //   return await notification.error({
-    //     message: "File submission failed.",
-    //   });
-    // }
-    // await notification.success({
-    //   message: "Files submitted successfully.",
-    // });
     const res = await sendNotification(id);
     return router.push(`final?resourceId=${id}`);
   };
