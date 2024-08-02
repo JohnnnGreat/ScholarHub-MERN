@@ -30,7 +30,7 @@ export const Login = () => {
       message.error(error.message);
       return;
     }
-    router.push("/profile");
+    router.push("/feeds");
   };
   return (
     <div className="relative top-0">

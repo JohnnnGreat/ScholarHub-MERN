@@ -1,0 +1,89 @@
+"filename", "language", "JSON with Comments", "TypeScript", "TypeScript JSX", "CSS", "JSON", "XML", "JavaScript", "Markdown", "comment", "blank", "total"
+"c:\Users\John\Desktop\scholarsHub\scholarshub\README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 25, 0, 14, 39
+"c:\Users\John\Desktop\scholarsHub\scholarshub\next.config.mjs", "JavaScript", 0, 0, 0, 0, 0, 0, 7, 0, 1, 2, 10
+"c:\Users\John\Desktop\scholarsHub\scholarshub\package-lock.json", "JSON", 0, 0, 0, 0, 13228, 0, 0, 0, 0, 1, 13229
+"c:\Users\John\Desktop\scholarsHub\scholarshub\package.json", "JSON", 0, 0, 0, 0, 61, 0, 0, 0, 0, 1, 62
+"c:\Users\John\Desktop\scholarsHub\scholarshub\postcss.config.mjs", "JavaScript", 0, 0, 0, 0, 0, 0, 6, 0, 1, 2, 9
+"c:\Users\John\Desktop\scholarsHub\scholarshub\public\blueel.svg", "XML", 0, 0, 0, 0, 0, 12, 0, 0, 0, 1, 13
+"c:\Users\John\Desktop\scholarsHub\scholarshub\public\googl.svg", "XML", 0, 0, 0, 0, 0, 6, 0, 0, 0, 1, 7
+"c:\Users\John\Desktop\scholarsHub\scholarshub\public\net.svg", "XML", 0, 0, 0, 0, 0, 6, 0, 0, 0, 1, 7
+"c:\Users\John\Desktop\scholarsHub\scholarshub\public\next.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\John\Desktop\scholarsHub\scholarshub\public\researchblur.svg", "XML", 0, 0, 0, 0, 0, 12, 0, 0, 0, 1, 13
+"c:\Users\John\Desktop\scholarsHub\scholarshub\public\vercel.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\displayimage\page.tsx", "TypeScript JSX", 0, 0, 15, 0, 0, 0, 0, 0, 0, 5, 20
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\final\page.tsx", "TypeScript JSX", 0, 0, 17, 0, 0, 0, 0, 0, 0, 7, 24
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\layout.tsx", "TypeScript JSX", 0, 0, 18, 0, 0, 0, 0, 0, 0, 5, 23
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\page.tsx", "TypeScript JSX", 0, 0, 28, 0, 0, 0, 0, 0, 0, 8, 36
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\resourceprivacy\page.tsx", "TypeScript JSX", 0, 0, 11, 0, 0, 0, 0, 0, 0, 4, 15
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\auth\route.ts", "TypeScript", 0, 27, 0, 0, 0, 0, 0, 0, 1, 6, 34
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\notify\route.ts", "TypeScript", 0, 30, 0, 0, 0, 0, 0, 0, 0, 6, 36
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\onboarding\institution\route.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 0, 0, 13, 9, 42
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\onboarding\researcher\route.ts", "TypeScript", 0, 31, 0, 0, 0, 0, 0, 0, 1, 7, 39
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\resource\[resourceId]\route.ts", "TypeScript", 0, 15, 0, 0, 0, 0, 0, 0, 0, 3, 18
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\sendnotification\route.ts", "TypeScript", 0, 40, 0, 0, 0, 0, 0, 0, 1, 6, 47
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\institution\page.tsx", "TypeScript JSX", 0, 0, 18, 0, 0, 0, 0, 0, 0, 8, 26
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\layout.tsx", "TypeScript JSX", 0, 0, 6, 0, 0, 0, 0, 0, 0, 5, 11
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\login\page.tsx", "TypeScript JSX", 0, 0, 19, 0, 0, 0, 0, 0, 0, 5, 24
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\page.tsx", "TypeScript JSX", 0, 0, 20, 0, 0, 0, 0, 0, 0, 5, 25
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\researchtype\page.tsx", "TypeScript JSX", 0, 0, 20, 0, 0, 0, 0, 0, 0, 7, 27
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\editprofile\page.tsx", "TypeScript JSX", 0, 0, 18, 0, 0, 0, 0, 0, 0, 8, 26
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\feeds\page.tsx", "TypeScript JSX", 0, 0, 14, 0, 0, 0, 0, 0, 0, 6, 20
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\globals.css", "CSS", 0, 0, 0, 158, 0, 0, 0, 0, 7, 32, 197
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\layout.tsx", "TypeScript JSX", 0, 0, 36, 0, 0, 0, 0, 0, 0, 6, 42
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\loading.tsx", "TypeScript JSX", 0, 0, 9, 0, 0, 0, 0, 0, 0, 3, 12
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\page.tsx", "TypeScript JSX", 0, 0, 4, 0, 0, 0, 0, 0, 0, 2, 6
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\profile\layout.tsx", "TypeScript JSX", 0, 0, 14, 0, 0, 0, 0, 0, 0, 5, 19
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\profile\page.tsx", "TypeScript JSX", 0, 0, 13, 0, 0, 0, 0, 0, 0, 6, 19
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\resource\[id]\page.tsx", "TypeScript JSX", 0, 0, 53, 0, 0, 0, 0, 0, 1, 9, 63
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\resource\page.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 0, 3, 8
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\search\[resourcetitle]\page.tsx", "TypeScript JSX", 0, 0, 5, 0, 0, 0, 0, 0, 0, 3, 8
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\user\page.tsx", "TypeScript JSX", 0, 0, 18, 0, 0, 0, 0, 0, 2, 7, 27
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\AddResourceField.tsx", "TypeScript JSX", 0, 0, 183, 0, 0, 0, 0, 0, 1, 11, 195
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\DisplayImage.tsx", "TypeScript JSX", 0, 0, 113, 0, 0, 0, 0, 0, 1, 11, 125
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\Final.tsx", "TypeScript JSX", 0, 0, 53, 0, 0, 0, 0, 0, 0, 8, 61
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\Nextco.tsx", "TypeScript JSX", 0, 0, 30, 0, 0, 0, 0, 0, 157, 11, 198
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\Privacy.tsx", "TypeScript JSX", 0, 0, 81, 0, 0, 0, 0, 0, 0, 9, 90
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Authentication\Login.tsx", "TypeScript JSX", 0, 0, 98, 0, 0, 0, 0, 0, 2, 8, 108
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Authentication\Register.tsx", "TypeScript JSX", 0, 0, 111, 0, 0, 0, 0, 0, 92, 13, 216
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Authentication\index.tsx", "TypeScript JSX", 0, 0, 17, 0, 0, 0, 0, 0, 2, 4, 23
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\FeedsFollowersCard.tsx", "TypeScript JSX", 0, 0, 118, 0, 0, 0, 0, 0, 0, 3, 121
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\ProfileFeeds.tsx", "TypeScript JSX", 0, 0, 7, 0, 0, 0, 0, 0, 0, 2, 9
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\RecentFeedsCard.tsx", "TypeScript JSX", 0, 0, 66, 0, 0, 0, 0, 0, 4, 4, 74
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\index.tsx", "TypeScript JSX", 0, 0, 118, 0, 0, 0, 0, 0, 2, 5, 125
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Header.tsx", "TypeScript JSX", 0, 0, 187, 0, 0, 0, 0, 0, 1, 11, 199
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\HomePage\FeaturedResearch.tsx", "TypeScript JSX", 0, 0, 152, 0, 0, 0, 0, 0, 1, 9, 162
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\HomePage\Hero.tsx", "TypeScript JSX", 0, 0, 66, 0, 0, 0, 0, 0, 0, 3, 69
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\HomePage\index.tsx", "TypeScript JSX", 0, 0, 12, 0, 0, 0, 0, 0, 0, 3, 15
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Onboarding\Institution.tsx", "TypeScript JSX", 0, 0, 162, 0, 0, 0, 0, 0, 1, 13, 176
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Onboarding\ResearchType.tsx", "TypeScript JSX", 0, 0, 93, 0, 0, 0, 0, 0, 3, 7, 103
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ButtonsNot.tsx", "TypeScript JSX", 0, 0, 30, 0, 0, 0, 0, 0, 1, 5, 36
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\EditProfile.tsx", "TypeScript JSX", 0, 0, 113, 0, 0, 0, 0, 0, 7, 14, 134
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\MyResource.tsx", "TypeScript JSX", 0, 0, 85, 0, 0, 0, 0, 0, 2, 16, 103
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\Notice.tsx", "TypeScript JSX", 0, 0, 74, 0, 0, 0, 0, 0, 1, 8, 83
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\Notification.tsx", "TypeScript JSX", 0, 0, 151, 0, 0, 0, 0, 0, 9, 16, 176
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ProfileMainComponent.tsx", "TypeScript JSX", 0, 0, 285, 0, 0, 0, 0, 0, 18, 19, 322
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ProfileSection.tsx", "TypeScript JSX", 0, 0, 42, 0, 0, 0, 0, 0, 1, 4, 47
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ResourceCard.tsx", "TypeScript JSX", 0, 0, 174, 0, 0, 0, 0, 0, 8, 15, 197
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\SingleResource\index.tsx", "TypeScript JSX", 0, 0, 256, 0, 0, 0, 0, 0, 2, 17, 275
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\SkeletalmageLoading.tsx", "TypeScript JSX", 0, 0, 30, 0, 0, 0, 0, 0, 2, 4, 36
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\User\index.tsx", "TypeScript JSX", 0, 0, 120, 0, 0, 0, 0, 0, 2, 6, 128
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\constant.tsx", "TypeScript JSX", 0, 0, 312, 0, 0, 0, 0, 0, 0, 3, 315
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\pdfWorker.tsx", "TypeScript JSX", 0, 0, 11, 0, 0, 0, 0, 0, 0, 2, 13
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\queryClient.tsx", "TypeScript JSX", 0, 0, 8, 0, 0, 0, 0, 0, 0, 3, 11
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\middleware.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 9, 3, 30
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\types.ts", "TypeScript", 0, 48, 0, 0, 0, 0, 0, 0, 1, 6, 55
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\framermotion\index.tsx", "TypeScript JSX", 0, 0, 59, 0, 0, 0, 0, 0, 0, 6, 65
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\metadata.tsx", "TypeScript JSX", 0, 0, 33, 0, 0, 0, 0, 0, 1, 5, 39
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\newResourceNotificationHtml.ts", "TypeScript", 0, 136, 0, 0, 0, 0, 0, 0, 0, 6, 142
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\notificationHtml.ts", "TypeScript", 0, 85, 0, 0, 0, 0, 0, 0, 1, 2, 88
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\queries\index.ts", "TypeScript", 0, 86, 0, 0, 0, 0, 0, 0, 0, 12, 98
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\request\index.ts", "TypeScript", 0, 317, 0, 0, 0, 0, 0, 0, 17, 53, 387
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\request\server.ts", "TypeScript", 0, 21, 0, 0, 0, 0, 0, 0, 0, 4, 25
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\schema\index.tsx", "TypeScript JSX", 0, 0, 26, 0, 0, 0, 0, 0, 1, 5, 32
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\shared.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\supabase\client.ts", "TypeScript", 0, 6, 0, 0, 0, 0, 0, 0, 0, 2, 8
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\supabase\middleware.ts", "TypeScript", 0, 64, 0, 0, 0, 0, 0, 0, 10, 5, 79
+"c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\supabase\server.ts", "TypeScript", 0, 30, 0, 0, 0, 0, 0, 0, 6, 2, 38
+"c:\Users\John\Desktop\scholarsHub\scholarshub\tailwind.config.ts", "TypeScript", 0, 80, 0, 0, 0, 0, 0, 0, 0, 3, 83
+"c:\Users\John\Desktop\scholarsHub\scholarshub\tsconfig.json", "JSON with Comments", 26, 0, 0, 0, 0, 0, 0, 0, 0, 1, 27
+"Total", "-", 26, 1058, 3837, 158, 13289, 38, 13, 25, 394, 593, 19431

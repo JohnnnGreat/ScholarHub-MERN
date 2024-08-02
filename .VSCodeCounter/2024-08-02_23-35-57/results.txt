@@ -1,0 +1,169 @@
+Date : 2024-08-02 23:35:57
+Directory : c:\Users\John\Desktop\scholarsHub\scholarshub
+Total : 87 files,  18444 codes, 394 comments, 593 blanks, all 19431 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| JSON               |          2 |     13,289 |          0 |          2 |     13,291 |
+| TypeScript JSX     |         56 |      3,837 |        325 |        400 |      4,562 |
+| TypeScript         |         18 |      1,058 |         60 |        136 |      1,254 |
+| CSS                |          1 |        158 |          7 |         32 |        197 |
+| XML                |          6 |         38 |          0 |          4 |         42 |
+| JSON with Comments |          1 |         26 |          0 |          1 |         27 |
+| Markdown           |          1 |         25 |          0 |         14 |         39 |
+| JavaScript         |          2 |         13 |          2 |          4 |         19 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                          | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                             |         87 |     18,444 |        394 |        593 |     19,431 |
+| . (Files)                                                                                     |          7 |     13,433 |          2 |         24 |     13,459 |
+| public                                                                                        |          6 |         38 |          0 |          4 |         42 |
+| src                                                                                           |         74 |      4,973 |        392 |        565 |      5,930 |
+| src (Files)                                                                                   |          2 |         66 |         10 |          9 |         85 |
+| src\app                                                                                       |         28 |        682 |         26 |        186 |        894 |
+| src\app (Files)                                                                               |          4 |        207 |          7 |         43 |        257 |
+| src\app\addresource                                                                           |          5 |         89 |          0 |         29 |        118 |
+| src\app\addresource (Files)                                                                   |          2 |         46 |          0 |         13 |         59 |
+| src\app\addresource\displayimage                                                              |          1 |         15 |          0 |          5 |         20 |
+| src\app\addresource\final                                                                     |          1 |         17 |          0 |          7 |         24 |
+| src\app\addresource\resourceprivacy                                                           |          1 |         11 |          0 |          4 |         15 |
+| src\app\api                                                                                   |          6 |        163 |         16 |         37 |        216 |
+| src\app\api\auth                                                                              |          1 |         27 |          1 |          6 |         34 |
+| src\app\api\notify                                                                            |          1 |         30 |          0 |          6 |         36 |
+| src\app\api\onboarding                                                                        |          2 |         51 |         14 |         16 |         81 |
+| src\app\api\onboarding\institution                                                            |          1 |         20 |         13 |          9 |         42 |
+| src\app\api\onboarding\researcher                                                             |          1 |         31 |          1 |          7 |         39 |
+| src\app\api\resource                                                                          |          1 |         15 |          0 |          3 |         18 |
+| src\app\api\resource\[resourceId]                                                             |          1 |         15 |          0 |          3 |         18 |
+| src\app\api\sendnotification                                                                  |          1 |         40 |          1 |          6 |         47 |
+| src\app\auth                                                                                  |          5 |         83 |          0 |         30 |        113 |
+| src\app\auth (Files)                                                                          |          2 |         26 |          0 |         10 |         36 |
+| src\app\auth\institution                                                                      |          1 |         18 |          0 |          8 |         26 |
+| src\app\auth\login                                                                            |          1 |         19 |          0 |          5 |         24 |
+| src\app\auth\researchtype                                                                     |          1 |         20 |          0 |          7 |         27 |
+| src\app\editprofile                                                                           |          1 |         18 |          0 |          8 |         26 |
+| src\app\feeds                                                                                 |          1 |         14 |          0 |          6 |         20 |
+| src\app\profile                                                                               |          2 |         27 |          0 |         11 |         38 |
+| src\app\resource                                                                              |          2 |         58 |          1 |         12 |         71 |
+| src\app\resource (Files)                                                                      |          1 |          5 |          0 |          3 |          8 |
+| src\app\resource\[id]                                                                         |          1 |         53 |          1 |          9 |         63 |
+| src\app\search                                                                                |          1 |          5 |          0 |          3 |          8 |
+| src\app\search\[resourcetitle]                                                                |          1 |          5 |          0 |          3 |          8 |
+| src\app\user                                                                                  |          1 |         18 |          2 |          7 |         27 |
+| src\components                                                                                |         32 |      3,358 |        320 |        267 |      3,945 |
+| src\components (Files)                                                                        |          5 |        548 |          3 |         23 |        574 |
+| src\components\Add                                                                            |          5 |        460 |        159 |         50 |        669 |
+| src\components\Authentication                                                                 |          3 |        226 |         96 |         25 |        347 |
+| src\components\Feeds                                                                          |          4 |        309 |          6 |         14 |        329 |
+| src\components\HomePage                                                                       |          3 |        230 |          1 |         15 |        246 |
+| src\components\Onboarding                                                                     |          2 |        255 |          4 |         20 |        279 |
+| src\components\Profile                                                                        |          8 |        954 |         47 |         97 |      1,098 |
+| src\components\SingleResource                                                                 |          1 |        256 |          2 |         17 |        275 |
+| src\components\User                                                                           |          1 |        120 |          2 |          6 |        128 |
+| src\utils                                                                                     |         12 |        867 |         36 |        103 |      1,006 |
+| src\utils (Files)                                                                             |          4 |        258 |          2 |         14 |        274 |
+| src\utils\framermotion                                                                        |          1 |         59 |          0 |          6 |         65 |
+| src\utils\queries                                                                             |          1 |         86 |          0 |         12 |         98 |
+| src\utils\request                                                                             |          2 |        338 |         17 |         57 |        412 |
+| src\utils\schema                                                                              |          1 |         26 |          1 |          5 |         32 |
+| src\utils\supabase                                                                            |          3 |        100 |         16 |          9 |        125 |
++-----------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                                      | language           | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| c:\Users\John\Desktop\scholarsHub\scholarshub\README.md                                       | Markdown           |         25 |          0 |         14 |         39 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\next.config.mjs                                 | JavaScript         |          7 |          1 |          2 |         10 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\package-lock.json                               | JSON               |     13,228 |          0 |          1 |     13,229 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\package.json                                    | JSON               |         61 |          0 |          1 |         62 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\postcss.config.mjs                              | JavaScript         |          6 |          1 |          2 |          9 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\public\blueel.svg                               | XML                |         12 |          0 |          1 |         13 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\public\googl.svg                                | XML                |          6 |          0 |          1 |          7 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\public\net.svg                                  | XML                |          6 |          0 |          1 |          7 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\public\next.svg                                 | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\public\researchblur.svg                         | XML                |         12 |          0 |          1 |         13 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\public\vercel.svg                               | XML                |          1 |          0 |          0 |          1 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\displayimage\page.tsx       | TypeScript JSX     |         15 |          0 |          5 |         20 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\final\page.tsx              | TypeScript JSX     |         17 |          0 |          7 |         24 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\layout.tsx                  | TypeScript JSX     |         18 |          0 |          5 |         23 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\page.tsx                    | TypeScript JSX     |         28 |          0 |          8 |         36 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\addresource\resourceprivacy\page.tsx    | TypeScript JSX     |         11 |          0 |          4 |         15 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\auth\route.ts                       | TypeScript         |         27 |          1 |          6 |         34 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\notify\route.ts                     | TypeScript         |         30 |          0 |          6 |         36 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\onboarding\institution\route.ts     | TypeScript         |         20 |         13 |          9 |         42 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\onboarding\researcher\route.ts      | TypeScript         |         31 |          1 |          7 |         39 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\resource\[resourceId]\route.ts      | TypeScript         |         15 |          0 |          3 |         18 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\api\sendnotification\route.ts           | TypeScript         |         40 |          1 |          6 |         47 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\institution\page.tsx               | TypeScript JSX     |         18 |          0 |          8 |         26 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\layout.tsx                         | TypeScript JSX     |          6 |          0 |          5 |         11 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\login\page.tsx                     | TypeScript JSX     |         19 |          0 |          5 |         24 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\page.tsx                           | TypeScript JSX     |         20 |          0 |          5 |         25 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\auth\researchtype\page.tsx              | TypeScript JSX     |         20 |          0 |          7 |         27 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\editprofile\page.tsx                    | TypeScript JSX     |         18 |          0 |          8 |         26 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\feeds\page.tsx                          | TypeScript JSX     |         14 |          0 |          6 |         20 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\globals.css                             | CSS                |        158 |          7 |         32 |        197 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\layout.tsx                              | TypeScript JSX     |         36 |          0 |          6 |         42 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\loading.tsx                             | TypeScript JSX     |          9 |          0 |          3 |         12 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\page.tsx                                | TypeScript JSX     |          4 |          0 |          2 |          6 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\profile\layout.tsx                      | TypeScript JSX     |         14 |          0 |          5 |         19 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\profile\page.tsx                        | TypeScript JSX     |         13 |          0 |          6 |         19 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\resource\[id]\page.tsx                  | TypeScript JSX     |         53 |          1 |          9 |         63 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\resource\page.tsx                       | TypeScript JSX     |          5 |          0 |          3 |          8 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\search\[resourcetitle]\page.tsx         | TypeScript JSX     |          5 |          0 |          3 |          8 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\app\user\page.tsx                           | TypeScript JSX     |         18 |          2 |          7 |         27 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\AddResourceField.tsx         | TypeScript JSX     |        183 |          1 |         11 |        195 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\DisplayImage.tsx             | TypeScript JSX     |        113 |          1 |         11 |        125 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\Final.tsx                    | TypeScript JSX     |         53 |          0 |          8 |         61 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\Nextco.tsx                   | TypeScript JSX     |         30 |        157 |         11 |        198 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Add\Privacy.tsx                  | TypeScript JSX     |         81 |          0 |          9 |         90 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Authentication\Login.tsx         | TypeScript JSX     |         98 |          2 |          8 |        108 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Authentication\Register.tsx      | TypeScript JSX     |        111 |         92 |         13 |        216 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Authentication\index.tsx         | TypeScript JSX     |         17 |          2 |          4 |         23 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\FeedsFollowersCard.tsx     | TypeScript JSX     |        118 |          0 |          3 |        121 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\ProfileFeeds.tsx           | TypeScript JSX     |          7 |          0 |          2 |          9 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\RecentFeedsCard.tsx        | TypeScript JSX     |         66 |          4 |          4 |         74 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Feeds\index.tsx                  | TypeScript JSX     |        118 |          2 |          5 |        125 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Header.tsx                       | TypeScript JSX     |        187 |          1 |         11 |        199 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\HomePage\FeaturedResearch.tsx    | TypeScript JSX     |        152 |          1 |          9 |        162 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\HomePage\Hero.tsx                | TypeScript JSX     |         66 |          0 |          3 |         69 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\HomePage\index.tsx               | TypeScript JSX     |         12 |          0 |          3 |         15 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Onboarding\Institution.tsx       | TypeScript JSX     |        162 |          1 |         13 |        176 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Onboarding\ResearchType.tsx      | TypeScript JSX     |         93 |          3 |          7 |        103 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ButtonsNot.tsx           | TypeScript JSX     |         30 |          1 |          5 |         36 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\EditProfile.tsx          | TypeScript JSX     |        113 |          7 |         14 |        134 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\MyResource.tsx           | TypeScript JSX     |         85 |          2 |         16 |        103 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\Notice.tsx               | TypeScript JSX     |         74 |          1 |          8 |         83 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\Notification.tsx         | TypeScript JSX     |        151 |          9 |         16 |        176 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ProfileMainComponent.tsx | TypeScript JSX     |        285 |         18 |         19 |        322 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ProfileSection.tsx       | TypeScript JSX     |         42 |          1 |          4 |         47 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\Profile\ResourceCard.tsx         | TypeScript JSX     |        174 |          8 |         15 |        197 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\SingleResource\index.tsx         | TypeScript JSX     |        256 |          2 |         17 |        275 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\SkeletalmageLoading.tsx          | TypeScript JSX     |         30 |          2 |          4 |         36 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\User\index.tsx                   | TypeScript JSX     |        120 |          2 |          6 |        128 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\constant.tsx                     | TypeScript JSX     |        312 |          0 |          3 |        315 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\pdfWorker.tsx                    | TypeScript JSX     |         11 |          0 |          2 |         13 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\components\queryClient.tsx                  | TypeScript JSX     |          8 |          0 |          3 |         11 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\middleware.ts                               | TypeScript         |         18 |          9 |          3 |         30 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\types.ts                                    | TypeScript         |         48 |          1 |          6 |         55 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\framermotion\index.tsx                | TypeScript JSX     |         59 |          0 |          6 |         65 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\metadata.tsx                          | TypeScript JSX     |         33 |          1 |          5 |         39 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\newResourceNotificationHtml.ts        | TypeScript         |        136 |          0 |          6 |        142 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\notificationHtml.ts                   | TypeScript         |         85 |          1 |          2 |         88 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\queries\index.ts                      | TypeScript         |         86 |          0 |         12 |         98 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\request\index.ts                      | TypeScript         |        317 |         17 |         53 |        387 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\request\server.ts                     | TypeScript         |         21 |          0 |          4 |         25 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\schema\index.tsx                      | TypeScript JSX     |         26 |          1 |          5 |         32 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\shared.ts                             | TypeScript         |          4 |          0 |          1 |          5 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\supabase\client.ts                    | TypeScript         |          6 |          0 |          2 |          8 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\supabase\middleware.ts                | TypeScript         |         64 |         10 |          5 |         79 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\src\utils\supabase\server.ts                    | TypeScript         |         30 |          6 |          2 |         38 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\tailwind.config.ts                              | TypeScript         |         80 |          0 |          3 |         83 |
+| c:\Users\John\Desktop\scholarsHub\scholarshub\tsconfig.json                                   | JSON with Comments |         26 |          0 |          1 |         27 |
+| Total                                                                                         |                    |     18,444 |        394 |        593 |     19,431 |
++-----------------------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
