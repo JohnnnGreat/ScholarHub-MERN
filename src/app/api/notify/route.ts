@@ -12,15 +12,15 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const transporter = nodemailer.createTransport({
       service: "Gmail", // You can use other email services
       auth: {
-        user: "johnossai20@gmail.com",
-        pass: "kblgyogjwalbiwja",
+        user: "scholarhubbot@gmail.com",
+        pass: "vqrrtrkcnmdicsht ",
       },
     });
 
     const responseHtml = notifyHtml(body);
 
     const mailOptions = {
-      from: "johnossai20@gmail.com",
+      from: "scholarhubbot@gmail.com",
       to: sendTo,
       subject: "Resource Request Notification",
       html: responseHtml,

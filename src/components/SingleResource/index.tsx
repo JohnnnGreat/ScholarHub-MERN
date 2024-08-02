@@ -12,6 +12,9 @@ import { message as antmessage } from "antd";
 import { Document, Outline, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import { createClient } from "@/utils/supabase/client";
+
+const supabase = createClient();
 
 function highlightPattern(text: string, pattern: any) {
   return text.replace(pattern, (value: any) => `<mark>${value}</mark>`);
@@ -38,6 +41,21 @@ const SingleResourceComponent = ({
     document.body.removeChild(link);
   };
 
+  // Notifications Types
+  type NotificationType = "Resource Request" | "Follower Information" | "New Resource Request";
+
+  function getNotificationMessage(notificationType: NotificationType): string {
+    switch (notificationType) {
+      case "Resource Request":
+        return "You have a new resource request.";
+      case "Follower Information":
+        return "Someone has started following you.";
+      case "New Resource Request":
+        return "A new resource has been requested.";
+      default:
+        return "You have a new notification.";
+    }
+  }
   const handleSendRequest = async () => {
     setIsLoading(true);
     const payload = {
@@ -54,6 +72,21 @@ const SingleResourceComponent = ({
     }
     setShowModal(false);
     setIsLoading(false);
+
+    // Add to Database About request
+
+    const notificationMessage = getNotificationMessage("Resource Request");
+    const { data, error } = await supabase.from("Notification").insert([
+      {
+        notificationMessage: notificationMessage,
+        notificationHeader: "Resource Request",
+        respondedTo: false,
+        notificationTo: userInfo?.email,
+        triggeredEmail: email,
+      },
+    ]);
+
+    console.log(data, error);
   };
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -73,7 +106,7 @@ const SingleResourceComponent = ({
     [searchText]
   );
 
-  function onChange(event: any) {
+  function onChangeText(event: any) {
     setSearchText(event.target.value);
   }
 
@@ -203,8 +236,7 @@ const SingleResourceComponent = ({
                       type="search"
                       id="search"
                       className="border-[1px] border-[#ffffff59] placeholder:text-[#ffffffa1] text-[#76ABAE!important]"
-                      value={searchText}
-                      onChange={onChange}
+                      onChange={onChangeText}
                     />
                   </div>
                 </div>

@@ -15,8 +15,7 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
   const [thumbnail, setThumbnail] = useState<any>("");
   const [resourceFile, setResourceFile] = useState<any>("");
   const router = useRouter();
-  const { mutateAsync: uploadFile, isPending: isUploadingResource, isError } = useUpdateFile();
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleThumbnailChange = async ({ file, onSuccess, onError }: any) => {
     const fileName = `${Date.now()}_${file.name}`; // Generate unique file name
     try {
@@ -63,8 +62,10 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
   };
 
   const handleSubmit = async () => {
+    setIsLoading(true);
     const res = await sendNotification(id);
     return router.push(`final?resourceId=${id}`);
+    setIsLoading(false);
   };
 
   return (
@@ -107,7 +108,7 @@ const DisplayImageComponent = ({ id }: { id: string }) => {
         <div className="flex justify-center">
           <NextButton
             type="submit"
-            isLoading={isUploadingResource}
+            isLoading={isLoading}
             onClick={handleSubmit}
             // disabled={isCreatingNewUser && true}
             className="disabled:bg-[#8dcccf] block py-5 rounded-[10px] px-5 w-full bg-[#76ABAE!important] flex justify-center items-center text-[16px]"

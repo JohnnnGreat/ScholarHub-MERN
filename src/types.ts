@@ -16,6 +16,7 @@ export interface IResource {
   id: string;
   parentOrganization: string;
   views: string;
+  createdAt: any;
 }
 
 export interface INote {

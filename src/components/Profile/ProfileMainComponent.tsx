@@ -17,6 +17,7 @@ import { getRelatedUsers, welcomeEmail } from "@/utils/request";
 import { Avatar as AntAvatar, message } from "antd";
 import { INote, IUser } from "@/types";
 import { noteSchema } from "@/utils/schema";
+import { Notification } from "./Notification";
 
 /* =================== PROFILE MAIN COMPONENT: WRAPPER COMPONENT ==================== */
 
@@ -56,8 +57,6 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
     resolver: zodResolver(noteSchema),
   });
 
-
- 
   // Effect to fetch user information when `users` state changes
   useEffect(() => {
     fetchUserInfo(userInfo?.researchType, userInfo?.email).then((res) => {
@@ -139,7 +138,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
         <div id="page-p" className="overflow-hidden relative mt-[6rem] max-w-[1100px] mx-auto">
           <div className="md:p-4">
             <div className="bg-[#1E242C] text-white p-2 md:p-5 rounded-lg">
-              <Button onClick={handleSendEmail}>Send Email Notification</Button>
+              {/* <Button onClick={handleSendEmail}>Send Email Notification</Button> */}
               <Notice user={userInfo} />
               <div className="flex flex-col">
                 <Tabs variant="solid" aria-label="Options">
@@ -304,7 +303,7 @@ const ProfileMainComponent = ({ userInfo }: { userInfo: IUser }) => {
                     </div>
                   </Tab>
                   <Tab key="activity" title="Activity">
-                    <div>Tab 2</div>
+                    <Notification userEmail={userInfo?.email} />
                   </Tab>
                   <Tab key="analytics" title="Analytics">
                     <div>Tab 2</div>

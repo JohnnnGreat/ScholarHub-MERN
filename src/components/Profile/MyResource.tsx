@@ -6,7 +6,6 @@ import { Pagination, divider } from "@nextui-org/react";
 import { IResource } from "@/types";
 import { message } from "antd";
 import Link from "next/link";
-import { sendNotification } from "@/utils/request";
 
 /* =================== MY RESOURCE TAB ==================== */
 const MyResource = ({ email }: { email?: string }) => {
@@ -28,7 +27,6 @@ const MyResource = ({ email }: { email?: string }) => {
       .range(from, to)
       .eq("uploadBy", email);
 
-    console.log(error);
     if (error) {
       message.error("Error Fetching Resoure");
     } else {
@@ -63,7 +61,6 @@ const MyResource = ({ email }: { email?: string }) => {
     return channels;
   };
 
-  console.log("resources Updated", currentPage);
   useEffect(() => {
     subscribeToChanges();
 
@@ -76,7 +73,7 @@ const MyResource = ({ email }: { email?: string }) => {
       <div className="flex justify-end  my-[.8rem]">
         <Link
           href="/addresource"
-          className="bg-[#76ABAE] rounded-md text-black py-[.8rem] px-[1rem]"
+          className="bg-[#76ABAE] hover:bg-[#5d8688] rounded-[10px] text-black py-[.8rem] px-[1rem] "
         >
           Add a New Resource
         </Link>

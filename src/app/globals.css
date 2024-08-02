@@ -92,9 +92,19 @@ div,
   gap: 1rem;
   grid-template-columns: 30% 45% 25%;
 }
+
+.grid-profile {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 25% 70%;
+}
 @media (max-width: 567px) {
   .grid-auth,
   .grid-feeds {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-profile {
     grid-template-columns: 1fr;
   }
 }
